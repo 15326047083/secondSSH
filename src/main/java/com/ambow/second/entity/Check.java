@@ -8,7 +8,7 @@ import javax.persistence.*;
  * 考勤
  */
 @Entity
-@Table(name = "check")
+@Table(name = "clocking")
 public class Check {
 
     @Id

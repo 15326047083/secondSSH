@@ -23,7 +23,7 @@ public class UserController extends ActionSupport {
     public String execute() {
         System.out.println(111111);
         System.out.println();
-        System.out.println(userService.get().toString());
+        System.out.println(userService.queryAll().toString());
         return SUCCESS;
     }
 }

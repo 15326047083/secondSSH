@@ -34,7 +34,7 @@ public class CheckDao extends CommonDao<Check> implements ICheckDao {
     @Transactional
     public CheckVo getByCheckVoId(String id) {
        
-        String sql="select new com.ambow.second.CheckVo(c.id as checkId,u.id as userId,u.name as userName,u.num as num,u.deptId as deptName,c.time as time,o.id as courseId,o.name as courseName,c.info as info,c.num as absNum) from Check c,User u,Course o where c.userId=u.id and c.courseId=o.id and u.id='"+id+"'";
+        String sql="select new com.ambow.second.vo.CheckVo(c.id as checkId,u.id as userId,u.name as userName,u.num as num,u.deptId as deptName,c.time as time,o.id as courseId,o.name as courseName,c.info as info,c.num as absNum) from Check c,User u,Course o where c.userId=u.id and c.courseId=o.id and u.id='"+id+"'";
 
         return (CheckVo) sessionFactory.getCurrentSession().createQuery(sql).uniqueResult();
     }

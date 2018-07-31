@@ -8,4 +8,5 @@ import java.util.List;
 public interface IUserDao extends ICommonDao<User> {
 
     List<User> queryAll();
+
 }

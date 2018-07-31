@@ -1,3 +1,4 @@
+import com.ambow.second.entity.User;
 import com.ambow.second.service.IUserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,6 +21,9 @@ public class UserTest {
      */
     @Test
     public void getUserTest() {
+
         System.out.println(userService.queryAll().toString());
+
+
     }
 }

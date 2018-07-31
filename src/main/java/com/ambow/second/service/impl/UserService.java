@@ -22,19 +22,20 @@ public class UserService implements IUserService {
         // TODO Auto-generated method stub
         return userDao.queryAll();
     }
-
+    @Override
     public User findUserById(User user){
-        userDao.findUserById(user);
-        return null;
+        return userDao.get(user.getId());
     }
-    /*@Override
-    public boolean updateUserById(User user) {
-        try{
-            userDao.updateUserById(user);
-            return true;
-        }catch (Exception e){
-            return false;
-        }
-    }*/
+
+    @Override
+    public String saveOrUpdate(User user) {
+        return userDao.saveOrUpdate(user);
+    }
+
+    @Override
+    public String delete(User user) {
+        return userDao.delete(user.getId());
+    }
+
 
 }

@@ -11,19 +11,31 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  */
 @ContextConfiguration(locations = {"classpath:spring.xml", "classpath:spring-hibernate.xml"})
 @RunWith(SpringJUnit4ClassRunner.class)
-public class UserTest {
+
+public class GuoweiTest {
+
     // 自动注入userService
     @Autowired
     private IUserService userService;
 
-    /**
-     * 获取UserList
-     */
     @Test
-    public void getUserTest() {
-
-        System.out.println(userService.queryAll().toString());
-
-
+    public void findUserById(){
+        User user = new User();
+        user.setId("4028abf064efab9f0164efaba1d80000");
+        System.out.println(userService.findUserById(user));
     }
+    @Test
+    public void saveOrUpdate(){
+        User user=new User();
+        user.setId("4028abf064efab9f0164efaba1d80000");
+        user.setName("test");
+        System.out.println(userService.saveOrUpdate(user));
+    }
+    @Test
+    public void delete(){
+        User user=new User();
+        user.setId("3");
+        System.out.println(userService.delete(user));
+    }
+
 }

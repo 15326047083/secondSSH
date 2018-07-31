@@ -6,5 +6,5 @@ import com.ambow.second.entity.User;
 
 public interface IUserService {
 
-	List<User> get();
+	List<User> queryAll();
 }

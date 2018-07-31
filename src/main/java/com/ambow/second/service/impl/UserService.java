@@ -16,9 +16,9 @@ public class UserService implements IUserService {
     private IUserDao userDao;
 
     @Override
-    public List<User> get() {
+    public List<User> queryAll() {
         // TODO Auto-generated method stub
-        return userDao.get();
+        return userDao.queryAll();
     }
 
 }

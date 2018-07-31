@@ -1,27 +1,28 @@
 package com.ambow.second.vo;
 
+import javax.persistence.Entity;
+
 public class CheckVo {
-    private String id; // 主键
+    private String checkId; // 主键
     private String userId; // 用户ID
-    private String UserName; // 姓名
+    private String userName; // 姓名
     private int num; // 工号
-    private String deptId; // 部门ID
+    private String deptName; // 部门名称
     private String time; // 考勤时间
     private String courseId; // 课程ID
     private String courseName; // 课程名
     private String info; // 考勤详情
     private int absNum; // 缺勤次数
 
+    public CheckVo(){
 
-    public CheckVo() {
     }
-
-    public CheckVo(String id, String userId, String userName, int num, String deptId, String time, String courseId, String courseName, String info, int absNum) {
-        this.id = id;
+    public CheckVo(String checkId, String userId, String userName, int num, String deptName, String time, String courseId, String courseName, String info, int absNum) {
+        this.checkId = checkId;
         this.userId = userId;
-        UserName = userName;
+        this.userName = userName;
         this.num = num;
-        this.deptId = deptId;
+        this.deptName = deptName;
         this.time = time;
         this.courseId = courseId;
         this.courseName = courseName;
@@ -29,12 +30,12 @@ public class CheckVo {
         this.absNum = absNum;
     }
 
-    public String getId() {
-        return id;
+    public String getCheckId() {
+        return checkId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setCheckId(String checkId) {
+        this.checkId = checkId;
     }
 
     public String getUserId() {
@@ -46,11 +47,11 @@ public class CheckVo {
     }
 
     public String getUserName() {
-        return UserName;
+        return userName;
     }
 
     public void setUserName(String userName) {
-        UserName = userName;
+        this.userName = userName;
     }
 
     public int getNum() {
@@ -61,12 +62,12 @@ public class CheckVo {
         this.num = num;
     }
 
-    public String getDeptId() {
-        return deptId;
+    public String getDeptName() {
+        return deptName;
     }
 
-    public void setDeptId(String deptId) {
-        this.deptId = deptId;
+    public void setDeptName(String deptName) {
+        this.deptName = deptName;
     }
 
     public String getTime() {
@@ -112,11 +113,11 @@ public class CheckVo {
     @Override
     public String toString() {
         return "CheckVo{" +
-                "id='" + id + '\'' +
+                "checkId='" + checkId + '\'' +
                 ", userId='" + userId + '\'' +
-                ", UserName='" + UserName + '\'' +
+                ", userName='" + userName + '\'' +
                 ", num=" + num +
-                ", deptId='" + deptId + '\'' +
+                ", deptName='" + deptName + '\'' +
                 ", time='" + time + '\'' +
                 ", courseId='" + courseId + '\'' +
                 ", courseName='" + courseName + '\'' +

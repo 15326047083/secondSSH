@@ -1,13 +1,18 @@
 package com.ambow.second.service.impl;
 
+import com.ambow.second.dao.ICheckDao;
 import com.ambow.second.service.ICheckService;
 import com.ambow.second.vo.CheckVo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class CheckService implements ICheckService {
+
+    @Autowired
+    private ICheckDao checkDao;
 
     /**
      * 修改干部缺勤次数
@@ -25,7 +30,8 @@ public class CheckService implements ICheckService {
      */
     @Override
     public CheckVo getByCheckVoId(String id) {
-        return null;
+
+        return checkDao.getByCheckVoId(id);
     }
 
     /**

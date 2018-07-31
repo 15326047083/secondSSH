@@ -7,4 +7,11 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class ScoreDao extends CommonDao<Score> implements IScoreDao {
+
+
+    @Override
+    public String saveScore(Score score) {
+
+        return saveOrUpdate(score);
+    }
 }

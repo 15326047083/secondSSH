@@ -13,4 +13,6 @@ public class UserDao extends CommonDao<User> implements IUserDao {
     @Autowired
     private SessionFactory sessionFactory;
 
+    
+
 }

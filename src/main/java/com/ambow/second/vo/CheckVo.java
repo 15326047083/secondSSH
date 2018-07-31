@@ -12,6 +12,7 @@ public class CheckVo {
     private String info; // 考勤详情
     private int absNum; // 缺勤次数
 
+
     public CheckVo() {
     }
 

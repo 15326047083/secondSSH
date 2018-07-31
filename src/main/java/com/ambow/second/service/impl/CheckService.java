@@ -29,7 +29,7 @@ public class CheckService implements ICheckService {
      * @return 考情
      */
     @Override
-    public CheckVo getByCheckVoId(String id) {
+    public List<CheckVo> getByCheckVoId(String id) {
 
         return checkDao.getByCheckVoId(id);
     }
@@ -41,6 +41,19 @@ public class CheckService implements ICheckService {
      */
     @Override
     public List<CheckVo> queryCheckVoAll() {
-        return null;
+        String sql="";
+        return checkDao.queryCheckVoAll(sql);
+    }
+
+    /**
+     * 查找全部考勤列表
+     *
+     * @param id 教师Id
+     * @return
+     */
+    @Override
+    public List<CheckVo> queryCheskVoAllByTeacherId(String id) {
+        String sql=" and o.teacherId="+id;
+        return checkDao.queryCheckVoAll(sql);
     }
 }

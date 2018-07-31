@@ -21,4 +21,18 @@ public class CheckVoTest {
     public void getByIdTest(){
         System.out.println(checkService.getByCheckVoId("2"));
     }
+    /**
+     * 查询全部考勤信息
+     */
+    @Test
+    public void queryAllTest(){
+        System.out.println(checkService.queryCheckVoAll());
+    }
+    /**
+     * 教师查询全部考勤信息
+     */
+    @Test
+    public void teacherQueryAllTest(){
+        System.out.println(checkService.queryCheskVoAllByTeacherId("2"));
+    }
 }

@@ -5,9 +5,7 @@ import java.util.List;
 public interface ICommonDao<T> {
     String saveOrUpdate(T t);
 
-    T get();
-
-    T getById(String id);
+    T get(String id);
 
     void delete(String id);
 

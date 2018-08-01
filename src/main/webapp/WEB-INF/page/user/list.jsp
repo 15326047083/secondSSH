@@ -6,10 +6,12 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="s" uri="/struts-tags" %>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>全部考勤列表</title>
+    <title>用户管理</title>
     <link href="/css/css/css.css" type="text/css" rel="stylesheet" />
     <link href="/css/css/main.css" type="text/css" rel="stylesheet" />
     <link rel="shortcut icon" href="/css/cimages/main/favicon.ico" />
@@ -53,7 +55,7 @@
                             <input name="" type="button" value="查询" class="text-but">
                         </form>
                     </td>
-                    <td width="10%" align="center" valign="middle" style="text-align:right; width:150px;"><a href="add.html" target="mainFrame" onFocus="this.blur()" class="add">新增考勤</a></td>
+                    <td width="10%" align="center" valign="middle" style="text-align:right; width:150px;"><a href="saveOrUpdate.jsp" target="mainFrame" onFocus="this.blur()" class="add">新增管理员</a></td>
                 </tr>
             </table>
         </td>
@@ -63,31 +65,36 @@
 
             <table width="100%" border="0" cellspacing="0" cellpadding="0" id="main-tab">
                 <tr>
+                    <th align="center" valign="middle" class="borderright">姓名</th>
                     <th align="center" valign="middle" class="borderright">工号</th>
-                    <th align="center" valign="middle" class="borderright">干部姓名</th>
-                    <th align="center" valign="middle" class="borderright">课程名</th>
-                    <th align="center" valign="middle" class="borderright">缺勤次数</th>
-                    <th align="center" valign="middle" class="borderright">详情</th>
+                    <th align="center" valign="middle" class="borderright">手机号</th>
+                    <th align="center" valign="middle" class="borderright">邮箱</th>
+                    <th align="center" valign="middle" class="borderright">性别</th>
+                    <th align="center" valign="middle" class="borderright">学历</th>
+                    <th align="center" valign="middle" class="borderright">注册时间</th>
+                    <th align="center" valign="middle" class="borderright">部门ID</th>
+                    <th align="center" valign="middle" class="borderright">职务</th>
+                    <th align="center" valign="middle" class="borderright">用户类型</th>
+                    <th align="center" valign="middle" class="borderright">用户状态</th>
                     <th align="center" valign="middle">操作</th>
                 </tr>
+                <s:iterator var="queryUser" value="queryAllList" status="queryAllList">
                 <tr onMouseOut="this.style.backgroundColor='#ffffff'" onMouseOver="this.style.backgroundColor='#edf5ff'">
-                    <td align="center" valign="middle" class="borderright borderbottom">1</td>
-                    <td align="center" valign="middle" class="borderright borderbottom">admin</td>
-                    <td align="center" valign="middle" class="borderright borderbottom">创始人</td>
-                    <td align="center" valign="middle" class="borderright borderbottom">已锁定</td>
-                    <td align="center" valign="middle" class="borderright borderbottom">2013-04-26 11:00:59</td>
-                    <td align="center" valign="middle" class="borderbottom"><a href="add.html" target="mainFrame" onFocus="this.blur()" class="add">编辑</a><span class="gray">&nbsp;|&nbsp;</span><a href="add.html" target="mainFrame" onFocus="this.blur()" class="add">删除</a></td>
-                </tr>
-                <tr class="bggray" onMouseOut="this.style.backgroundColor='#f9f9f9'" onMouseOver="this.style.backgroundColor='#edf5ff'">
-                    <td align="center" valign="middle" class="borderright borderbottom">2</td>
-                    <td align="center" valign="middle" class="borderright borderbottom">admin</td>
-                    <td align="center" valign="middle" class="borderright borderbottom">创始人</td>
-                    <td align="center" valign="middle" class="borderright borderbottom">已锁定</td>
-                    <td align="center" valign="middle" class="borderright borderbottom">2013-04-26 11:00:59</td>
-                    <td align="center" valign="middle" class="borderbottom"><a href="add.html" target="mainFrame" onFocus="this.blur()" class="add">编辑</a><span class="gray">&nbsp;|&nbsp;</span><a href="add.html" target="mainFrame" onFocus="this.blur()" class="add">删除</a></td>
-                </tr>
-
-            </table></td>
+                    <td align="center" valign="middle" class="borderright borderbottom"><s:property value="#queryUser.name"/></td>
+                    <td align="center" valign="middle" class="borderright borderbottom"><s:property value="#queryUser.num"/></td>
+                    <td align="center" valign="middle" class="borderright borderbottom"><s:property value="#queryUser.phone"/></td>
+                    <td align="center" valign="middle" class="borderright borderbottom"><s:property value="#queryUser.email"/></td>
+                    <td align="center" valign="middle" class="borderright borderbottom"><s:property value="#queryUser.sex"/></td>
+                    <td align="center" valign="middle" class="borderright borderbottom"><s:property value="#queryUser.edu"/></td>
+                    <td align="center" valign="middle" class="borderright borderbottom"><s:property value="#queryUser.joinTime"/></td>
+                    <td align="center" valign="middle" class="borderright borderbottom"><s:property value="#queryUser.deptId"/></td>
+                    <td align="center" valign="middle" class="borderright borderbottom"><s:property value="#queryUser.duty"/></td>
+                    <td align="center" valign="middle" class="borderright borderbottom"><s:property value="#queryUser.userType"/></td>
+                    <td align="center" valign="middle" class="borderright borderbottom"><s:property value="#queryUser.alive"/></td>
+                    <td align="center" valign="middle" class="borderbottom"><a href="/user/toUpdate.action?userId=<s:property value="#queryUser.id"/>" target="mainFrame" onFocus="this.blur()" class="add">编辑</a><span class="gray">&nbsp;|&nbsp;</span><a href="${ pageContext.request.contextPage }/delete.action?id=<s:property value="#queryUser.id"/>" target="mainFrame" onFocus="this.blur()" class="add">删除</a></td>
+                </tr></s:iterator>
+            </table>
+        </td>
     </tr>
     <tr>
         <td align="left" valign="top" class="fenye">11 条数据 1/1 页&nbsp;&nbsp;<a href="#" target="mainFrame" onFocus="this.blur()">首页</a>&nbsp;&nbsp;<a href="#" target="mainFrame" onFocus="this.blur()">上一页</a>&nbsp;&nbsp;<a href="#" target="mainFrame" onFocus="this.blur()">下一页</a>&nbsp;&nbsp;<a href="#" target="mainFrame" onFocus="this.blur()">尾页</a></td>

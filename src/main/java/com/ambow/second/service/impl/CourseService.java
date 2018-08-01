@@ -36,5 +36,15 @@ public class CourseService implements ICourseService {
         iCourseService.saveOrUpdate(course);
     }
 
+    @Override
+    public void deleteCourse(String id) {
+        iCourseService.delete(id);
+    }
+
+    @Override
+    public Course getById(String courseId) {
+        return iCourseService.get(courseId);
+    }
+
 
 }

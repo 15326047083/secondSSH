@@ -16,7 +16,7 @@ public class Check {
     @GenericGenerator(name = "uuid", strategy = "uuid")
     private String id; // 主键
     @Column(name = "userId")
-    private String userId; // 用户ID
+    private String userId; // 用户工号
     @Column(name = "time")
     private String time; // 考勤时间
     @Column(name = "courseId")

@@ -3,6 +3,7 @@ package com.ambow.second.service;
 import java.util.List;
 
 import com.ambow.second.entity.User;
+import com.ambow.second.vo.CheckVo;
 
 public interface IUserService {
 
@@ -13,5 +14,8 @@ public interface IUserService {
 	String saveOrUpdate(User user);
 	// 删除用户
 	void delete(User user);
-
+	// 查询自己的考勤
+	List<CheckVo> queryCheckVoAll();
+	// 根据Id查考勤
+	List<CheckVo> getByCheckVoId(String id);
 }

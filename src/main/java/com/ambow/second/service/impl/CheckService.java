@@ -1,6 +1,7 @@
 package com.ambow.second.service.impl;
 
 import com.ambow.second.dao.ICheckDao;
+import com.ambow.second.entity.Check;
 import com.ambow.second.service.ICheckService;
 import com.ambow.second.vo.CheckVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,8 @@ public class CheckService implements ICheckService {
      * 修改干部缺勤次数
      */
     @Override
-    public void setAbsNum() {
+    public void setAbsNum(Check check) {
+        checkDao.saveOrUpdate(check);
 
     }
 
@@ -56,4 +58,18 @@ public class CheckService implements ICheckService {
         String sql=" and o.teacherId="+id;
         return checkDao.queryCheckVoAll(sql);
     }
+
+    /**
+     * 判断是否可以新建
+     * 如不可以新建，则返回考勤ID；
+     * @param check
+     * @return 考勤的ID
+     */
+    @Override
+    public Check sava(Check check) {
+        return checkDao.getByUserIdAndCourseId(check);
+
+    }
+
+
 }

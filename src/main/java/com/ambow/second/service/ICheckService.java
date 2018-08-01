@@ -16,11 +16,18 @@ public interface ICheckService {
      * @param id UserId
      * @return 考情
      */
-    CheckVo getByCheckVoId(String id);
+    List<CheckVo> getByCheckVoId(String id);
 
     /**
      * 查找全部考勤列表
      * @return 考勤列表
      */
     List<CheckVo> queryCheckVoAll();
+
+    /**
+     * 查找全部考勤列表
+     * @param id 教师Id
+     * @return
+     */
+    List<CheckVo> queryCheskVoAllByTeacherId(String id);
 }

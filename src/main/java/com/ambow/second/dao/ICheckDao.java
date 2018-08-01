@@ -17,11 +17,11 @@ public interface ICheckDao extends ICommonDao<Check> {
      * @param id UserId
      * @return 考情
      */
-    CheckVo getByCheckVoId(String id);
+    List<CheckVo> getByCheckVoId(String id);
 
     /**
      * 查找全部考勤列表
      * @return 考勤列表
      */
-    List<CheckVo> queryCheckVoAll();
+    List<CheckVo> queryCheckVoAll(String sql);
 }

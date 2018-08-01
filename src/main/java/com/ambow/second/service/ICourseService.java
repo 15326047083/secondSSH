@@ -13,6 +13,10 @@ public interface ICourseService {
     List<Course> queryCourse();
     //修改课程状态 alive 0为正常 1为注销
     void updateCourse(Course course);
+    //根据ID删除课程信息
+    void deleteCourse(String id);
+
+    Course getById(String courseId);
     //
 
 }

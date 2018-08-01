@@ -1,6 +1,7 @@
 package com.ambow.second.service.impl;
 
 import com.ambow.second.dao.ICheckDao;
+import com.ambow.second.entity.Check;
 import com.ambow.second.service.ICheckService;
 import com.ambow.second.vo.CheckVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,8 @@ public class CheckService implements ICheckService {
      * 修改干部缺勤次数
      */
     @Override
-    public void setAbsNum() {
+    public void setAbsNum(Check check) {
+        checkDao.saveOrUpdate(check);
 
     }
 

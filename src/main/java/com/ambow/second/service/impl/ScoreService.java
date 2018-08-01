@@ -23,8 +23,8 @@ public class ScoreService implements IScoreService {
     }
 
     @Override
-    public Score getScoreById(String id) {
-        return scoreDao.get(id);
+    public ScoreVo getScoreById(String id) {
+        return scoreDao.getScoreById(id);
     }
 
     @Override
@@ -39,9 +39,20 @@ public class ScoreService implements IScoreService {
     }
 
     @Override
-    public List<ScoreVo> getScore(String id) {
+    public List<ScoreVo> getScoreByuserId(String id) {
 
-        return scoreDao.getScore(id);
+        return scoreDao.getScoreByuserId(id);
+    }
+
+    @Override
+    public List<ScoreVo> getScoreBycourseName(String couserName) {
+
+        return scoreDao.getScoreBycourseName(couserName);
+    }
+
+    @Override
+    public Score get(String id) {
+        return scoreDao.get(id);
     }
 
 

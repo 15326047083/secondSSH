@@ -9,5 +9,7 @@ import java.util.List;
 public interface IScoreDao extends ICommonDao<Score> {
 
 
-  List<ScoreVo>  getScore(String userId);
+  List<ScoreVo>  getScoreByuserId(String userId);
+  List<ScoreVo>  getScoreBycourseName(String courseName);
+  ScoreVo  getScoreById(String scoreId);
 }

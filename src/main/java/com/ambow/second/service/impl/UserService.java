@@ -33,8 +33,8 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public String delete(User user) {
-        return userDao.delete(user.getId());
+    public void delete(User user) {
+        userDao.delete(user.getId());
     }
 
 

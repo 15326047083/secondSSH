@@ -35,7 +35,7 @@ public class GuoweiTest {
     public void delete(){
         User user=new User();
         user.setId("3");
-        System.out.println(userService.delete(user));
+        userService.delete(user);
     }
 
 }

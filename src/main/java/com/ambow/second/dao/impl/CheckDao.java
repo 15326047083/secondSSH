@@ -25,18 +25,18 @@ public class CheckDao extends CommonDao<Check> implements ICheckDao {
     }
 
     /**
-     * 根据UserID查找查看考勤
+     * 根据UserID查找查看考勤列表
      *
      * @param id UserId
      * @return 考情
      */
     @Override
     @Transactional
-    public CheckVo getByCheckVoId(String id) {
+    public List<CheckVo> getByCheckVoId(String id) {
        
         String sql="select new com.ambow.second.vo.CheckVo(c.id as checkId,u.id as userId,u.name as userName,u.num as num,u.deptId as deptName,c.time as time,o.id as courseId,o.name as courseName,c.info as info,c.num as absNum) from Check c,User u,Course o where c.userId=u.id and c.courseId=o.id and u.id='"+id+"'";
 
-        return (CheckVo) sessionFactory.getCurrentSession().createQuery(sql).uniqueResult();
+        return (List<CheckVo>) sessionFactory.getCurrentSession().createQuery(sql).list();
     }
 
     /**
@@ -45,7 +45,11 @@ public class CheckDao extends CommonDao<Check> implements ICheckDao {
      * @return 考勤列表
      */
     @Override
-    public List<CheckVo> queryCheckVoAll() {
-        return null;
+    @Transactional
+    public List<CheckVo> queryCheckVoAll(String addsql) {
+        String sql="select new com.ambow.second.vo.CheckVo(c.id as checkId,u.id as userId,u.name as userName,u.num as num,u.deptId as deptName,c.time as time,o.id as courseId,o.name as courseName,c.info as info,c.num as absNum) from Check c,User u,Course o where c.userId=u.id and c.courseId=o.id"+addsql;
+
+        return (List<CheckVo>) sessionFactory.getCurrentSession().createQuery(sql).list();
+
     }
 }

@@ -17,14 +17,6 @@ public class CheckDao extends CommonDao<Check> implements ICheckDao {
 
 
     /**
-     * 修改干部缺勤次数
-     */
-    @Override
-    public void setAbsNum() {
-
-    }
-
-    /**
      * 根据UserID查找查看考勤列表
      *
      * @param id UserId
@@ -52,4 +44,5 @@ public class CheckDao extends CommonDao<Check> implements ICheckDao {
         return (List<CheckVo>) sessionFactory.getCurrentSession().createQuery(sql).list();
 
     }
+
 }

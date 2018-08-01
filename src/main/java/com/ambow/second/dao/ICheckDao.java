@@ -8,11 +8,6 @@ import java.util.List;
 
 public interface ICheckDao extends ICommonDao<Check> {
     /**
-     * 修改干部缺勤次数
-     */
-    void setAbsNum();
-
-    /**
      * 根据UserID查找查看考勤
      * @param id UserId
      * @return 考情
@@ -24,4 +19,13 @@ public interface ICheckDao extends ICommonDao<Check> {
      * @return 考勤列表
      */
     List<CheckVo> queryCheckVoAll(String sql);
+
+    /**
+     * 根据UserId 和 CourseId查询 考勤记录
+     * @param check
+     * @return
+     */
+    Check getByUserIdAndCourseId(Check check);
+
+
 }

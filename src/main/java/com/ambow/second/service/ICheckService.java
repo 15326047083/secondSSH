@@ -1,5 +1,6 @@
 package com.ambow.second.service;
 
+import com.ambow.second.entity.Check;
 import com.ambow.second.vo.CheckVo;
 
 import java.util.List;
@@ -9,7 +10,7 @@ public interface ICheckService {
     /**
      * 修改干部缺勤次数
      */
-    void setAbsNum();
+    void setAbsNum(Check check);
 
     /**
      * 根据UserID查找查看考勤
@@ -30,4 +31,12 @@ public interface ICheckService {
      * @return
      */
     List<CheckVo> queryCheskVoAllByTeacherId(String id);
+
+    /**
+     * 判断是否可以新建
+     * @param check
+     * @return
+     */
+    Check sava(Check check);
+
 }

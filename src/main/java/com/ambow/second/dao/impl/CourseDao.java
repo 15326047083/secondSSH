@@ -16,10 +16,13 @@ public class CourseDao extends CommonDao<Course> implements ICourseDao {
 
     @Override
     @Transactional
-    //根据教师ID 查询自己所教授的课程
+    /**
+     * 根据teacherID查询课程信息
+     */
     public List<Course> queryTeacherById(String teacherId) {
         return sessionFactory.getCurrentSession().createQuery("from Course where teacherId='"+teacherId+"'").list();
     }
+
 
 
 

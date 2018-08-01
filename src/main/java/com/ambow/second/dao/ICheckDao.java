@@ -20,5 +20,12 @@ public interface ICheckDao extends ICommonDao<Check> {
      */
     List<CheckVo> queryCheckVoAll(String sql);
 
+    /**
+     * 根据UserId 和 CourseId查询 考勤记录
+     * @param check
+     * @return
+     */
+    Check getByUserIdAndCourseId(Check check);
+
 
 }

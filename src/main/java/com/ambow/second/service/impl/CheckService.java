@@ -58,4 +58,18 @@ public class CheckService implements ICheckService {
         String sql=" and o.teacherId="+id;
         return checkDao.queryCheckVoAll(sql);
     }
+
+    /**
+     * 判断是否可以新建
+     * 如不可以新建，则返回考勤ID；
+     * @param check
+     * @return 考勤的ID
+     */
+    @Override
+    public Check sava(Check check) {
+        return checkDao.getByUserIdAndCourseId(check);
+
+    }
+
+
 }

@@ -45,4 +45,17 @@ public class CheckDao extends CommonDao<Check> implements ICheckDao {
 
     }
 
+    /**
+     * 根据UserId 和 CourseId查询 考勤记录
+     *
+     * @param check
+     * @return
+     */
+    @Override
+    @Transactional
+    public Check getByUserIdAndCourseId(Check check) {
+        String sql="from Check where userId='"+check.getUserId()+"' and courseId='"+check.getCourseId()+"'";
+        return (Check) sessionFactory.getCurrentSession().createQuery(sql).uniqueResult();
+    }
+
 }

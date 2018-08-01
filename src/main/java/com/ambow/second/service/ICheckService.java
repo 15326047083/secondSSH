@@ -32,4 +32,11 @@ public interface ICheckService {
      */
     List<CheckVo> queryCheskVoAllByTeacherId(String id);
 
+    /**
+     * 判断是否可以新建
+     * @param check
+     * @return
+     */
+    Check sava(Check check);
+
 }

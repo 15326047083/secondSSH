@@ -58,7 +58,7 @@
                     <tr onMouseOut="this.style.backgroundColor='#ffffff'" onMouseOver="this.style.backgroundColor='#edf5ff'">
                         <td align="right" valign="middle" class="borderright borderbottom bggray">干部名称：</td>
                         <td align="left" valign="middle" class="borderright borderbottom main-for">
-                            <select name="userId" id="level">
+                            <select name="userId" id="level1">
 
                                 <s:iterator var="user" value="userList">
                                     <option value="<s:property value="#user.id"/>" ><s:property value="#user.name"/></option>

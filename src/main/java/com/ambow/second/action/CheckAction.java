@@ -32,7 +32,7 @@ public class CheckAction extends ActionSupport {
     private String courseId;
     private int num;
     private String info;
-    private String id;
+
     private String bj;
 
 
@@ -126,15 +126,29 @@ public class CheckAction extends ActionSupport {
      * 新增考勤列表
      * @return
      */
-    @Action(value = "newCheck", results = {@Result(name = "teacher", location = "/toListByTeacherId.action",type = "redirect"),@Result(name = "admin",location = "toCheckList.action",type = "redirect")})
+    @Action(value = "newCheck", results = {@Result(name = "teacher", location = "/toListByTeacherId.action",type = "redirect"),
+            @Result(name = "admin",location = "toCheckList.action",type = "redirect")})
     public String newCheck(){
         Check check=new Check();
         check.setCourseId(this.courseId);
         check.setInfo(this.info);
         check.setNum(this.num);
         check.setUserId(this.userId);
-        System.out.println(check);
-        iCheckService.setAbsNum(check);
+
+
+        Check check1=iCheckService.sava(check);
+      //  如果找不到相同信息，即同一个人的同一个课程
+        if (check1==null){
+            iCheckService.setAbsNum(check);
+        }
+        //如果存在则修改缺勤次数
+        else{
+            int num1=check1.getNum();
+            check1.setNum(num1+check.getNum());
+            check1.setInfo(check.getInfo());
+            iCheckService.setAbsNum(check1);
+        }
+
         // 获取角色 role
         // bj = role;
         // return "bj";
@@ -166,13 +180,6 @@ public class CheckAction extends ActionSupport {
         this.info = info;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public int getNum() {
         return num;

@@ -86,7 +86,7 @@
                             value="#cl.name" /></td>
                     <td align="center" valign="middle" class="borderright borderbottom">已锁定</td>
                     <td align="center" valign="middle" class="borderright borderbottom">2013-04-26 11:00:59</td>
-                    <td align="center" valign="middle" class="borderbottom"><a href="add.html" target="mainFrame" onFocus="this.blur()" class="add">编辑</a><span class="gray">&nbsp;|&nbsp;</span><a href="add.html" target="mainFrame" onFocus="this.blur()" class="add">删除</a></td>
+                    <td align="center" valign="middle" class="borderbottom"><a href="/course/updateCourse.action?courseId=<s:property value="#cl.id"/>" target="mainFrame" onFocus="this.blur()" class="add">编辑</a><span class="gray">&nbsp;|&nbsp;</span><a href="/course/deleteCourse.action?courseId=<s:property value="#cl.id"/>" target="mainFrame" onFocus="this.blur()" class="add">删除</a></td>
                 </tr>
                        </s:iterator>
             </table></td>

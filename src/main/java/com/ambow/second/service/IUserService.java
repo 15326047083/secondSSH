@@ -12,6 +12,6 @@ public interface IUserService {
     // 修改用户信息
 	String saveOrUpdate(User user);
 	// 删除用户
-	String delete(User user);
+	void delete(User user);
 
 }

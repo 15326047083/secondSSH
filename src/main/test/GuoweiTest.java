@@ -37,5 +37,15 @@ public class GuoweiTest {
         user.setId("3");
         userService.delete(user);
     }
+    @Test
+    public void queryCheckVoAll(){
+        System.out.println(userService.queryCheckVoAll());
+    }
+
+    @Test
+    public void getByCheckVoId(){
+        System.out.println(userService.getByCheckVoId("2"));
+    }
+
 
 }

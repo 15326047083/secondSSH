@@ -2,6 +2,8 @@ package com.ambow.second.service.impl;
 
 import java.util.List;
 
+import com.ambow.second.dao.ICheckDao;
+import com.ambow.second.vo.CheckVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +18,8 @@ public class UserService implements IUserService {
 
     @Autowired
     private IUserDao userDao;
+    @Autowired
+    private ICheckDao checkDao;
 
     @Override
     public List<User> queryAll() {
@@ -36,6 +40,18 @@ public class UserService implements IUserService {
     public void delete(User user) {
         userDao.delete(user.getId());
     }
+
+    @Override
+    public List<CheckVo> queryCheckVoAll() {
+        String sql="";
+        return checkDao.queryCheckVoAll(sql);
+    }
+    @Override
+    public List<CheckVo> getByCheckVoId(String id) {
+
+        return checkDao.getByCheckVoId(id);
+    }
+
 
 
 }

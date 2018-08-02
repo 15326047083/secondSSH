@@ -42,20 +42,20 @@
 
 <table width="99%" border="0" cellspacing="0" cellpadding="0" id="searchmain">
     <tr>
-        <td width="99%" align="left" valign="top">您的位置：考勤管理</td>
+        <td width="99%" align="left" valign="top">您的位置：成绩管理</td>
     </tr>
     <tr>
         <td align="left" valign="top">
             <table width="100%" border="0" cellspacing="0" cellpadding="0" id="search">
                 <tr>
                     <td width="90%" align="left" valign="middle">
-                        <form method="post" action="">
+                        <form method="post" action="<%=request.getContextPath()%>likeScore.action">
                             <span>模糊查询：</span>
-                            <input type="text" name="" value="" class="text-word">
-                            <input name="" type="button" value="查询" class="text-but">
+                            <input type="text" name="like" value="" class="text-word">
+                            <input name="" type="submit" value="查询" class="text-but">
                         </form>
                     </td>
-                    <td width="10%" align="center" valign="middle" style="text-align:right; width:150px;"><a href="add.html" target="mainFrame" onFocus="this.blur()" class="add">新增考勤</a></td>
+                    <td width="10%" align="center" valign="middle" style="text-align:right; width:150px;"><a href="/score/toNewScore.action" target="mainFrame" onFocus="this.blur()" class="add">新增成绩</a></td>
                 </tr>
             </table>
         </td>
@@ -67,26 +67,37 @@
                 <tr>
                     <th align="center" valign="middle" class="borderright">课程编号</th>
                     <th align="center" valign="middle" class="borderright">课程名称</th>
-                    <th align="center" valign="middle" class="borderright">教师</th>
+                    <th align="center" valign="middle" class="borderright">教师编号</th>
+                    <th align="center" valign="middle" class="borderright">干部</th>
                     <th align="center" valign="middle" class="borderright">课时</th>
                     <th align="center" valign="middle" class="borderright">成绩</th>
                     <th align="center" valign="middle">操作</th>
                 </tr>
-               <s:iterator var="score" value="getAll">
-                <tr onMouseOut="this.style.backgroundColor='#ffffff'" onMouseOver="this.style.backgroundColor='#edf5ff'">
-                    <td align="center" valign="middle" class="borderright borderbottom"><s:property value="#score.courseId"/></td>
-                    <td align="center" valign="middle" class="borderright borderbottom"><s:property value="#score.courseName"/></td>
-                    <td align="center" valign="middle" class="borderright borderbottom"><s:property value="#score.teacherName"/></td>
-                    <td align="center" valign="middle" class="borderright borderbottom"><s:property value="#score.courseLessons"/></td>
-                    <td align="center" valign="middle" class="borderright borderbottom"><s:property value="#score.score"/></td>
-                    <td align="center" valign="middle" class="borderbottom"><a href="/score/getById.action?scoreId=<s:property value="#score.scoreId"/>" target="mainFrame" onFocus="this.blur()" class="add">编辑</a><span class="gray">&nbsp;|&nbsp;</span><a href="/score/deleteScore.action?scoreId=<s:property value="#score.scoreId"/>" target="mainFrame" onFocus="this.blur()" class="add">删除</a></td>
-                </tr>
-               </s:iterator>
+                <s:iterator var="score" value="getAll">
+                    <tr onMouseOut="this.style.backgroundColor='#ffffff'" onMouseOver="this.style.backgroundColor='#edf5ff'">
+                        <td align="center" valign="middle" class="borderright borderbottom"><s:property value="#score.courseId"/></td>
+                        <td align="center" valign="middle" class="borderright borderbottom"><s:property value="#score.courseName"/></td>
+                        <td align="center" valign="middle" class="borderright borderbottom"><s:property value="#score.teacherId"/></td>
+                        <td align="center" valign="middle" class="borderright borderbottom"><s:property value="#score.userName"/></td>
+                        <td align="center" valign="middle" class="borderright borderbottom"><s:property value="#score.courseLessons"/></td>
+                        <td align="center" valign="middle" class="borderright borderbottom"><s:property value="#score.score"/></td>
+                        <td align="center" valign="middle" class="borderbottom"><a href="/score/getById.action?scoreId=<s:property value="#score.scoreId"/>" target="mainFrame" onFocus="this.blur()" class="add">编辑</a><span class="gray">&nbsp;|&nbsp;</span><a href="/score/deleteScore.action?scoreId=<s:property value="#score.scoreId"/>" target="mainFrame" onFocus="this.blur()" class="add">删除</a></td>
+                    </tr>
+                </s:iterator>
 
             </table></td>
     </tr>
     <tr>
-        <td align="left" valign="top" class="fenye">11 条数据 1/1 页&nbsp;&nbsp;<a href="#" target="mainFrame" onFocus="this.blur()">首页</a>&nbsp;&nbsp;<a href="#" target="mainFrame" onFocus="this.blur()">上一页</a>&nbsp;&nbsp;<a href="#" target="mainFrame" onFocus="this.blur()">下一页</a>&nbsp;&nbsp;<a href="#" target="mainFrame" onFocus="this.blur()">尾页</a></td>
+        <td align="left" valign="top" class="fenye">
+            11 条数据 1/1 页&nbsp;&nbsp;
+            <a href="#"  target="mainFrame" onFocus="this.blur()">首页</a>
+            &nbsp;&nbsp;
+            <a href="#" target="mainFrame" onFocus="this.blur()">上一页</a>
+            &nbsp;&nbsp;
+            <a href="#" target="mainFrame" onFocus="this.blur()">下一页</a>
+            &nbsp;&nbsp;
+            <a href="#" target="mainFrame" onFocus="this.blur()">尾页</a>
+        </td>
     </tr>
 </table>
 

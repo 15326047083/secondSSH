@@ -18,7 +18,7 @@ public interface ICheckDao extends ICommonDao<Check> {
      * 查找全部考勤列表
      * @return 考勤列表
      */
-    List<CheckVo> queryCheckVoAll(String sql);
+    List<CheckVo> queryCheckVoAll(String sql,int index);
 
     /**
      * 根据UserId 和 CourseId查询 考勤记录
@@ -38,14 +38,25 @@ public interface ICheckDao extends ICommonDao<Check> {
      * @param str
      * @return
      */
-    List fuzzyQuery(String str);
+    List fuzzyQuery(String str,int index);
 
     /**
      * 模糊查询(教师）
      * @param str
      * @return
      */
-    List<CheckVo> fuzzyQueryOfTeacher(String str,String teacherId);
+    List<CheckVo> fuzzyQueryOfTeacher(String str,String teacherId,int index);
 
+    /**
+     * 统计条目
+     * @return
+     */
+    long countVo();
 
+    /**
+     * 统计条目(模糊)
+     * @return
+     */
+    long fuzzyCountVo(String str);
+    long fuzzyCountVoOfTeacher(String str,String teacherId);
 }

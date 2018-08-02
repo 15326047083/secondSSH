@@ -44,6 +44,15 @@ public class CheckAction extends ActionSupport {
 
     private  String str;//接受到的模糊查询字段
 
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
+    }
+
+    private  int index;  //当前页数
 
 
 
@@ -55,15 +64,34 @@ public class CheckAction extends ActionSupport {
     @Action(value = "toCheckList", results = {@Result(name = "success", location = "/WEB-INF/page/check/checkList" +
             ".jsp", type = "dispatcher")})
     public String toCheckList() {
-        list = iCheckService.queryCheckVoAll();
+//        权限
+//        教师查询
+//        list=iCheckService.queryCheskVoAllByTeacherId(teacherId,index);
+        list = iCheckService.queryCheckVoAll(index);
+        long page=iCheckService.countVo();
+        tag(page);
+
         //
 //        如果是教师；
 //        String teacherId = "1";
 //        从session 中获得userId 即为 teacherID
 //        list = iCheckService.queryCheskVoAllByTeacherId(teacherId);
         ActionContext.getContext().put("list", list);
+        ActionContext.getContext().put("index",index);
 
         return SUCCESS;
+    }
+
+    private void tag(long page) {
+        if (page%5==0){
+            if (page/5==0){
+                page=1;
+            }
+            ActionContext.getContext().put("allPage",page/5);
+        }
+        else {
+            ActionContext.getContext().put("allPage",page/5+1);
+        }
     }
 
     /**
@@ -133,6 +161,7 @@ public class CheckAction extends ActionSupport {
         // 获取角色 role
         // bj = role;
         // return "bj";
+        ActionContext.getContext().put("index",1);
         return SUCCESS;
     }
 
@@ -148,6 +177,7 @@ public class CheckAction extends ActionSupport {
         // 获取角色 role
         // bj = role;
         // return "bj";
+        ActionContext.getContext().put("index",1);
         return SUCCESS;
 
     }
@@ -175,12 +205,19 @@ public class CheckAction extends ActionSupport {
         if(str==null){
             return "listAll";
         }
-
-        list=iCheckService.fuzzyQuery(str);
+       //
+        // 教师
+        // long page=iCheckService.fuzzyCountVoOfTeacher(str,"2");
+        long page=iCheckService.fuzzyCountVo(str);
+        tag(page);
+        list=iCheckService.fuzzyQuery(str,index);
        //   如果是教师
         //
-        // list=iCheckService.fuzzyQueryOfTeacher(str,"2");
+        // list=iCheckService.fuzzyQueryOfTeacher(str,"2",index);
         ActionContext.getContext().put("list",list);
+        ActionContext.getContext().put("index",1);
+        ActionContext.getContext().put("bj","fuzzy");
+        ActionContext.getContext().put("str",str);
 
         return SUCCESS;
     }

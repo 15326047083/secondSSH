@@ -42,9 +42,9 @@ public class CheckService implements ICheckService {
      * @return 考勤列表
      */
     @Override
-    public List<CheckVo> queryCheckVoAll() {
+    public List<CheckVo> queryCheckVoAll(int index) {
         String sql="";
-        return checkDao.queryCheckVoAll(sql);
+        return checkDao.queryCheckVoAll(sql,index);
     }
 
     /**
@@ -54,9 +54,9 @@ public class CheckService implements ICheckService {
      * @return
      */
     @Override
-    public List<CheckVo> queryCheskVoAllByTeacherId(String id) {
+    public List<CheckVo> queryCheskVoAllByTeacherId(String id,int index) {
         String sql=" and o.teacherId="+id;
-        return checkDao.queryCheckVoAll(sql);
+        return checkDao.queryCheckVoAll(sql,index);
     }
 
     /**
@@ -85,7 +85,7 @@ public class CheckService implements ICheckService {
     /**
      * 根据ID查找 check表全部信息
      *
-     * @param Id
+     * @param id
      * @return
      */
     @Override
@@ -100,8 +100,8 @@ public class CheckService implements ICheckService {
      * @return
      */
     @Override
-    public List<CheckVo> fuzzyQuery(String str) {
-        return checkDao.fuzzyQuery(str);
+    public List<CheckVo> fuzzyQuery(String str,int index) {
+        return checkDao.fuzzyQuery(str,index);
     }
 
     /**
@@ -111,8 +111,37 @@ public class CheckService implements ICheckService {
      * @return
      */
     @Override
-    public List<CheckVo> fuzzyQueryOfTeacher(String str,String teacherId) {
-        return checkDao.fuzzyQueryOfTeacher(str,teacherId);
+    public List<CheckVo> fuzzyQueryOfTeacher(String str,String teacherId,int index) {
+        return checkDao.fuzzyQueryOfTeacher(str,teacherId,index);
+    }
+
+    /**
+     * 统计条目
+     *
+     * @return
+     */
+    @Override
+    public long countVo() {
+        return checkDao.countVo();
+    }
+
+    /**
+     * 统计条目(模糊)
+     *
+     * @return
+     */
+    @Override
+    public long fuzzyCountVo(String str) {
+        return checkDao.fuzzyCountVo(str);
+    }
+    /**
+     * 统计条目(模糊) 教师
+     *
+     * @return
+     */
+    @Override
+    public long fuzzyCountVoOfTeacher(String str,String teacherId) {
+        return checkDao.fuzzyCountVo(str);
     }
 
 

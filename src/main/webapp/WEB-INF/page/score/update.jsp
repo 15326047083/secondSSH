@@ -48,66 +48,28 @@ td.fenye{ padding:10px 0 0 0; text-align:right;}
 <!--main_top-->
 <table width="99%" border="0" cellspacing="0" cellpadding="0" id="searchmain">
   <tr>
-    <td width="99%" align="left" valign="top">您的位置：课程管理&nbsp;&nbsp;>&nbsp;&nbsp;添加课程</td>
+    <td width="99%" align="left" valign="top">您的位置：成绩管理&nbsp;&nbsp;>&nbsp;&nbsp;修改成绩</td>
   </tr>
   <tr>
     <td align="left" valign="top" id="addinfo">
-    <a href="add.html" target="mainFrame" onFocus="this.blur()" class="add">课程信息</a>
+    <a href="add.html" target="mainFrame" onFocus="this.blur()" class="add">成绩信息</a>
     </td>
   </tr>
   <tr>
     <td align="left" valign="top">
-    <form method="post" action="/course/saveCourse.action">
+    <form method="post" action="<%=request.getContextPath()%>updateScore.action">
     <table width="100%" border="0" cellspacing="0" cellpadding="0" id="main-tab">
+
       <tr onMouseOut="this.style.backgroundColor='#ffffff'" onMouseOver="this.style.backgroundColor='#edf5ff'">
-        <td align="right" valign="middle" class="borderright borderbottom bggray">课程名：</td>
-        <td align="left" valign="middle" class="borderright borderbottom main-for" >
-        <input type="text" name="course.name" value="" class="text-word" required>
-        </td>
-        </tr>
-      <tr onMouseOut="this.style.backgroundColor='#ffffff'" onMouseOver="this.style.backgroundColor='#edf5ff'">
-        <td align="right" valign="middle" class="borderright borderbottom bggray">上课时间：</td>
+        <td align="right" valign="middle" class="borderright borderbottom bggray">成绩：</td>
         <td align="left" valign="middle" class="borderright borderbottom main-for">
-        <input type="time" name="course.startTime" value="" class="text-word" required>
-        </td>
-        </tr>
-
-        <tr onMouseOut="this.style.backgroundColor='#ffffff'" onMouseOver="this.style.backgroundColor='#edf5ff'">
-            <td align="right" valign="middle" class="borderright borderbottom bggray">下课时间：</td>
-            <td align="left" valign="middle" class="borderright borderbottom main-for">
-                <input type="time" name="course.endTime" value="" class="text-word" required>
-            </td>
-        </tr>
-
-        <tr onMouseOut="this.style.backgroundColor='#ffffff'" onMouseOver="this.style.backgroundColor='#edf5ff'">
-            <td align="right" valign="middle" class="borderright borderbottom bggray">课程信息：</td>
-            <td align="left" valign="middle" class="borderright borderbottom main-for">
-                <input type="text" name="course.info" value="" class="text-word" required>
-            </td>
-        </tr>
-
-        <tr onMouseOut="this.style.backgroundColor='#ffffff'" onMouseOver="this.style.backgroundColor='#edf5ff'">
-            <td align="right" valign="middle" class="borderright borderbottom bggray">总课时：</td>
-            <td align="left" valign="middle" class="borderright borderbottom main-for">
-                <input type="text" name="course.lessons" value="" class="text-word" required>
-            </td>
-        </tr>
-
-      <tr onMouseOut="this.style.backgroundColor='#ffffff'" onMouseOver="this.style.backgroundColor='#edf5ff'">
-        <td align="right" valign="middle" class="borderright borderbottom bggray">授课教师工号：</td>
-        <td align="left" valign="middle" class="borderright borderbottom main-for">
-        <select name="course.teacherId" id="level">
-
-
-          <s:iterator var="user" value="userList">
-	    <option value="<s:property value="#user.num"/>" ><s:property
-                value="#user.num" /></option>
-          </s:iterator>
-        </select>
-
+        <input type="text" name="scores" value="<s:property value="#getById.score"/>" class="text-word">
+          <input type="hidden" name="scoreId" value="<s:property value="#getById.id"/>" required>
 
         </td>
       </tr>
+
+
       <tr onMouseOut="this.style.backgroundColor='#ffffff'" onMouseOver="this.style.backgroundColor='#edf5ff'">
         <td align="right" valign="middle" class="borderright borderbottom bggray">&nbsp;</td>
         <td align="left" valign="middle" class="borderright borderbottom main-for">

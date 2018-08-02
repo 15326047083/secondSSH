@@ -151,7 +151,7 @@
             <table width="100%" border="0" cellspacing="0" cellpadding="0" id="search">
                 <tr>
                     <td width="90%" align="left" valign="middle">
-                        <form method="post" action="<%=request.getContextPath()%>fuzzyQuery.action">
+                        <form method="post" action="<%=request.getContextPath()%>fuzzyQuery.action?index=1">
                             <span>模糊查询：</span>
                             <input type="text" name="str" value="" class="text-word">
                             <input name="" type="submit" value="查询" class="text-but">
@@ -196,13 +196,55 @@
         </td>
     </tr>
     <tr>
-        <td align="left" valign="top" class="fenye">11 条数据 1/1 页&nbsp;&nbsp;<a href="#" target="mainFrame"
-                                                                               onFocus="this.blur()">首页</a>&nbsp;&nbsp;<a
-                href="#" target="mainFrame" onFocus="this.blur()">上一页</a>&nbsp;&nbsp;<a href="#" target="mainFrame"
-                                                                                        onFocus="this.blur()">下一页</a>&nbsp;&nbsp;<a
-                href="#" target="mainFrame" onFocus="this.blur()">尾页</a></td>
+        <td align="left" valign="top" class="fenye"> <s:property value="#index"/>/<s:property value="#allPage"/>页&nbsp;&nbsp;
+           <s:if test="#bj!='fuzzy'.toString()">
+            <a href="<%=request.getContextPath()%>toCheckList.action?index=1" target="mainFrame" onFocus="this.blur()">首页</a>&nbsp;&nbsp;
+
+           <s:if test="#index==1">
+               <a id="prior" style="cursor: default;"
+                  href="javascript:return false;" target="mainFrame" onFocus="this.blur()">上一页</a>&nbsp;&nbsp;
+           </s:if>
+            <s:if test="#index>1">
+            <a id="prior"
+                href="<%=request.getContextPath()%>toCheckList.action?index=<s:property value="#index-1"/>" target="mainFrame" onFocus="this.blur()">上一页</a>&nbsp;&nbsp;
+            </s:if>
+           <s:if test="#allPage>#index">
+            <a id="last" href="<%=request.getContextPath()%>toCheckList.action?index=<s:property value="#index+1"/>" target="mainFrame" onFocus="this.blur()">下一页</a>&nbsp;&nbsp;
+           </s:if>
+            <s:if test="#allPage<=#index">
+                <a id="last" style="cursor: default;"
+                   href="javascript:return false;" target="mainFrame" onFocus="this.blur()">下一页</a>&nbsp;&nbsp;
+            </s:if>
+
+            <a
+                href="<%=request.getContextPath()%>toCheckList.action?index=<s:property value="#allPage"/>" target="mainFrame" onFocus="this.blur()">尾页</a></td>
+        </s:if>
+        <s:if test="#bj=='fuzzy'.toString()">
+            <a href="<%=request.getContextPath()%>fuzzyQuery.action?index=1&str=<s:property value="#str"/>" target="mainFrame" onFocus="this.blur()">首页</a>&nbsp;&nbsp;
+
+            <s:if test="#index==1">
+                <a id="prior" style="cursor: default;"
+                   href="javascript:return false;" target="mainFrame" onFocus="this.blur()">上一页</a>&nbsp;&nbsp;
+            </s:if>
+            <s:if test="#index>1">
+                <a id="prior"
+                   href="<%=request.getContextPath()%>fuzzyQuery.action?index=<s:property value="#index-1"/>&str=<s:property value="#str"/>" target="mainFrame" onFocus="this.blur()">上一页</a>&nbsp;&nbsp;
+            </s:if>
+            <s:if test="#allPage>#index">
+                <a id="last" href="<%=request.getContextPath()%>fuzzyQuery.action?index=<s:property value="#index+1"/>&str=<s:property value="#str"/>" target="mainFrame" onFocus="this.blur()">下一页</a>&nbsp;&nbsp;
+            </s:if>
+            <s:if test="#allPage<=#index">
+                <a id="last" style="cursor: default;"
+                   href="javascript:return false;" target="mainFrame" onFocus="this.blur()">下一页</a>&nbsp;&nbsp;
+            </s:if>
+
+            <a
+                    href="<%=request.getContextPath()%>fuzzyQuery.action?index=<s:property value="#allPage"/>&str=<s:property value="#str"/>" target="mainFrame" onFocus="this.blur()">尾页</a></td>
+        </s:if>
+
     </tr>
 </table>
 
 </body>
 </html>
+

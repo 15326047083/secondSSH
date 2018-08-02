@@ -26,13 +26,13 @@ public class CheckVoTest {
      */
     @Test
     public void queryAllTest(){
-        System.out.println(checkService.queryCheckVoAll());
+      //  System.out.println(checkService.queryCheckVoAll();
     }
     /**
      * 教师查询全部考勤信息
      */
     @Test
     public void teacherQueryAllTest(){
-        System.out.println(checkService.queryCheskVoAllByTeacherId("2"));
+        //System.out.println(checkService.queryCheskVoAllByTeacherId("2"));
     }
 }

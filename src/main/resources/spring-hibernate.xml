@@ -10,6 +10,33 @@ http://www.springframework.org/schema/aop
 http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
 ">
 
+    <!-- shiro配置 -->
+
+    <bean class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+        <property name="securityManager" ref="securityManager"/>
+    </bean>
+
+    <bean id="shiroFilter"
+          class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <property name="securityManager" ref="securityManager"></property>
+        <property name="loginUrl" value="/login/toLogin.action"></property>
+        <property name="unauthorizedUrl" value="/login/toLogin.action"></property>
+        <property name="filterChainDefinitions">
+            <value>
+                /**=authc
+            </value>
+        </property>
+    </bean>
+    <!-- 创建securityManager对象 -->
+    <bean class="org.apache.shiro.web.mgt.DefaultWebSecurityManager"
+          id="securityManager">
+        <property name="realm" ref="realm"></property>
+    </bean>
+
+    <bean id="realm" class="com.ambow.second.util.CustomRealm">
+
+    </bean>
     <!-- 配置数据源 -->
     <bean name="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
 

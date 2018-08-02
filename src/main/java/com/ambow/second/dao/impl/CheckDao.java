@@ -3,6 +3,7 @@ package com.ambow.second.dao.impl;
 import com.ambow.second.dao.ICheckDao;
 import com.ambow.second.entity.Check;
 import com.ambow.second.vo.CheckVo;
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -15,7 +16,7 @@ public class CheckDao extends CommonDao<Check> implements ICheckDao {
     @Autowired
     private SessionFactory sessionFactory;
 
-
+    final int num=5;        // 一页显示的数目
     /**
      * 根据UserID查找查看考勤列表
      *
@@ -38,10 +39,13 @@ public class CheckDao extends CommonDao<Check> implements ICheckDao {
      */
     @Override
     @Transactional
-    public List<CheckVo> queryCheckVoAll(String addsql) {
+    public List<CheckVo> queryCheckVoAll(String addsql,int index) {
         String sql="select new com.ambow.second.vo.CheckVo(c.id as checkId,u.id as userId,u.name as userName,u.num as num,u.deptId as deptName,c.time as time,o.id as courseId,o.name as courseName,c.info as info,c.num as absNum) from Check c,User u,Course o where c.userId=u.id and c.courseId=o.id"+addsql;
 
-        return (List<CheckVo>) sessionFactory.getCurrentSession().createQuery(sql).list();
+        Query query=sessionFactory.getCurrentSession().createQuery(sql);
+        query.setFirstResult((index-1)*num);
+        query.setMaxResults(num-1);
+        return query.list();
 
     }
 
@@ -104,5 +108,17 @@ public class CheckDao extends CommonDao<Check> implements ICheckDao {
         return sessionFactory.getCurrentSession().createQuery(sql).list();
     }
 
+    /**
+     * 统计条目
+     *
+     * @return
+     */
+    @Override
+    @Transactional
+    public long countVo() {
+        String sql="select count(*) from Check c,User u,Course o where c.userId=u.id and c.courseId=o.id";
+        return (long) sessionFactory.getCurrentSession().createQuery(sql).uniqueResult();
+
+    }
 
 }

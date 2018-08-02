@@ -44,6 +44,15 @@ public class CheckAction extends ActionSupport {
 
     private  String str;//接受到的模糊查询字段
 
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
+    }
+
+    private  int index;  //当前页数
 
 
 
@@ -55,13 +64,24 @@ public class CheckAction extends ActionSupport {
     @Action(value = "toCheckList", results = {@Result(name = "success", location = "/WEB-INF/page/check/checkList" +
             ".jsp", type = "dispatcher")})
     public String toCheckList() {
-        list = iCheckService.queryCheckVoAll();
+
+
+        list = iCheckService.queryCheckVoAll(index);
+        long page=iCheckService.countVo();
+        if (page%5==0){
+            ActionContext.getContext().put("allPage",page/5);
+        }
+        else {
+            ActionContext.getContext().put("allPage",page/5+1);
+        }
+
         //
 //        如果是教师；
 //        String teacherId = "1";
 //        从session 中获得userId 即为 teacherID
 //        list = iCheckService.queryCheskVoAllByTeacherId(teacherId);
         ActionContext.getContext().put("list", list);
+        ActionContext.getContext().put("index",index);
 
         return SUCCESS;
     }

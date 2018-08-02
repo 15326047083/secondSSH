@@ -42,9 +42,9 @@ public class CheckService implements ICheckService {
      * @return 考勤列表
      */
     @Override
-    public List<CheckVo> queryCheckVoAll() {
+    public List<CheckVo> queryCheckVoAll(int index) {
         String sql="";
-        return checkDao.queryCheckVoAll(sql);
+        return checkDao.queryCheckVoAll(sql,index);
     }
 
     /**
@@ -54,9 +54,9 @@ public class CheckService implements ICheckService {
      * @return
      */
     @Override
-    public List<CheckVo> queryCheskVoAllByTeacherId(String id) {
+    public List<CheckVo> queryCheskVoAllByTeacherId(String id,int index) {
         String sql=" and o.teacherId="+id;
-        return checkDao.queryCheckVoAll(sql);
+        return checkDao.queryCheckVoAll(sql,index);
     }
 
     /**
@@ -85,7 +85,7 @@ public class CheckService implements ICheckService {
     /**
      * 根据ID查找 check表全部信息
      *
-     * @param Id
+     * @param id
      * @return
      */
     @Override
@@ -113,6 +113,16 @@ public class CheckService implements ICheckService {
     @Override
     public List<CheckVo> fuzzyQueryOfTeacher(String str,String teacherId) {
         return checkDao.fuzzyQueryOfTeacher(str,teacherId);
+    }
+
+    /**
+     * 统计条目
+     *
+     * @return
+     */
+    @Override
+    public long countVo() {
+        return checkDao.countVo();
     }
 
 

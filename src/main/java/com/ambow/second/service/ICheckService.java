@@ -23,14 +23,14 @@ public interface ICheckService {
      * 查找全部考勤列表
      * @return 考勤列表
      */
-    List<CheckVo> queryCheckVoAll();
+    List<CheckVo> queryCheckVoAll(int index);
 
     /**
      * 查找全部考勤列表
      * @param id 教师Id
      * @return
      */
-    List<CheckVo> queryCheskVoAllByTeacherId(String id);
+    List<CheckVo> queryCheskVoAllByTeacherId(String id,int index);
 
     /**
      * 判断是否可以新建
@@ -66,4 +66,10 @@ public interface ICheckService {
      * @return
      */
     List<CheckVo> fuzzyQueryOfTeacher(String str,String teacherId);
+
+    /**
+     * 统计条目
+     * @return
+     */
+    long countVo();
 }

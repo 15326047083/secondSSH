@@ -3,6 +3,7 @@ package com.ambow.second.dao.impl;
 
 import com.ambow.second.dao.IUserDao;
 import com.ambow.second.entity.User;
+import org.hibernate.Query;
 import org.hibernate.ScrollableResults;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +18,23 @@ public class UserDao extends CommonDao<User> implements IUserDao {
     @Autowired
     private SessionFactory sessionFactory;
 
+    @Autowired
+    @Transactional
+    public List<User> queryAll() {
+        Query query=sessionFactory.getCurrentSession().createQuery("from User");
+        ScrollableResults scrollableResults=query.scroll();
+        scrollableResults.last();
+        int i=scrollableResults.getRowNumber()+1;
+        System.out.println("总记录数：" + i);
+        query.setFirstResult(0);
+        query.setMaxResults(3);
+        return query.list();
+    }
     @Override
     @Transactional
+    /**
+     * 删除用户
+     */
     public void updateAlive(User user) {
         sessionFactory.getCurrentSession().saveOrUpdate(user);
     }
@@ -29,6 +45,7 @@ public class UserDao extends CommonDao<User> implements IUserDao {
      * @return
      */
     @Override
+    @Transactional
     public List<User> likeSelect(String selectKey) {
         return sessionFactory.getCurrentSession().createQuery("from User where name like '%"+selectKey+"%' or num like '%"+selectKey+"%' or phone like '%"+selectKey+"%' or deptId like '%"+selectKey+"%'").list();
     }
@@ -39,6 +56,7 @@ public class UserDao extends CommonDao<User> implements IUserDao {
      * @return
      */
     @Override
+    @Transactional
     public User getByNum(int num) {
         return (User) sessionFactory.getCurrentSession().createQuery("from User where num=" + num).uniqueResult();
     }

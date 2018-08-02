@@ -2,7 +2,7 @@
   Created by IntelliJ IDEA.
   User: leiyuan
   Date: 2018/8/1
-  Time: 上午11:09
+  Time: 上午22:00
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>用户信息编辑</title>
+<title>新增用户</title>
 <link href="/css/css/css.css" type="text/css" rel="stylesheet" />
 <link href="/css/css/main.css" type="text/css" rel="stylesheet" />
 <link rel="shortcut icon" href="/css/images/main/favicon.ico" />
@@ -56,78 +56,69 @@ td.fenye{ padding:10px 0 0 0; text-align:right;}
   </tr>
   <tr>
     <td align="left" valign="top">
-      <form method="post" action="<%=request.getContextPath()%>update.action">
+      <form method="post" action="<%=request.getContextPath()%>addUser.action">
         <table width="100%" border="0" cellspacing="0" cellpadding="0" id="main-tab">
-          <tr onMouseOut="this.style.backgroundColor='#ffffff'" onMouseOver="this.style.backgroundColor='#edf5ff'">
-            <td align="left" valign="middle" class="borderright borderbottom main-for">
-              <input type="hidden" name="user.id" value="<s:property value="#userInfo.id"/>" class="text-word" required>
-            </td>
-          </tr>
           <tr onMouseOut="this.style.backgroundColor='#ffffff'" onMouseOver="this.style.backgroundColor='#edf5ff'">
             <td align="right" valign="middle" class="borderright borderbottom bggray">姓名：</td>
             <td align="left" valign="middle" class="borderright borderbottom main-for">
-              <input type="text" name="user.name" value="<s:property value="#userInfo.name"/>" class="text-word" required>
+              <input type="text" name="user.name" value="" class="text-word" required>
             </td>
           </tr>
           <tr onMouseOut="this.style.backgroundColor='#ffffff'" onMouseOver="this.style.backgroundColor='#edf5ff'">
             <td align="right" valign="middle" class="borderright borderbottom bggray">工号：</td>
             <td align="left" valign="middle" class="borderright borderbottom main-for"><s:property value="userInfo.num"/>
-              <input type="text" name="user.num" value="<s:property value="#userInfo.num"/>" class="text-word" required>
+              <input type="text" name="user.num" value="" class="text-word" required>
             </td>
           </tr>
           <tr onMouseOut="this.style.backgroundColor='#ffffff'" onMouseOver="this.style.backgroundColor='#edf5ff'">
             <td align="right" valign="middle" class="borderright borderbottom bggray">手机号：</td>
             <td align="left" valign="middle" class="borderright borderbottom main-for">
-              <input type="text" name="user.phone" value="<s:property value="#userInfo.phone"/>" class="text-word" required>
+              <input type="text" name="user.phone" value="" class="text-word" required>
             </td>
           </tr>
           <tr onMouseOut="this.style.backgroundColor='#ffffff'" onMouseOver="this.style.backgroundColor='#edf5ff'">
             <td align="right" valign="middle" class="borderright borderbottom bggray">邮箱：</td>
             <td align="left" valign="middle" class="borderright borderbottom main-for">
-              <input type="text" name="user.email" value="<s:property value="#userInfo.email"/>" class="text-word" required>
+              <input type="text" name="user.email" value="" class="text-word" required>
             </td>
           </tr>
           <tr onMouseOut="this.style.backgroundColor='#ffffff'" onMouseOver="this.style.backgroundColor='#edf5ff'">
             <td align="right" valign="middle" class="borderright borderbottom bggray">性别：</td>
             <td align="left" valign="middle" class="borderright borderbottom main-for">
-              <input type="radio" name="user.sex" checked="checked" value= "男"/><label>男</label>
-              <input type="radio" name="user.sex" value= "女"/><label>女</label>
+              <input type="radio" name="user.sex" checked="checked" value="男"/><label>男</label>
+              <input type="radio" name="user.sex" value="女" /><label>女</label>
+
             </td>
           </tr>
           <tr onMouseOut="this.style.backgroundColor='#ffffff'" onMouseOver="this.style.backgroundColor='#edf5ff'">
             <td align="right" valign="middle" class="borderright borderbottom bggray">学历：</td>
             <td align="left" valign="middle" class="borderright borderbottom main-for">
-              <input type="text" name="user.edu" value="<s:property value="#userInfo.edu"/>" class="text-word" required>
+              <input type="text" name="user.edu" value="" class="text-word" required>
             </td>
           </tr>
           <tr onMouseOut="this.style.backgroundColor='#ffffff'" onMouseOver="this.style.backgroundColor='#edf5ff'">
-            <td align="right" valign="middle" class="borderright borderbottom bggray">注册时间：</td>
+            <td align="right" valign="middle" class="borderright borderbottom bggray">部门名称：</td>
             <td align="left" valign="middle" class="borderright borderbottom main-for">
-              <input type="text" name="user.joinTime" value="<s:property value="#userInfo.joinTime"/>" class="text-word" required>
-            </td>
-          </tr>
-          <tr onMouseOut="this.style.backgroundColor='#ffffff'" onMouseOver="this.style.backgroundColor='#edf5ff'">
-            <td align="right" valign="middle" class="borderright borderbottom bggray">部门ID：</td>
-            <td align="left" valign="middle" class="borderright borderbottom main-for">
-              <input type="text" name="user.deptId" value="<s:property value="#userInfo.deptId"/>" class="text-word" required>
+              <select name="user.deptId">
+                <option value="财务部">财务部</option>
+                <option value="人事部">人事部</option>
+                <option value="教务处">教务处</option>
+              </select>
             </td>
           </tr>
           <tr onMouseOut="this.style.backgroundColor='#ffffff'" onMouseOver="this.style.backgroundColor='#edf5ff'">
             <td align="right" valign="middle" class="borderright borderbottom bggray">职务：</td>
             <td align="left" valign="middle" class="borderright borderbottom main-for">
-              <input type="text" name="user.duty" value="<s:property value="#userInfo.duty"/>" class="text-word" required>
+              <input type="text" name="user.duty" value="" class="text-word" required>
             </td>
           </tr>
           <tr onMouseOut="this.style.backgroundColor='#ffffff'" onMouseOver="this.style.backgroundColor='#edf5ff'">
             <td align="right" valign="middle" class="borderright borderbottom bggray">用户类型：</td>
             <td align="left" valign="middle" class="borderright borderbottom main-for">
-              <input type="text" name="user.userType" value="<s:property value="#userInfo.userType"/>" class="text-word" required>
-            </td>
-          </tr>
-          <tr onMouseOut="this.style.backgroundColor='#ffffff'" onMouseOver="this.style.backgroundColor='#edf5ff'">
-            <td align="right" valign="middle" class="borderright borderbottom bggray">用户状态：</td>
-            <td align="left" valign="middle" class="borderright borderbottom main-for">
-              <input type="text" name="user.alive" value="<s:property value="#userInfo.alive"/>" class="text-word" required>
+              <select name="user.userType">
+                <option value="管理员">管理员</option>
+                <option value="普通用户">普通用户</option>
+              </select>
             </td>
           </tr>
           <tr onMouseOut="this.style.backgroundColor='#ffffff'" onMouseOver="this.style.backgroundColor='#edf5ff'">

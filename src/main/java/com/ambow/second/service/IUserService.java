@@ -6,7 +6,7 @@ import com.ambow.second.entity.User;
 import com.ambow.second.vo.CheckVo;
 
 public interface IUserService {
-
+	// 查询所有的用户
 	List<User> queryAll();
 	// 根据用户ID查询用户
 	User findUserById(User user);
@@ -22,6 +22,6 @@ public interface IUserService {
 	void updateAlive(User user);
 	// 模糊查询
 	List<User> likeSelect(String selectKey);
-
+    //  根据num查询
 	User getByNum(int num);
 }

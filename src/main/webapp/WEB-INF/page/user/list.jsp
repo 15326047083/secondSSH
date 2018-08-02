@@ -49,13 +49,13 @@
             <table width="100%" border="0" cellspacing="0" cellpadding="0" id="search">
                 <tr>
                     <td width="90%" align="left" valign="middle">
-                        <form method="post" action="">
+                        <form method="post" action="<%=request.getContextPath()%>likeSelect.action">
                             <span>模糊查询：</span>
-                            <input type="text" name="" value="" class="text-word">
-                            <input name="" type="button" value="查询" class="text-but">
+                            <input type="text" name="selectKey" value="" class="text-word">
+                            <input name="" type="submit" value="查询" class="text-but">
                         </form>
                     </td>
-                    <td width="10%" align="center" valign="middle" style="text-align:right; width:150px;"><a href="save.jsp" target="mainFrame" onFocus="this.blur()" class="add">新增管理员</a></td>
+                    <td width="10%" align="center" valign="middle" style="text-align:right; width:150px;"><a href="/user/toAddUser.action" target="mainFrame" onFocus="this.blur()" class="add">新增用户</a></td>
                 </tr>
             </table>
         </td>
@@ -94,7 +94,7 @@
                     <td align="center" valign="middle" class="borderbottom">
                         <a href="/user/toUpdate.action?userId=<s:property value="#queryUser.id"/>" target="mainFrame" onFocus="this.blur()" class="add">编辑</a>
                         <span class="gray">&nbsp;|&nbsp;</span>
-                        <a href="/user/delete.action?userId=<s:property value="#queryUser.id"/>" target="mainFrame" onFocus="this.blur()" class="add">删除</a></td>
+                        <a href="/user/updateAlive.action?userId=<s:property value="#queryUser.id"/>" target="mainFrame" onFocus="this.blur()" class="add">删除</a></td>
                 </tr></s:iterator>
             </table>
         </td>

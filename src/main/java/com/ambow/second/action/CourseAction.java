@@ -18,9 +18,9 @@ import java.util.List;
 public class CourseAction extends ActionSupport {
     @Autowired
     private ICourseService courseService;
-    private Course course;
-    private String courseId;
-    private int teacherNum;
+    private Course course;//定义course对象
+    private String courseId;//定义courseId 删除对象
+    private int teacherNum;//查询该教师所教授的所有课程
     private int Num;
     public int getNum() {
         return Num;
@@ -74,7 +74,7 @@ public class CourseAction extends ActionSupport {
 
     /**
      * 前往增加页面的过程中
-     * 获取USer表的值
+     * 获取User表的值
      * @return
      */
     @Action(value = "toNew", results = {@Result(name = "success", location = "/WEB-INF/page/course/new.jsp")})
@@ -137,10 +137,6 @@ public class CourseAction extends ActionSupport {
     }
 
 
-    /**
-     *获取用户表信息
-     *
-     */
 
 
 }

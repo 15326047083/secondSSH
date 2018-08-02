@@ -157,8 +157,12 @@
                             <input name="" type="button" value="查询" class="text-but">
                         </form>
                     </td>
+                    <%-- 权限控制
+                         如是教师跳入 toNewCheckOfTeacher
+                         管理员跳入   toNewCheck
+                    --%>
                     <td width="10%" align="center" valign="middle" style="text-align:right; width:150px;"><a
-                            href="add.html" target="mainFrame" onFocus="this.blur()" class="add">新增考勤</a></td>
+                            href="<%=request.getContextPath()%>toNewCheck.action" target="mainFrame" onFocus="this.blur()" class="add">新增考勤</a></td>
                 </tr>
             </table>
         </td>
@@ -182,10 +186,9 @@
                     <td align="center" valign="middle" class="borderright borderbottom"><s:property value="#a.courseName"/></td>
                     <td align="center" valign="middle" class="borderright borderbottom"><s:property value="#a.absNum"/></td>
                     <td align="center" valign="middle" class="borderright borderbottom"><s:property value="#a.info"/></td>
-                    <td align="center" valign="middle" class="borderbottom"><a href="add.html" target="mainFrame"
+                    <td align="center" valign="middle" class="borderbottom"><a href="<%=request.getContextPath()%>toUpdateCheck.action?id=<s:property value="#a.checkId"/>" target="mainFrame"
                                                                                onFocus="this.blur()"
-                                                                               class="add">编辑</a><span class="gray">&nbsp;|&nbsp;</span><a
-                            href="add.html" target="mainFrame" onFocus="this.blur()" class="add">删除</a></td>
+                                                                               class="add">修改</a></td>
                     </tr>
                 </s:iterator>
                 <%--<c:forEach items="${requestScope.list}" var="a">--%>

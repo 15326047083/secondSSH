@@ -39,4 +39,19 @@ public interface ICheckService {
      */
     Check sava(Check check);
 
+    /**
+     * 根据ID查找vo类
+     * @param id
+     * @return
+     */
+    CheckVo getById(String id);
+
+    /**
+     * 根据ID查找 check表全部信息
+     * @param Id
+     * @return
+     */
+    Check get(String id);
+
+
 }

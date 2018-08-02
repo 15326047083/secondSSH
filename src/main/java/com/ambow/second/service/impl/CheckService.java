@@ -71,5 +71,27 @@ public class CheckService implements ICheckService {
 
     }
 
+    /**
+     * 根据ID查找vo类
+     *
+     * @param id
+     * @return
+     */
+    @Override
+    public CheckVo getById(String id) {
+        return checkDao.getById(id);
+    }
+
+    /**
+     * 根据ID查找 check表全部信息
+     *
+     * @param Id
+     * @return
+     */
+    @Override
+    public Check get(String id) {
+        return checkDao.get(id);
+    }
+
 
 }

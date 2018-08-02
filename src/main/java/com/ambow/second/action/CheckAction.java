@@ -32,7 +32,7 @@ public class CheckAction extends ActionSupport {
     private String courseId;
     private int num;
     private String info;
-
+    private String id;
     private String bj;
 
 
@@ -155,6 +155,35 @@ public class CheckAction extends ActionSupport {
         return "admin";
     }
 
+    /**
+     * 修改考勤信息
+     * @return
+     */
+    @Action(value = "updateCheck", results = {@Result(name = "teacher", location = "/toListByTeacherId.action",type = "redirect"),
+            @Result(name = "admin",location = "toCheckList.action",type = "redirect")})
+    public String updateCheck(){
+        Check check=iCheckService.get(id);
+        check.setNum(this.num);
+        iCheckService.setAbsNum(check);
+        // 获取角色 role
+        // bj = role;
+        // return "bj";
+        return "admin";
+
+    }
+
+    /**
+     * 跳转到 修改考勤 列表
+     * @return
+     */
+    @Action(value = "toUpdateCheck",results = {@Result(name = "success",location = "/WEB-INF/page/check/updateCheck.jsp")})
+    public String toUpdateCheck(){
+        System.out.println(id);
+        CheckVo checkVo=iCheckService.getById(id);
+        ActionContext.getContext().put("checkVo",checkVo);
+        return  SUCCESS;
+    }
+
     public String getUserId() {
         return userId;
     }
@@ -195,5 +224,13 @@ public class CheckAction extends ActionSupport {
 
     public void setBj(String bj) {
         this.bj = bj;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getId() {
+        return id;
     }
 }

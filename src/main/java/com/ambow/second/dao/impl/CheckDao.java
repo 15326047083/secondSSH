@@ -58,4 +58,19 @@ public class CheckDao extends CommonDao<Check> implements ICheckDao {
         return (Check) sessionFactory.getCurrentSession().createQuery(sql).uniqueResult();
     }
 
+    /**
+     * 根据ID查找vo类
+     *
+     * @param id
+     * @return
+     */
+    @Override
+    public CheckVo getById(String id) {
+        String sql="select new com.ambow.second.vo.CheckVo(c.id as checkId,u.id as userId,u.name as userName,u.num as num,u.deptId as deptName,c.time as time,o.id as courseId,o.name as courseName,c.info as info,c.num as absNum) from Check c,User u,Course o where c.userId=u.id and c.courseId=o.id and c.id='"+id+"'";
+
+        return (CheckVo) sessionFactory.getCurrentSession().createQuery(sql).uniqueResult();
+
+    }
+
+
 }

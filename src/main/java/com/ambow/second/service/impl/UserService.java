@@ -71,7 +71,7 @@ public class UserService implements IUserService {
     @Override
     public List<CheckVo> queryCheckVoAll() {
         String sql="";
-        return checkDao.queryCheckVoAll(sql);
+        return null;
     }
 
     /**

@@ -42,20 +42,20 @@
 
 <table width="99%" border="0" cellspacing="0" cellpadding="0" id="searchmain">
     <tr>
-        <td width="99%" align="left" valign="top">您的位置：考勤管理</td>
+        <td width="99%" align="left" valign="top">您的位置：课程管理</td>
     </tr>
     <tr>
         <td align="left" valign="top">
             <table width="100%" border="0" cellspacing="0" cellpadding="0" id="search">
                 <tr>
                     <td width="90%" align="left" valign="middle">
-                        <form method="post" action="">
-                            <span>模糊查询：</span>
-                            <input type="text" name="" value="" class="text-word">
-                            <input name="" type="button" value="查询" class="text-but">
+                        <form method="post" action="/course/queryTeacherId.action">
+                            <span>查询：</span>
+                            <input type="text" name="teacherNum" value="教师工号" class="text-word">
+                            <input name="" type="submit" value="查询" class="text-but">
                         </form>
                     </td>
-                    <td width="10%" align="center" valign="middle" style="text-align:right; width:150px;"><a href="add.html" target="mainFrame" onFocus="this.blur()" class="add">新增考勤</a></td>
+                    <td width="10%" align="center" valign="middle" style="text-align:right; width:150px;"><a href="/course/toNew.action" target="mainFrame" onFocus="this.blur()" class="add">新增课程</a></td>
                 </tr>
             </table>
         </td>
@@ -72,21 +72,30 @@
                     <th align="center" valign="middle" class="borderright">教师信息</th>
                     <th align="center" valign="middle" class="borderright">总课时</th>
                     <th align="center" valign="middle" class="borderright">课程状态</th>
-                    <th align="center" valign="middle" class="borderright">详情</th>
+
                     <th align="center" valign="middle">操作</th>
                 </tr>
 
                        <s:iterator value="courseList" var="cl">
                 <tr onMouseOut="this.style.backgroundColor='#ffffff'" onMouseOver="this.style.backgroundColor='#edf5ff'">
                     <td align="center" valign="middle" class="borderright borderbottom"><s:property
-                            value="#cl.id" /></td>
-                    <td align="center" valign="middle" class="borderright borderbottom"><s:property
                             value="#cl.name" /></td>
                     <td align="center" valign="middle" class="borderright borderbottom"><s:property
-                            value="#cl.name" /></td>
-                    <td align="center" valign="middle" class="borderright borderbottom">已锁定</td>
-                    <td align="center" valign="middle" class="borderright borderbottom">2013-04-26 11:00:59</td>
-                    <td align="center" valign="middle" class="borderbottom"><a href="/course/updateCourse.action?courseId=<s:property value="#cl.id"/>" target="mainFrame" onFocus="this.blur()" class="add">编辑</a><span class="gray">&nbsp;|&nbsp;</span><a href="/course/deleteCourse.action?courseId=<s:property value="#cl.id"/>" target="mainFrame" onFocus="this.blur()" class="add">删除</a></td>
+                            value="#cl.startTime" /></td>
+                    <td align="center" valign="middle" class="borderright borderbottom"><s:property
+                            value="#cl.endTime" /></td>
+                    <td align="center" valign="middle" class="borderright borderbottom"><s:property
+                            value="#cl.info" /></td>
+                    <td align="center" valign="middle" class="borderright borderbottom"><s:property
+                            value="#cl.teacherId" /></td>
+                    <td align="center" valign="middle" class="borderright borderbottom"><s:property
+                            value="#cl.lessons" /></td>
+                    <td align="center" valign="middle" class="borderright borderbottom">
+                        <s:if test="#cl.alive==0">授课中 </s:if>
+                        <s:elseif test="#cl.alive==1">已结课</s:elseif>
+
+                    </td>
+                    <td align="center" valign="middle" class="borderbottom"><a href="/course/updateCourse.action?courseId=<s:property value="#cl.id"/>" target="mainFrame" onFocus="this.blur()" class="add">点击结课</a><span class="gray">&nbsp;|&nbsp;</span><a href="/course/deleteCourse.action?courseId=<s:property value="#cl.id"/>" target="mainFrame" onFocus="this.blur()" class="add">删除</a></td>
                 </tr>
                        </s:iterator>
             </table></td>

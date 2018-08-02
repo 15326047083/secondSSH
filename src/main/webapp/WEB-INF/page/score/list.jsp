@@ -42,20 +42,20 @@
 
 <table width="99%" border="0" cellspacing="0" cellpadding="0" id="searchmain">
     <tr>
-        <td width="99%" align="left" valign="top">您的位置：考勤管理</td>
+        <td width="99%" align="left" valign="top">您的位置：成绩管理</td>
     </tr>
     <tr>
         <td align="left" valign="top">
             <table width="100%" border="0" cellspacing="0" cellpadding="0" id="search">
                 <tr>
                     <td width="90%" align="left" valign="middle">
-                        <form method="post" action="">
+                        <form method="post" action="<%=request.getContextPath()%>likeScore.action">
                             <span>模糊查询：</span>
-                            <input type="text" name="" value="" class="text-word">
-                            <input name="" type="button" value="查询" class="text-but">
+                            <input type="text" name="like" value="" class="text-word">
+                            <input name="" type="submit" value="查询" class="text-but">
                         </form>
                     </td>
-                    <td width="10%" align="center" valign="middle" style="text-align:right; width:150px;"><a href="add.html" target="mainFrame" onFocus="this.blur()" class="add">新增考勤</a></td>
+                    <td width="10%" align="center" valign="middle" style="text-align:right; width:150px;"><a href="/score/toNewScore.action" target="mainFrame" onFocus="this.blur()" class="add">新增成绩</a></td>
                 </tr>
             </table>
         </td>

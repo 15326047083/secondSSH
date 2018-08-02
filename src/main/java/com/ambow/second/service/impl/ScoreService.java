@@ -1,7 +1,9 @@
 package com.ambow.second.service.impl;
 
 import com.ambow.second.dao.IScoreDao;
+import com.ambow.second.entity.Course;
 import com.ambow.second.entity.Score;
+import com.ambow.second.entity.User;
 import com.ambow.second.service.IScoreService;
 import com.ambow.second.vo.ScoreVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,21 +18,32 @@ public class ScoreService implements IScoreService {
     private IScoreDao scoreDao;
 
 
+    /**
+     * 保存/修改成绩
+     * @param score
+     * @return
+     */
     @Override
     public String saveorUpdateScore(Score score) {
 
         return  scoreDao.saveOrUpdate(score);
     }
 
-    @Override
-    public ScoreVo getScoreById(String id) {
-        return scoreDao.getScoreById(id);
-    }
+
+    /**
+     * 删除成绩
+     * @param id
+     */
 
     @Override
     public void deleteScore(String id) {
         scoreDao.delete(id);
     }
+
+    /**
+     * 查询全部成绩
+     * @return
+     */
 
     @Override
     public List<Score> getAll() {
@@ -38,22 +51,47 @@ public class ScoreService implements IScoreService {
         return scoreDao.queryAll();
     }
 
+    /**
+     * 根据用户ID查询成绩
+     * @param id
+     * @return
+     */
+
     @Override
     public List<ScoreVo> getScoreByuserId(String id) {
 
         return scoreDao.getScoreByuserId(id);
     }
 
-    @Override
-    public List<ScoreVo> getScoreBycourseName(String couserName) {
 
-        return scoreDao.getScoreBycourseName(couserName);
-    }
+    /**
+     * 根据成绩ID查询成绩
+     * @param id
+     * @return
+     */
 
     @Override
     public Score get(String id) {
         return scoreDao.get(id);
     }
 
+    /**
+     * 查询全部用户
+     */
+
+public  List<User> getAllUser(){
+    return  scoreDao.getAllUser();
+}
+
+    @Override
+    public List<Course> getAllCourse() {
+        return scoreDao.getAllCourse();
+    }
+
+    @Override
+    public List<ScoreVo> getScoredBylike(String like) {
+
+    return scoreDao.getScoredBylike(like);
+    }
 
 }

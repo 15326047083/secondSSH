@@ -53,5 +53,17 @@ public interface ICheckService {
      */
     Check get(String id);
 
+    /**
+     * 模糊查询(管理员)
+     * @param str
+     * @return
+     */
+    List<CheckVo> fuzzyQuery(String str);
 
+    /**
+     * 模糊查询(教师）
+     * @param str
+     * @return
+     */
+    List<CheckVo> fuzzyQueryOfTeacher(String str,String teacherId);
 }

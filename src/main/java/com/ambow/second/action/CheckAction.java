@@ -33,13 +33,22 @@ public class CheckAction extends ActionSupport {
     private int num;
     private String info;
     private String id;
-    private String bj;
+
+    public String getStr() {
+        return str;
+    }
+
+    public void setStr(String str) {
+        this.str = str;
+    }
+
+    private  String str;//接受到的模糊查询字段
 
 
 
 
     /**
-     * 全部考勤列表信息（管理员）
+     * 全部考勤列表信息（管理员/教师）
      *
      * @return
      */
@@ -47,27 +56,12 @@ public class CheckAction extends ActionSupport {
             ".jsp", type = "dispatcher")})
     public String toCheckList() {
         list = iCheckService.queryCheckVoAll();
+        //
+//        如果是教师；
+//        String teacherId = "1";
+//        从session 中获得userId 即为 teacherID
+//        list = iCheckService.queryCheskVoAllByTeacherId(teacherId);
         ActionContext.getContext().put("list", list);
-      //  ActionContext.getContext().put("role", "admin");
-        return SUCCESS;
-    }
-
-    /**
-     * 全部考勤列表信息（教师）
-     *
-     * @return
-     */
-    @Action(value = "toListByTeacherId", results = {@Result(name = "success", location =
-            "/WEB-INF/page/check/checkList.jsp")})
-    public String toListByTeacherId() {
-
-        /* 添加一个teacherID
-           从session 中获得userId 即为 teacherID
-         */
-        String teacherId = "1";
-        list = iCheckService.queryCheskVoAllByTeacherId(teacherId);
-        ActionContext.getContext().put("list", list);
-       // ActionContext.getContext().put("role", "teacher");
 
         return SUCCESS;
     }
@@ -98,25 +92,13 @@ public class CheckAction extends ActionSupport {
      */
     @Action(value = "toNewCheck", results = {@Result(name = "success", location = "/WEB-INF/page/check/newCheck.jsp")})
     public String toNewCheck() {
+//
+//        教师添加（）
+//        String teacherId="1";
+//        List<Course> courseList=iCourseService.queryTeacherById(teacherId);
+
         List<User> userList=iUserService.queryAll();
         List<Course> courseList=iCourseService.queryCourse();
-        ActionContext.getContext().put("userList",userList);
-        ActionContext.getContext().put("courseList",courseList);
-        return SUCCESS;
-    }
-
-    /**
-     * 跳转到新增考勤（教师）
-     * 将用户列表与课程列表传入页面
-     * @return
-     */
-    @Action(value = "toNewCheckOfTeacher", results = {@Result(name = "success", location = "/WEB-INF/page/check/newCheck.jsp")})
-    public String toNewCheckOfTeacher() {
-        // 获取教师ID
-        // role
-        String teacherId="1";
-        List<User> userList=iUserService.queryAll();
-        List<Course> courseList=iCourseService.queryTeacherById(teacherId);
         ActionContext.getContext().put("userList",userList);
         ActionContext.getContext().put("courseList",courseList);
         return SUCCESS;
@@ -126,8 +108,7 @@ public class CheckAction extends ActionSupport {
      * 新增考勤列表
      * @return
      */
-    @Action(value = "newCheck", results = {@Result(name = "teacher", location = "/toListByTeacherId.action",type = "redirect"),
-            @Result(name = "admin",location = "toCheckList.action",type = "redirect")})
+    @Action(value = "newCheck", results = {@Result(name = "success", location = "toCheckList.action",type = "redirect")})
     public String newCheck(){
         Check check=new Check();
         check.setCourseId(this.courseId);
@@ -152,15 +133,14 @@ public class CheckAction extends ActionSupport {
         // 获取角色 role
         // bj = role;
         // return "bj";
-        return "admin";
+        return SUCCESS;
     }
 
     /**
      * 修改考勤信息
      * @return
      */
-    @Action(value = "updateCheck", results = {@Result(name = "teacher", location = "/toListByTeacherId.action",type = "redirect"),
-            @Result(name = "admin",location = "toCheckList.action",type = "redirect")})
+    @Action(value = "updateCheck", results = {@Result(name = "success", location = "toCheckList.action",type = "redirect")})
     public String updateCheck(){
         Check check=iCheckService.get(id);
         check.setNum(this.num);
@@ -168,7 +148,7 @@ public class CheckAction extends ActionSupport {
         // 获取角色 role
         // bj = role;
         // return "bj";
-        return "admin";
+        return SUCCESS;
 
     }
 
@@ -178,10 +158,31 @@ public class CheckAction extends ActionSupport {
      */
     @Action(value = "toUpdateCheck",results = {@Result(name = "success",location = "/WEB-INF/page/check/updateCheck.jsp")})
     public String toUpdateCheck(){
-        System.out.println(id);
+      //  System.out.println(id);
         CheckVo checkVo=iCheckService.getById(id);
         ActionContext.getContext().put("checkVo",checkVo);
         return  SUCCESS;
+    }
+
+    /**
+     * 模糊查询
+     * @return
+     */
+    @Action(value = "fuzzyQuery", results = {@Result(name = "success", location = "/WEB-INF/page/check/checkList" +
+            ".jsp", type = "dispatcher"),@Result(name = "listAll", location = "toCheckList.action",type = "redirect")})
+    public String fuzzyQuery(){
+
+        if(str==null){
+            return "listAll";
+        }
+
+        list=iCheckService.fuzzyQuery(str);
+       //   如果是教师
+        //
+        // list=iCheckService.fuzzyQueryOfTeacher(str,"2");
+        ActionContext.getContext().put("list",list);
+
+        return SUCCESS;
     }
 
     public String getUserId() {
@@ -218,13 +219,6 @@ public class CheckAction extends ActionSupport {
         this.num = num;
     }
 
-    public String getBj() {
-        return bj;
-    }
-
-    public void setBj(String bj) {
-        this.bj = bj;
-    }
 
     public void setId(String id) {
         this.id = id;

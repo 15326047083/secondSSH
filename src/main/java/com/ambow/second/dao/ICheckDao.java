@@ -33,5 +33,19 @@ public interface ICheckDao extends ICommonDao<Check> {
      * @return
      */
     CheckVo getById(String id);
+    /**
+     * 模糊查询
+     * @param str
+     * @return
+     */
+    List fuzzyQuery(String str);
+
+    /**
+     * 模糊查询(教师）
+     * @param str
+     * @return
+     */
+    List<CheckVo> fuzzyQueryOfTeacher(String str,String teacherId);
+
 
 }

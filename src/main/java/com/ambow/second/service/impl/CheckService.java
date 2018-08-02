@@ -93,5 +93,27 @@ public class CheckService implements ICheckService {
         return checkDao.get(id);
     }
 
+    /**
+     * 模糊查询
+     *
+     * @param str
+     * @return
+     */
+    @Override
+    public List<CheckVo> fuzzyQuery(String str) {
+        return checkDao.fuzzyQuery(str);
+    }
+
+    /**
+     * 模糊查询(教师）
+     *
+     * @param str
+     * @return
+     */
+    @Override
+    public List<CheckVo> fuzzyQueryOfTeacher(String str,String teacherId) {
+        return checkDao.fuzzyQueryOfTeacher(str,teacherId);
+    }
+
 
 }

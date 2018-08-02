@@ -151,16 +151,13 @@
             <table width="100%" border="0" cellspacing="0" cellpadding="0" id="search">
                 <tr>
                     <td width="90%" align="left" valign="middle">
-                        <form method="post" action="">
+                        <form method="post" action="<%=request.getContextPath()%>fuzzyQuery.action">
                             <span>模糊查询：</span>
-                            <input type="text" name="" value="" class="text-word">
-                            <input name="" type="button" value="查询" class="text-but">
+                            <input type="text" name="str" value="" class="text-word">
+                            <input name="" type="submit" value="查询" class="text-but">
                         </form>
                     </td>
-                    <%-- 权限控制
-                         如是教师跳入 toNewCheckOfTeacher
-                         管理员跳入   toNewCheck
-                    --%>
+
                     <td width="10%" align="center" valign="middle" style="text-align:right; width:150px;"><a
                             href="<%=request.getContextPath()%>toNewCheck.action" target="mainFrame" onFocus="this.blur()" class="add">新增考勤</a></td>
                 </tr>

@@ -65,11 +65,43 @@ public class CheckDao extends CommonDao<Check> implements ICheckDao {
      * @return
      */
     @Override
+    @Transactional
     public CheckVo getById(String id) {
         String sql="select new com.ambow.second.vo.CheckVo(c.id as checkId,u.id as userId,u.name as userName,u.num as num,u.deptId as deptName,c.time as time,o.id as courseId,o.name as courseName,c.info as info,c.num as absNum) from Check c,User u,Course o where c.userId=u.id and c.courseId=o.id and c.id='"+id+"'";
 
         return (CheckVo) sessionFactory.getCurrentSession().createQuery(sql).uniqueResult();
 
+    }
+
+    /**
+     * 模糊查询
+     *
+     * @param str
+     * @return
+     */
+    @Override
+    @Transactional
+    public List<CheckVo> fuzzyQuery(String str) {
+
+        String sql="select new com.ambow.second.vo.CheckVo(c.id as checkId,u.id as userId,u.name as userName,u.num as" +
+                " num,u.deptId as deptName,c.time as time,o.id as courseId,o.name as courseName,c.info as info,c.num " +
+                "as absNum) from Check c,User u,Course o where c.userId=u.id and c.courseId=o.id and(u.name  like '%"+str+"%' or o.name like '%"+str+"%' or u.num like '%"+str+"%')";
+        return sessionFactory.getCurrentSession().createQuery(sql).list();
+    }
+
+    /**
+     * 模糊查询(教师）
+     *
+     * @param str
+     * @return
+     */
+    @Override
+    @Transactional
+    public List<CheckVo> fuzzyQueryOfTeacher(String str,String teacherId) {
+        String sql="select new com.ambow.second.vo.CheckVo(c.id as checkId,u.id as userId,u.name as userName,u.num as" +
+                " num,u.deptId as deptName,c.time as time,o.id as courseId,o.name as courseName,c.info as info,c.num " +
+                "as absNum) from Check c,User u,Course o where c.userId=u.id and c.courseId=o.id and o.teacherId='"+teacherId+"' and(u.name  like '%"+str+"%' or o.name like '%"+str+"%' or u.num like '%"+str+"%')";
+        return sessionFactory.getCurrentSession().createQuery(sql).list();
     }
 
 

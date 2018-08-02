@@ -15,4 +15,8 @@ public interface ICourseDao extends ICommonDao<Course> {
     User getUserByNum(int teacherNum);
     //查询用户表
     List<User> queryUser();
+    //分页查询
+   // List<Course> findByPage(int begin, int limit);
+
+
 }

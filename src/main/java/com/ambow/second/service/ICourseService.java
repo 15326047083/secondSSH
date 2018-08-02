@@ -23,4 +23,6 @@ public interface ICourseService {
     //
     List<User> queryUser();
 
+
+    //分页查询
 }

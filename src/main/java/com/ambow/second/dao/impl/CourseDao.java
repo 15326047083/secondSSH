@@ -3,6 +3,7 @@ package com.ambow.second.dao.impl;
 import com.ambow.second.dao.ICourseDao;
 import com.ambow.second.entity.Course;
 import com.ambow.second.entity.User;
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -41,8 +42,20 @@ public class CourseDao extends CommonDao<Course> implements ICourseDao {
     @Override
     @Transactional
     public List<User> queryUser() {
+
         return sessionFactory.getCurrentSession().createQuery("from User").list();
     }
+
+
+
+    /**
+     * 分页查询
+     *
+     */
+
+
+
+
 
 
 

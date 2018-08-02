@@ -100,8 +100,8 @@ public class CheckService implements ICheckService {
      * @return
      */
     @Override
-    public List<CheckVo> fuzzyQuery(String str) {
-        return checkDao.fuzzyQuery(str);
+    public List<CheckVo> fuzzyQuery(String str,int index) {
+        return checkDao.fuzzyQuery(str,index);
     }
 
     /**
@@ -111,8 +111,8 @@ public class CheckService implements ICheckService {
      * @return
      */
     @Override
-    public List<CheckVo> fuzzyQueryOfTeacher(String str,String teacherId) {
-        return checkDao.fuzzyQueryOfTeacher(str,teacherId);
+    public List<CheckVo> fuzzyQueryOfTeacher(String str,String teacherId,int index) {
+        return checkDao.fuzzyQueryOfTeacher(str,teacherId,index);
     }
 
     /**
@@ -123,6 +123,25 @@ public class CheckService implements ICheckService {
     @Override
     public long countVo() {
         return checkDao.countVo();
+    }
+
+    /**
+     * 统计条目(模糊)
+     *
+     * @return
+     */
+    @Override
+    public long fuzzyCountVo(String str) {
+        return checkDao.fuzzyCountVo(str);
+    }
+    /**
+     * 统计条目(模糊) 教师
+     *
+     * @return
+     */
+    @Override
+    public long fuzzyCountVoOfTeacher(String str,String teacherId) {
+        return checkDao.fuzzyCountVo(str);
     }
 
 

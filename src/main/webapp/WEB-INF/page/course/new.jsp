@@ -61,30 +61,51 @@ td.fenye{ padding:10px 0 0 0; text-align:right;}
     <table width="100%" border="0" cellspacing="0" cellpadding="0" id="main-tab">
       <tr onMouseOut="this.style.backgroundColor='#ffffff'" onMouseOver="this.style.backgroundColor='#edf5ff'">
         <td align="right" valign="middle" class="borderright borderbottom bggray">课程名：</td>
-        <td align="left" valign="middle" class="borderright borderbottom main-for">
-        <input type="text" name="" value="" class="text-word">
+        <td align="left" valign="middle" class="borderright borderbottom main-for" >
+        <input type="text" name="course.name" value="" class="text-word" required>
         </td>
         </tr>
       <tr onMouseOut="this.style.backgroundColor='#ffffff'" onMouseOver="this.style.backgroundColor='#edf5ff'">
         <td align="right" valign="middle" class="borderright borderbottom bggray">上课时间：</td>
         <td align="left" valign="middle" class="borderright borderbottom main-for">
-        <input type="text" name="course.name" value="" class="text-word">
+        <input type="time" name="course.startTime" value="" class="text-word" required>
         </td>
         </tr>
+
+        <tr onMouseOut="this.style.backgroundColor='#ffffff'" onMouseOver="this.style.backgroundColor='#edf5ff'">
+            <td align="right" valign="middle" class="borderright borderbottom bggray">下课时间：</td>
+            <td align="left" valign="middle" class="borderright borderbottom main-for">
+                <input type="time" name="course.endTime" value="" class="text-word" required>
+            </td>
+        </tr>
+
+        <tr onMouseOut="this.style.backgroundColor='#ffffff'" onMouseOver="this.style.backgroundColor='#edf5ff'">
+            <td align="right" valign="middle" class="borderright borderbottom bggray">课程信息：</td>
+            <td align="left" valign="middle" class="borderright borderbottom main-for">
+                <input type="text" name="course.info" value="" class="text-word" required>
+            </td>
+        </tr>
+
+        <tr onMouseOut="this.style.backgroundColor='#ffffff'" onMouseOver="this.style.backgroundColor='#edf5ff'">
+            <td align="right" valign="middle" class="borderright borderbottom bggray">总课时：</td>
+            <td align="left" valign="middle" class="borderright borderbottom main-for">
+                <input type="text" name="course.lessons" value="" class="text-word" required>
+            </td>
+        </tr>
+
       <tr onMouseOut="this.style.backgroundColor='#ffffff'" onMouseOver="this.style.backgroundColor='#edf5ff'">
-        <td align="right" valign="middle" class="borderright borderbottom bggray">下课时间：</td>
+        <td align="right" valign="middle" class="borderright borderbottom bggray">授课教师工号：</td>
         <td align="left" valign="middle" class="borderright borderbottom main-for">
-        <input type="text" name="startTime" value="" class="text-word">
-        </td>
-      </tr>
-      <tr onMouseOut="this.style.backgroundColor='#ffffff'" onMouseOver="this.style.backgroundColor='#edf5ff'">
-        <td align="right" valign="middle" class="borderright borderbottom bggray">用户权限：</td>
-        <td align="left" valign="middle" class="borderright borderbottom main-for">
-        <select name="level" id="level">
-	    <option value="1" >&nbsp;&nbsp;信息录入员</option>
-	    <option value="2" >&nbsp;&nbsp;一般管理员</option>
-	    <option value="3" >&nbsp;&nbsp;超级管理员</option>
+        <select name="course.teacherId" id="level">
+
+
+          <s:iterator var="user" value="userList">
+	    <option value="<s:property value="#user.num"/>" ><s:property
+                value="#user.num" /></option>
+          </s:iterator>
         </select>
+
+
         </td>
       </tr>
       <tr onMouseOut="this.style.backgroundColor='#ffffff'" onMouseOver="this.style.backgroundColor='#edf5ff'">

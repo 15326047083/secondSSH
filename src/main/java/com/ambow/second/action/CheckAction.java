@@ -64,16 +64,12 @@ public class CheckAction extends ActionSupport {
     @Action(value = "toCheckList", results = {@Result(name = "success", location = "/WEB-INF/page/check/checkList" +
             ".jsp", type = "dispatcher")})
     public String toCheckList() {
-
-
+//        权限
+//        教师查询
+//        list=iCheckService.queryCheskVoAllByTeacherId(teacherId,index);
         list = iCheckService.queryCheckVoAll(index);
         long page=iCheckService.countVo();
-        if (page%5==0){
-            ActionContext.getContext().put("allPage",page/5);
-        }
-        else {
-            ActionContext.getContext().put("allPage",page/5+1);
-        }
+        tag(page);
 
         //
 //        如果是教师；
@@ -84,6 +80,18 @@ public class CheckAction extends ActionSupport {
         ActionContext.getContext().put("index",index);
 
         return SUCCESS;
+    }
+
+    private void tag(long page) {
+        if (page%5==0){
+            if (page/5==0){
+                page=1;
+            }
+            ActionContext.getContext().put("allPage",page/5);
+        }
+        else {
+            ActionContext.getContext().put("allPage",page/5+1);
+        }
     }
 
     /**
@@ -153,6 +161,7 @@ public class CheckAction extends ActionSupport {
         // 获取角色 role
         // bj = role;
         // return "bj";
+        ActionContext.getContext().put("index",1);
         return SUCCESS;
     }
 
@@ -168,6 +177,7 @@ public class CheckAction extends ActionSupport {
         // 获取角色 role
         // bj = role;
         // return "bj";
+        ActionContext.getContext().put("index",1);
         return SUCCESS;
 
     }
@@ -195,12 +205,19 @@ public class CheckAction extends ActionSupport {
         if(str==null){
             return "listAll";
         }
-
-        list=iCheckService.fuzzyQuery(str);
+       //
+        // 教师
+        // long page=iCheckService.fuzzyCountVoOfTeacher(str,"2");
+        long page=iCheckService.fuzzyCountVo(str);
+        tag(page);
+        list=iCheckService.fuzzyQuery(str,index);
        //   如果是教师
         //
-        // list=iCheckService.fuzzyQueryOfTeacher(str,"2");
+        // list=iCheckService.fuzzyQueryOfTeacher(str,"2",index);
         ActionContext.getContext().put("list",list);
+        ActionContext.getContext().put("index",1);
+        ActionContext.getContext().put("bj","fuzzy");
+        ActionContext.getContext().put("str",str);
 
         return SUCCESS;
     }

@@ -73,58 +73,24 @@
                     <th align="center" valign="middle" class="borderright">成绩</th>
                     <th align="center" valign="middle">操作</th>
                 </tr>
-               <s:iterator var="score" value="getAll">
-                <tr onMouseOut="this.style.backgroundColor='#ffffff'" onMouseOver="this.style.backgroundColor='#edf5ff'">
-                    <td align="center" valign="middle" class="borderright borderbottom"><s:property value="#score.courseId"/></td>
-                    <td align="center" valign="middle" class="borderright borderbottom"><s:property value="#score.courseName"/></td>
-                    <td align="center" valign="middle" class="borderright borderbottom"><s:property value="#score.teacherId"/></td>
-                    <td align="center" valign="middle" class="borderright borderbottom"><s:property value="#score.userName"/></td>
-                    <td align="center" valign="middle" class="borderright borderbottom"><s:property value="#score.courseLessons"/></td>
-                    <td align="center" valign="middle" class="borderright borderbottom"><s:property value="#score.score"/></td>
-                    <td align="center" valign="middle" class="borderbottom"><a href="/score/getById.action?scoreId=<s:property value="#score.scoreId"/>" target="mainFrame" onFocus="this.blur()" class="add">编辑</a><span class="gray">&nbsp;|&nbsp;</span><a href="/score/deleteScore.action?scoreId=<s:property value="#score.scoreId"/>" target="mainFrame" onFocus="this.blur()" class="add">删除</a></td>
-                </tr>
-               </s:iterator>
+                <s:iterator var="score" value="getAll">
+                    <tr onMouseOut="this.style.backgroundColor='#ffffff'" onMouseOver="this.style.backgroundColor='#edf5ff'">
+                        <td align="center" valign="middle" class="borderright borderbottom"><s:property value="#score.courseId"/></td>
+                        <td align="center" valign="middle" class="borderright borderbottom"><s:property value="#score.courseName"/></td>
+                        <td align="center" valign="middle" class="borderright borderbottom"><s:property value="#score.teacherId"/></td>
+                        <td align="center" valign="middle" class="borderright borderbottom"><s:property value="#score.userName"/></td>
+                        <td align="center" valign="middle" class="borderright borderbottom"><s:property value="#score.courseLessons"/></td>
+                        <td align="center" valign="middle" class="borderright borderbottom"><s:property value="#score.score"/></td>
+                        <td align="center" valign="middle" class="borderbottom"><a href="/score/getById.action?scoreId=<s:property value="#score.scoreId"/>" target="mainFrame" onFocus="this.blur()" class="add">编辑</a><span class="gray">&nbsp;|&nbsp;</span><a href="/score/deleteScore.action?scoreId=<s:property value="#score.scoreId"/>" target="mainFrame" onFocus="this.blur()" class="add">删除</a></td>
+                    </tr>
+                </s:iterator>
 
             </table></td>
     </tr>
     <tr>
-        <td align="left" valign="top" class="fenye">11 条数据 1/1 页&nbsp;&nbsp;<a href="#"  id="spanFirst" target="mainFrame" onFocus="this.blur()">首页</a>&nbsp;&nbsp;<a href="#"  id="spanPre" target="mainFrame" onFocus="this.blur()">上一页</a>&nbsp;&nbsp;<a href="#"  id="spanNext" target="mainFrame" onFocus="this.blur()">下一页</a>&nbsp;&nbsp;<a href="#"  id="spanLast" target="mainFrame" onFocus="this.blur()">尾页</a></td>
+        <td align="left" valign="top" class="fenye">11 条数据 1/1 页&nbsp;&nbsp;<a href="#"  target="mainFrame" onFocus="this.blur()">首页</a>&nbsp;&nbsp;<a href="#" target="mainFrame" onFocus="this.blur()">上一页</a>&nbsp;&nbsp;<a href="#" target="mainFrame" onFocus="this.blur()">下一页</a>&nbsp;&nbsp;<a href="#" target="mainFrame" onFocus="this.blur()">尾页</a></td>
     </tr>
 </table>
-
-<script type="text/javascript">
-     var theTable = document.getElementById("main-tab");
-
-
-     var spanPre = document.getElementById("spanPre");
-     var spanNext = document.getElementById("spanNext");
-     var spanFirst = document.getElementById("spanFirst");
-     var spanLast = document.getElementById("spanLast");
-     var numberRowsInTable = theTable.rows.length;
-     var pageSize = 11;
-     var page = 1;
-
-      function hideTable() {
-              for ( var i = 0; i<numberRowsInTable; i++ ) {
-                  theTable.rows[i].style.display = 'none';
-                  }
-          }
-
-
-     //第一页
-      function first() {
-          hideTable();
-              page = 1;
-              for ( var i = 0; i<pageSize; i++ ) {
-                    theTable.rows[i].style.display = '';
-                 }
-              showPage();
-
-              preText();
-             nextLink();
-             lastLink();
-          }
-
 
 </body>
 </html>

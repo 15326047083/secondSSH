@@ -67,7 +67,8 @@
                 <tr>
                     <th align="center" valign="middle" class="borderright">课程编号</th>
                     <th align="center" valign="middle" class="borderright">课程名称</th>
-                    <th align="center" valign="middle" class="borderright">教师</th>
+                    <th align="center" valign="middle" class="borderright">教师编号</th>
+                    <th align="center" valign="middle" class="borderright">干部</th>
                     <th align="center" valign="middle" class="borderright">课时</th>
                     <th align="center" valign="middle" class="borderright">成绩</th>
                     <th align="center" valign="middle">操作</th>
@@ -76,7 +77,8 @@
                 <tr onMouseOut="this.style.backgroundColor='#ffffff'" onMouseOver="this.style.backgroundColor='#edf5ff'">
                     <td align="center" valign="middle" class="borderright borderbottom"><s:property value="#score.courseId"/></td>
                     <td align="center" valign="middle" class="borderright borderbottom"><s:property value="#score.courseName"/></td>
-                    <td align="center" valign="middle" class="borderright borderbottom"><s:property value="#score.teacherName"/></td>
+                    <td align="center" valign="middle" class="borderright borderbottom"><s:property value="#score.teacherId"/></td>
+                    <td align="center" valign="middle" class="borderright borderbottom"><s:property value="#score.userName"/></td>
                     <td align="center" valign="middle" class="borderright borderbottom"><s:property value="#score.courseLessons"/></td>
                     <td align="center" valign="middle" class="borderright borderbottom"><s:property value="#score.score"/></td>
                     <td align="center" valign="middle" class="borderbottom"><a href="/score/getById.action?scoreId=<s:property value="#score.scoreId"/>" target="mainFrame" onFocus="this.blur()" class="add">编辑</a><span class="gray">&nbsp;|&nbsp;</span><a href="/score/deleteScore.action?scoreId=<s:property value="#score.scoreId"/>" target="mainFrame" onFocus="this.blur()" class="add">删除</a></td>

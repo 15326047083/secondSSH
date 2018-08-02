@@ -9,11 +9,20 @@ import java.util.List;
 
 public interface IScoreService {
     String saveorUpdateScore(Score score);
+
     void deleteScore(String id);
-    List<Score>  getAll();
+
+    List<Score> getAll();
+
     List<ScoreVo> getScoreByuserId(String id);
-      Score get(String id);
-     List<User> getAllUser();
-     List<Course> getAllCourse();
+
+    List<ScoreVo> getScoreByteacherId(String teacherid);
+
+    Score get(String id);
+
+    List<User> getAllUser();
+
+    List<Course> getAllCourse();
+
     List<ScoreVo> getScoredBylike(String like);
- }
+}

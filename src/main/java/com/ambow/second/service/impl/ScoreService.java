@@ -63,6 +63,11 @@ public class ScoreService implements IScoreService {
         return scoreDao.getScoreByuserId(id);
     }
 
+    @Override
+    public List<ScoreVo> getScoreByteacherId(String teacherid) {
+        return scoreDao.getScoreByteacherId(teacherid);
+    }
+
 
     /**
      * 根据成绩ID查询成绩

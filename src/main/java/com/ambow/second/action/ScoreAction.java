@@ -30,7 +30,7 @@ public class ScoreAction extends ActionSupport {
     private String courseId;//添加的课程Id
     private String info;//成绩的详情
 
-    private  String like;//模糊查询的内容(jsp->action)
+    private String like;//模糊查询的内容(jsp->action)
 
     public String getLike() {
         return like;
@@ -96,11 +96,26 @@ public class ScoreAction extends ActionSupport {
      * @return
      */
 
-    @Action(value = "getAll", results = {@Result(name = "success", location = "/WEB-INF/page/score/list.jsp")})
-    public String getAll() {
+    @Action(value = "getAlluser", results = {@Result(name = "success", location = "/WEB-INF/page/score/list.jsp")})
+    public String getAlluser() {
 
         ActionContext context = ActionContext.getContext();
         context.put("getAll", scoreService.getScoreByuserId("2"));
+
+        return SUCCESS;
+    }
+
+    /**
+     * 教师查询成绩
+     *
+     * @return
+     */
+
+    @Action(value = "getAllteacher", results = {@Result(name = "success", location = "/WEB-INF/page/score/list.jsp")})
+    public String getAllteacher() {
+
+        ActionContext context = ActionContext.getContext();
+        context.put("getAll", scoreService.getScoreByteacherId("2"));
 
         return SUCCESS;
     }
@@ -123,7 +138,7 @@ public class ScoreAction extends ActionSupport {
      *
      * @return
      */
-    @Action(value = "updateScore", results = {@Result(name = "success", location = "getAll.action", type = "redirect")})
+    @Action(value = "updateScore", results = {@Result(name = "success", location = "getAllteacher.action", type = "redirect")})
     public String updateScore() {
         score = scoreService.get(this.scoreId);
         score.setScore(scores);
@@ -136,7 +151,7 @@ public class ScoreAction extends ActionSupport {
      * 删除成绩
      */
 
-    @Action(value = "deleteScore", results = {@Result(name = "success", location = "getAll.action", type = "redirect")}, params = {"scoreId", "%{scoreId}"})
+    @Action(value = "deleteScore", results = {@Result(name = "success", location = "getAllteacher.action", type = "redirect")}, params = {"scoreId", "%{scoreId}"})
 
     public String deleteScore() {
         scoreService.deleteScore(this.scoreId);
@@ -161,7 +176,7 @@ public class ScoreAction extends ActionSupport {
     /**
      * 添加成绩
      */
-    @Action(value = "saveScore", results = {@Result(name = "success", location = "getAll.action", type = "redirect")})
+    @Action(value = "saveScore", results = {@Result(name = "success", location = "getAllteacher.action", type = "redirect")})
     public String saveScore() {
         scoreService.saveorUpdateScore(score);
         return SUCCESS;
@@ -175,13 +190,11 @@ public class ScoreAction extends ActionSupport {
     public String likeScore() {
 
         ActionContext context = ActionContext.getContext();
-        context.put("getAll",  scoreService.getScoredBylike(like));
+        context.put("getAll", scoreService.getScoredBylike(like));
 
 
         return SUCCESS;
     }
-
-
 
 
 }

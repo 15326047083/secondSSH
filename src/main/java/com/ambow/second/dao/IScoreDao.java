@@ -10,10 +10,15 @@ import java.util.List;
 public interface IScoreDao extends ICommonDao<Score> {
 
 
-  List<ScoreVo>  getScoreByuserId(String userId);
-List<User>  getAllUser();
-List<Course>   getAllCourse();
-List<ScoreVo> getScoredBylike(String like);
+    List<ScoreVo> getScoreByuserId(String userId);
+
+    List<ScoreVo> getScoreByteacherId(String teacherid);
+
+    List<User> getAllUser();
+
+    List<Course> getAllCourse();
+
+    List<ScoreVo> getScoredBylike(String like);
 
 
 }

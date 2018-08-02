@@ -31,13 +31,7 @@ public class ScoreTest {
         System.out.print(scoreService.saveorUpdateScore(score));
     }
 
-            /**
-             * 根据ID查询
-             */
-    @Test
-            public  void  getScoreById(){
-        System.out.print(scoreService.getScoreById("2c87b4f664f0016e0164f0017a610000").toString());
-    }
+
     @Test
             public void deleteById(){
         scoreService.deleteScore("2c87b4f664f0016e0164f0017a610000");
@@ -48,7 +42,7 @@ public class ScoreTest {
             /**
              * 全查
              */
-@Test
+           @Test
             public  void getAll(){
                 System.out.print(scoreService.getAll().toString());
             }
@@ -63,9 +57,6 @@ public class ScoreTest {
                 System.out.println(scoreService.getScoreByuserId("2").toString());
             }
 
-            @Test
-            public  void  getScoreBycouresName(){
-                System.out.println(scoreService.getScoreBycourseName("qwe").toString());
-            }
+
 
         }

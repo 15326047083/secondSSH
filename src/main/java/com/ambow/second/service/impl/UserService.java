@@ -52,6 +52,27 @@ public class UserService implements IUserService {
         return checkDao.getByCheckVoId(id);
     }
 
+    /**
+     * 删除用户信息
+     * @param user
+     */
+    @Override
+    public void updateAlive(User user) {
+        userDao.updateAlive(user);
+    }
 
+    /**
+     * 模糊查询
+     */
+
+    @Override
+    public List<User> likeSelect(String selectKey) {
+        return null;
+    }
+
+    @Override
+    public User getByNum(int num) {
+        return userDao.getByNum(num);
+    }
 
 }

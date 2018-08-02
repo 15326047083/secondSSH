@@ -2,6 +2,7 @@ package com.ambow.second.service.impl;
 
 import com.ambow.second.dao.ICourseDao;
 import com.ambow.second.entity.Course;
+import com.ambow.second.entity.User;
 import com.ambow.second.service.ICourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,6 +45,16 @@ public class CourseService implements ICourseService {
     @Override
     public Course getById(String courseId) {
         return iCourseService.get(courseId);
+    }
+
+    @Override
+    public User getUserByNum(int teacherNum) {
+        return iCourseService.getUserByNum(teacherNum);
+    }
+
+    @Override
+    public List<User> queryUser() {
+        return iCourseService.queryUser();
     }
 
 

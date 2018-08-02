@@ -23,7 +23,7 @@ public class Course {
     @Column(name = "info")
     private String info; // 课程信息
     @Column(name = "teacherId")
-    private String teacherId; // 教室信息
+    private String teacherId; // 教师信息
     @Column(name = "lessons")
     private int lessons; // 总课时
     @Column(name = "alive")

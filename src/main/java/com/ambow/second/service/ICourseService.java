@@ -1,6 +1,7 @@
 package com.ambow.second.service;
 
 import com.ambow.second.entity.Course;
+import com.ambow.second.entity.User;
 
 import java.util.List;
 
@@ -17,6 +18,9 @@ public interface ICourseService {
     void deleteCourse(String id);
 
     Course getById(String courseId);
+
+    User getUserByNum(int teacherNum);
     //
+    List<User> queryUser();
 
 }

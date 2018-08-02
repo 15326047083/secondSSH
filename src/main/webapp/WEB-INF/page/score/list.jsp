@@ -6,6 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="s" uri="/struts-tags" %>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -63,29 +65,23 @@
 
             <table width="100%" border="0" cellspacing="0" cellpadding="0" id="main-tab">
                 <tr>
-                    <th align="center" valign="middle" class="borderright">工号</th>
-                    <th align="center" valign="middle" class="borderright">干部姓名</th>
-                    <th align="center" valign="middle" class="borderright">课程名</th>
-                    <th align="center" valign="middle" class="borderright">缺勤次数</th>
-                    <th align="center" valign="middle" class="borderright">详情</th>
+                    <th align="center" valign="middle" class="borderright">课程编号</th>
+                    <th align="center" valign="middle" class="borderright">课程名称</th>
+                    <th align="center" valign="middle" class="borderright">教师</th>
+                    <th align="center" valign="middle" class="borderright">课时</th>
+                    <th align="center" valign="middle" class="borderright">成绩</th>
                     <th align="center" valign="middle">操作</th>
                 </tr>
+               <s:iterator var="score" value="getAll">
                 <tr onMouseOut="this.style.backgroundColor='#ffffff'" onMouseOver="this.style.backgroundColor='#edf5ff'">
-                    <td align="center" valign="middle" class="borderright borderbottom">1</td>
-                    <td align="center" valign="middle" class="borderright borderbottom">admin</td>
-                    <td align="center" valign="middle" class="borderright borderbottom">创始人</td>
-                    <td align="center" valign="middle" class="borderright borderbottom">已锁定</td>
-                    <td align="center" valign="middle" class="borderright borderbottom">2013-04-26 11:00:59</td>
-                    <td align="center" valign="middle" class="borderbottom"><a href="add.html" target="mainFrame" onFocus="this.blur()" class="add">编辑</a><span class="gray">&nbsp;|&nbsp;</span><a href="add.html" target="mainFrame" onFocus="this.blur()" class="add">删除</a></td>
+                    <td align="center" valign="middle" class="borderright borderbottom"><s:property value="#score.courseId"/></td>
+                    <td align="center" valign="middle" class="borderright borderbottom"><s:property value="#score.courseName"/></td>
+                    <td align="center" valign="middle" class="borderright borderbottom"><s:property value="#score.teacherName"/></td>
+                    <td align="center" valign="middle" class="borderright borderbottom"><s:property value="#score.courseLessons"/></td>
+                    <td align="center" valign="middle" class="borderright borderbottom"><s:property value="#score.score"/></td>
+                    <td align="center" valign="middle" class="borderbottom"><a href="/score/getById.action?scoreId=<s:property value="#score.scoreId"/>" target="mainFrame" onFocus="this.blur()" class="add">编辑</a><span class="gray">&nbsp;|&nbsp;</span><a href="/score/deleteScore.action?scoreId=<s:property value="#score.scoreId"/>" target="mainFrame" onFocus="this.blur()" class="add">删除</a></td>
                 </tr>
-                <tr class="bggray" onMouseOut="this.style.backgroundColor='#f9f9f9'" onMouseOver="this.style.backgroundColor='#edf5ff'">
-                    <td align="center" valign="middle" class="borderright borderbottom">2</td>
-                    <td align="center" valign="middle" class="borderright borderbottom">admin</td>
-                    <td align="center" valign="middle" class="borderright borderbottom">创始人</td>
-                    <td align="center" valign="middle" class="borderright borderbottom">已锁定</td>
-                    <td align="center" valign="middle" class="borderright borderbottom">2013-04-26 11:00:59</td>
-                    <td align="center" valign="middle" class="borderbottom"><a href="add.html" target="mainFrame" onFocus="this.blur()" class="add">编辑</a><span class="gray">&nbsp;|&nbsp;</span><a href="add.html" target="mainFrame" onFocus="this.blur()" class="add">删除</a></td>
-                </tr>
+               </s:iterator>
 
             </table></td>
     </tr>

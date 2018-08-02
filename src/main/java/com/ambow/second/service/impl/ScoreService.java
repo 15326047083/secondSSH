@@ -3,6 +3,7 @@ package com.ambow.second.service.impl;
 import com.ambow.second.dao.IScoreDao;
 import com.ambow.second.entity.Score;
 import com.ambow.second.service.IScoreService;
+import com.ambow.second.vo.ScoreVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,8 +23,8 @@ public class ScoreService implements IScoreService {
     }
 
     @Override
-    public Score getScoreById(String id) {
-        return scoreDao.get(id);
+    public ScoreVo getScoreById(String id) {
+        return scoreDao.getScoreById(id);
     }
 
     @Override
@@ -38,17 +39,20 @@ public class ScoreService implements IScoreService {
     }
 
     @Override
-    public List<Score> getScoreByuserId(String id) {
+    public List<ScoreVo> getScoreByuserId(String id) {
 
-        System.out.print(id);
         return scoreDao.getScoreByuserId(id);
     }
 
     @Override
-    public List<Score> getScoreByCouserId(String id) {
+    public List<ScoreVo> getScoreBycourseName(String couserName) {
 
+        return scoreDao.getScoreBycourseName(couserName);
+    }
 
-        return scoreDao.getScoreByCourseId(id);
+    @Override
+    public Score get(String id) {
+        return scoreDao.get(id);
     }
 
 

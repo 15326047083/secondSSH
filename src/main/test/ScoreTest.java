@@ -26,7 +26,7 @@ public class ScoreTest {
              */
     @Test
     public  void  saveScoreTest(){
-        Score score= new Score("3","3","89","999");
+        Score score= new Score("2c87b46964efff750164efff7af70000","4","93","25695");
         score.setId("2c87b4f664f05b1c0164f05b25cb0000");
         System.out.print(scoreService.saveorUpdateScore(score));
     }
@@ -52,4 +52,20 @@ public class ScoreTest {
             public  void getAll(){
                 System.out.print(scoreService.getAll().toString());
             }
+
+            /**
+             * 查询个人成绩
+             */
+
+            @Test
+
+            public  void getScore(){
+                System.out.println(scoreService.getScoreByuserId("2").toString());
+            }
+
+            @Test
+            public  void  getScoreBycouresName(){
+                System.out.println(scoreService.getScoreBycourseName("qwe").toString());
+            }
+
         }

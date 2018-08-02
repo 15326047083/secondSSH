@@ -22,6 +22,11 @@ public class UserAction extends ActionSupport {
     private String userId;
     //  封装selectKey对象
     private String selectKey;
+    //  封装limit
+    private int limit=0;
+
+    public int getLimit() { return limit; }
+    public void setLimit(int limit) { this.limit = limit; }
 
     public User getUser() { return user; }
     public void setUser(User user) { this.user = user; }
@@ -41,10 +46,8 @@ public class UserAction extends ActionSupport {
      */
     @Action(value = "queryAll", results = {@Result(name = "success", location = "/WEB-INF/page/user/list.jsp")})
     public String queryAll(){
-
-        userService.queryAll();
         ActionContext actionContext=ActionContext.getContext();
-        actionContext.put("queryAllList",userService.queryAll());
+        actionContext.put("queryAllList",userService.queryAll(limit));
         return SUCCESS;
     }
     /**
@@ -64,7 +67,6 @@ public class UserAction extends ActionSupport {
         user.setJoinTime(new Date().toString());
         user.setAlive(0);
         userService.saveOrUpdate(user);
-        System.out.println(user.getSex()+"<><><><><><><><><>");
         return SUCCESS;
     }
     /**

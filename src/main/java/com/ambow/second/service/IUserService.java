@@ -7,7 +7,7 @@ import com.ambow.second.vo.CheckVo;
 
 public interface IUserService {
 	// 查询所有的用户
-	List<User> queryAll();
+	List<User> queryAll(int limit);
 	// 根据用户ID查询用户
 	User findUserById(User user);
     // 修改用户信息

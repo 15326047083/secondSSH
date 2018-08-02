@@ -3,6 +3,7 @@ package com.ambow.second.dao.impl;
 
 import com.ambow.second.dao.IUserDao;
 import com.ambow.second.entity.User;
+import org.apache.struts2.ServletActionContext;
 import org.hibernate.Query;
 import org.hibernate.ScrollableResults;
 import org.hibernate.SessionFactory;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.ServiceConfigurationError;
 
 @Repository
 public class UserDao extends CommonDao<User> implements IUserDao {
@@ -18,16 +20,22 @@ public class UserDao extends CommonDao<User> implements IUserDao {
     @Autowired
     private SessionFactory sessionFactory;
 
-    @Autowired
-    @Transactional
-    public List<User> queryAll() {
-        return null;
+    public List<User> queryAll(int limit){  //当前页
+        Query query=sessionFactory.getCurrentSession().createQuery("from User");
+        ScrollableResults scrollableResults=query.scroll();
+        scrollableResults.last();
+        int i=scrollableResults.getRowNumber()+1;
+        ServletActionContext.getRequest().getSession().setAttribute("page" , i);
+        query.setFirstResult(limit*3);
+        query.setMaxResults(3);
+        return query.list();
     }
+    /**
+     * 删除用户，，修改alive状态
+     * @param user
+     */
     @Override
     @Transactional
-    /**
-     * 删除用户
-     */
     public void updateAlive(User user) {
         sessionFactory.getCurrentSession().saveOrUpdate(user);
     }

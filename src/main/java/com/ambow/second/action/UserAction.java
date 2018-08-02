@@ -28,9 +28,11 @@ public class UserAction extends ActionSupport {
         actionContext.put("queryAllList",userService.queryAll());
         return SUCCESS;
     }
-    @Action(value ="" ,results = { @Result(name = "success", location = "/WEB-INF/page/user/list.jsp")})
+    @Action(value ="delete" ,results = { @Result(name = "success", location = "/user/queryAll.action",type = "redirect")},params = {"userId","%{userId}"})
     public String delete(){
-
+        User user=new User();
+        user.setId(userId);
+        userService.delete(user);
         return SUCCESS;
     }
     @Action (value = "toUpdate", results = {@Result(name = "success" , location = "/WEB-INF/page/user/saveOrUpdate.jsp")},params = {"userId","%{userId}"})

@@ -55,7 +55,7 @@
                             <input name="" type="button" value="查询" class="text-but">
                         </form>
                     </td>
-                    <td width="10%" align="center" valign="middle" style="text-align:right; width:150px;"><a href="saveOrUpdate.jsp" target="mainFrame" onFocus="this.blur()" class="add">新增管理员</a></td>
+                    <td width="10%" align="center" valign="middle" style="text-align:right; width:150px;"><a href="save.jsp" target="mainFrame" onFocus="this.blur()" class="add">新增管理员</a></td>
                 </tr>
             </table>
         </td>
@@ -91,7 +91,10 @@
                     <td align="center" valign="middle" class="borderright borderbottom"><s:property value="#queryUser.duty"/></td>
                     <td align="center" valign="middle" class="borderright borderbottom"><s:property value="#queryUser.userType"/></td>
                     <td align="center" valign="middle" class="borderright borderbottom"><s:property value="#queryUser.alive"/></td>
-                    <td align="center" valign="middle" class="borderbottom"><a href="/user/toUpdate.action?userId=<s:property value="#queryUser.id"/>" target="mainFrame" onFocus="this.blur()" class="add">编辑</a><span class="gray">&nbsp;|&nbsp;</span><a href="${ pageContext.request.contextPage }/delete.action?id=<s:property value="#queryUser.id"/>" target="mainFrame" onFocus="this.blur()" class="add">删除</a></td>
+                    <td align="center" valign="middle" class="borderbottom">
+                        <a href="/user/toUpdate.action?userId=<s:property value="#queryUser.id"/>" target="mainFrame" onFocus="this.blur()" class="add">编辑</a>
+                        <span class="gray">&nbsp;|&nbsp;</span>
+                        <a href="/user/delete.action?userId=<s:property value="#queryUser.id"/>" target="mainFrame" onFocus="this.blur()" class="add">删除</a></td>
                 </tr></s:iterator>
             </table>
         </td>

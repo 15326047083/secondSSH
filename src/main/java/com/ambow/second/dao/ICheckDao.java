@@ -38,14 +38,14 @@ public interface ICheckDao extends ICommonDao<Check> {
      * @param str
      * @return
      */
-    List fuzzyQuery(String str);
+    List fuzzyQuery(String str,int index);
 
     /**
      * 模糊查询(教师）
      * @param str
      * @return
      */
-    List<CheckVo> fuzzyQueryOfTeacher(String str,String teacherId);
+    List<CheckVo> fuzzyQueryOfTeacher(String str,String teacherId,int index);
 
     /**
      * 统计条目
@@ -53,5 +53,10 @@ public interface ICheckDao extends ICommonDao<Check> {
      */
     long countVo();
 
-
+    /**
+     * 统计条目(模糊)
+     * @return
+     */
+    long fuzzyCountVo(String str);
+    long fuzzyCountVoOfTeacher(String str,String teacherId);
 }

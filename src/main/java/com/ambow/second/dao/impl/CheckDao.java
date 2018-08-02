@@ -85,12 +85,15 @@ public class CheckDao extends CommonDao<Check> implements ICheckDao {
      */
     @Override
     @Transactional
-    public List<CheckVo> fuzzyQuery(String str) {
+    public List<CheckVo> fuzzyQuery(String str,int index) {
 
         String sql="select new com.ambow.second.vo.CheckVo(c.id as checkId,u.id as userId,u.name as userName,u.num as" +
                 " num,u.deptId as deptName,c.time as time,o.id as courseId,o.name as courseName,c.info as info,c.num " +
                 "as absNum) from Check c,User u,Course o where c.userId=u.id and c.courseId=o.id and(u.name  like '%"+str+"%' or o.name like '%"+str+"%' or u.num like '%"+str+"%')";
-        return sessionFactory.getCurrentSession().createQuery(sql).list();
+        Query query=sessionFactory.getCurrentSession().createQuery(sql);
+        query.setFirstResult((index-1)*num);
+        query.setMaxResults(num-1);
+        return query.list();
     }
 
     /**
@@ -101,11 +104,14 @@ public class CheckDao extends CommonDao<Check> implements ICheckDao {
      */
     @Override
     @Transactional
-    public List<CheckVo> fuzzyQueryOfTeacher(String str,String teacherId) {
+    public List<CheckVo> fuzzyQueryOfTeacher(String str,String teacherId,int index) {
         String sql="select new com.ambow.second.vo.CheckVo(c.id as checkId,u.id as userId,u.name as userName,u.num as" +
                 " num,u.deptId as deptName,c.time as time,o.id as courseId,o.name as courseName,c.info as info,c.num " +
                 "as absNum) from Check c,User u,Course o where c.userId=u.id and c.courseId=o.id and o.teacherId='"+teacherId+"' and(u.name  like '%"+str+"%' or o.name like '%"+str+"%' or u.num like '%"+str+"%')";
-        return sessionFactory.getCurrentSession().createQuery(sql).list();
+        Query query=sessionFactory.getCurrentSession().createQuery(sql);
+        query.setFirstResult((index-1)*num);
+        query.setMaxResults(num-1);
+        return query.list();
     }
 
     /**
@@ -119,6 +125,23 @@ public class CheckDao extends CommonDao<Check> implements ICheckDao {
         String sql="select count(*) from Check c,User u,Course o where c.userId=u.id and c.courseId=o.id";
         return (long) sessionFactory.getCurrentSession().createQuery(sql).uniqueResult();
 
+    }
+
+    /**
+     * 统计条目(模糊)
+     *
+     * @return
+     */
+    @Override
+    public long fuzzyCountVo(String str) {
+        String sql="select count(*) from Check c,User u,Course o where c.userId=u.id and c.courseId=o.id and(u.name like '%"+str+"%' or o.name like '%"+str+"%' or u.num like '%"+str+"%')";
+        return (long) sessionFactory.getCurrentSession().createQuery(sql).uniqueResult();
+    }
+
+    @Override
+    public long fuzzyCountVoOfTeacher(String str, String teacherId) {
+        String sql="select count(*) from Check c,User u,Course o where c.userId=u.id and c.courseId=o.id and o.teacherId='"+teacherId+"' and(u.name like '%"+str+"%' or o.name like '%"+str+"%' or u.num like '%"+str+"%')";
+        return (long) sessionFactory.getCurrentSession().createQuery(sql).uniqueResult();
     }
 
 }

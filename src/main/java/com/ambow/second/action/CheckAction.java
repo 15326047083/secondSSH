@@ -9,7 +9,6 @@ import com.ambow.second.service.IUserService;
 import com.ambow.second.vo.CheckVo;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
-import com.sun.tools.internal.xjc.reader.xmlschema.bindinfo.BIConversion;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.Result;
@@ -109,6 +108,7 @@ public class CheckAction extends ActionSupport {
         String userId = "1";
         list = iCheckService.getByCheckVoId(userId);
         ActionContext.getContext().put("list", list);
+        ActionContext.getContext().put("role","user");
     //    ActionContext.getContext().put("role", "user");
         return SUCCESS;
     }
@@ -143,8 +143,6 @@ public class CheckAction extends ActionSupport {
         check.setInfo(this.info);
         check.setNum(this.num);
         check.setUserId(this.userId);
-
-
         Check check1=iCheckService.sava(check);
       //  如果找不到相同信息，即同一个人的同一个课程
         if (check1==null){

@@ -32,6 +32,17 @@ public class ScoreAction extends ActionSupport {
 
     private String like;//模糊查询的内容(jsp->action)
 
+    private  int index;  //当前页数
+
+
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
+    }
+
     public String getLike() {
         return like;
     }
@@ -99,8 +110,18 @@ public class ScoreAction extends ActionSupport {
     @Action(value = "getAlluser", results = {@Result(name = "success", location = "/WEB-INF/page/score/list.jsp")})
     public String getAlluser() {
 
+        long page=scoreService.countScoreVo();
+        if (page%5==0){
+            ActionContext.getContext().put("allPage",page/5);
+        }
+        else {
+            ActionContext.getContext().put("allPage",page/5+1);
+        }
+
+
         ActionContext context = ActionContext.getContext();
-        context.put("getAll", scoreService.getScoreByuserId("2"));
+        context.put("getAll", scoreService.getScoreByuserId("2",index));
+        context.put("index",index);
 
         return SUCCESS;
     }
@@ -114,8 +135,19 @@ public class ScoreAction extends ActionSupport {
     @Action(value = "getAllteacher", results = {@Result(name = "success", location = "/WEB-INF/page/score/list.jsp")})
     public String getAllteacher() {
 
+        long page=scoreService.countScoreVo();
+        if (page%5==0){
+            ActionContext.getContext().put("allPage",page/5);
+        }
+        else {
+            ActionContext.getContext().put("allPage",page/5+1);
+        }
+
+
         ActionContext context = ActionContext.getContext();
-        context.put("getAll", scoreService.getScoreByteacherId("2"));
+        context.put("getAll", scoreService.getScoreByteacherId("2",index));
+
+        context.put("index",index);
 
         return SUCCESS;
     }

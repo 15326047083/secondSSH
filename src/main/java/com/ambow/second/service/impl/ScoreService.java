@@ -58,14 +58,14 @@ public class ScoreService implements IScoreService {
      */
 
     @Override
-    public List<ScoreVo> getScoreByuserId(String id) {
+    public List<ScoreVo> getScoreByuserId(String id,int index) {
 
-        return scoreDao.getScoreByuserId(id);
+        return scoreDao.getScoreByuserId(id,index);
     }
 
     @Override
-    public List<ScoreVo> getScoreByteacherId(String teacherid) {
-        return scoreDao.getScoreByteacherId(teacherid);
+    public List<ScoreVo> getScoreByteacherId(String teacherid,int index) {
+        return scoreDao.getScoreByteacherId(teacherid,index);
     }
 
 
@@ -93,10 +93,24 @@ public  List<User> getAllUser(){
         return scoreDao.getAllCourse();
     }
 
+    /**
+     * 模糊查询
+     * @param like
+     * @return
+     */
     @Override
     public List<ScoreVo> getScoredBylike(String like) {
 
     return scoreDao.getScoredBylike(like);
+    }
+
+    /**
+     * 统计查询个数
+     * @return
+     */
+    @Override
+    public long countScoreVo() {
+        return scoreDao.countScoreVo();
     }
 
 }

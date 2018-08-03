@@ -1,10 +1,14 @@
 import com.ambow.second.entity.User;
 import com.ambow.second.service.IUserService;
+import com.ambow.second.util.ExportExcel;
+import com.ambow.second.util.ImportExcel;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import java.util.List;
 
 /**
  * 读取spring配置文件
@@ -47,5 +51,19 @@ public class GuoweiTest {
         System.out.println(userService.getByCheckVoId("2"));
     }
 
+    @Test
+    public void exportExcel(){
+        List<User> userList=userService.queryAll();
+        ExportExcel exportExcel =new ExportExcel();
+        int num= exportExcel.ExportExcel(userList);
+    }
 
+    @Test
+    public void importExcel(){
+        ImportExcel importExcel=new ImportExcel();
+        List<User> importList=importExcel.ImportExcel("D:/software/export/2018-08-03.xls");
+        System.out.println(importList.size());
+        userService.saveOrUpdate(importList);
+
+    }
 }

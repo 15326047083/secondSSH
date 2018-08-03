@@ -57,5 +57,15 @@ public class CourseService implements ICourseService {
         return iCourseService.queryUser();
     }
 
+    @Override
+    public long countVo() {
+        return iCourseService.countVo();
+    }
+
+    @Override
+    public List<Course> getAll(int index) {
+        return iCourseService.getAll(index);
+    }
+
 
 }

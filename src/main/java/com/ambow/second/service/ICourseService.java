@@ -25,4 +25,6 @@ public interface ICourseService {
 
 
     //分页查询
+    long countVo();
+    List<Course> getAll(int index);
 }

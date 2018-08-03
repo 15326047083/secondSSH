@@ -16,12 +16,16 @@ public class CourseDao extends CommonDao<Course> implements ICourseDao {
     @Autowired
     private SessionFactory sessionFactory;
 
+    final int num=7;        // 一页显示的数目
+
     @Override
     @Transactional
     /**
      * 根据teacherID查询课程信息
      */
     public List<Course> queryTeacherById(String teacherId) {
+
+
         return sessionFactory.getCurrentSession().createQuery("from Course where teacherId='" + teacherId + "'").list();
     }
 
@@ -45,20 +49,32 @@ public class CourseDao extends CommonDao<Course> implements ICourseDao {
 
         return sessionFactory.getCurrentSession().createQuery("from User").list();
     }
-
-
-
     /**
      * 分页查询
      *
      */
+    @Override
+    @Transactional
+    public long countVo() {
+        String sql="select count(*) from Course ";
+        return (long) sessionFactory.getCurrentSession().createQuery(sql).uniqueResult();
 
 
+    }
 
-
-
-
-
+    /**
+     *查询全部课程
+     * @return
+     */
+    @Override
+    @Transactional
+    public List<Course> getAll(int index) {
+        String sql="from Course";
+        Query query=sessionFactory.getCurrentSession().createQuery(sql);
+        query.setFirstResult((index-1)*num);
+        query.setMaxResults(num-1);
+        return query.list();
+    }
 
 
 }

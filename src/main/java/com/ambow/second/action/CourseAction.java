@@ -22,6 +22,16 @@ public class CourseAction extends ActionSupport {
     private String courseId;//定义courseId 删除对象
     private int teacherNum;//查询该教师所教授的所有课程
     private int Num;
+    private  int index;  //当前页数
+
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
+    }
+
     public int getNum() {
         return Num;
     }
@@ -79,7 +89,7 @@ public class CourseAction extends ActionSupport {
      */
     @Action(value = "toNew", results = {@Result(name = "success", location = "/WEB-INF/page/course/new.jsp")})
     public String toNew() {
-        System.out.print(Num);
+
         List<User> userList=courseService.queryUser();
         ActionContext.getContext().put("userList",userList);
 
@@ -91,12 +101,12 @@ public class CourseAction extends ActionSupport {
      *
      * @return
      */
-    @Action(value = "queryCourse", results = {@Result(name = "success", location = "/WEB-INF/page/course/list.jsp")})
-    public String queryCourse() {
-        ActionContext actionContext = ActionContext.getContext();
-        actionContext.put("courseList", courseService.queryCourse());
-        return SUCCESS;
-    }
+//    @Action(value = "queryCourse", results = {@Result(name = "success", location = "/WEB-INF/page/course/list.jsp")})
+//    public String queryCourse() {
+//        ActionContext actionContext = ActionContext.getContext();
+//        actionContext.put("courseList", courseService.queryCourse());
+//        return SUCCESS;
+//    }
 
     /**
      * 根据id删除课程信息
@@ -136,7 +146,32 @@ public class CourseAction extends ActionSupport {
         }
     }
 
+    /**
+     *分页查询
+     * @return
+     */
 
+    @Action(value = "queryCourse", results = {@Result(name = "success", location = "/WEB-INF/page/course/list.jsp")})
+    public String queryCourse(){
+        ActionContext actionContext = ActionContext.getContext();
+        actionContext.put("courseList",courseService.getAll(index));
+        long page=courseService.countVo();
+        tag(page);
+        ActionContext.getContext().put("index",index);
+        return SUCCESS;
+    }
+
+    private void tag(long page) {
+        if (page%5==0){
+            if (page/5==0){
+                page=1;
+            }
+            ActionContext.getContext().put("allPage",page/5);
+        }
+        else {
+            ActionContext.getContext().put("allPage",page/5+1);
+        }
+    }
 
 
 }

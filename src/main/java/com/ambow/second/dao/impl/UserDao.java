@@ -12,7 +12,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.ServiceConfigurationError;
 
 @Repository
 public class UserDao extends CommonDao<User> implements IUserDao {
@@ -20,18 +19,20 @@ public class UserDao extends CommonDao<User> implements IUserDao {
     @Autowired
     private SessionFactory sessionFactory;
 
-    public List<User> queryAll(int limit){  //当前页
-        Query query=sessionFactory.getCurrentSession().createQuery("from User");
-        ScrollableResults scrollableResults=query.scroll();
+    public List<User> queryAll(int limit) {  //当前页
+        Query query = sessionFactory.getCurrentSession().createQuery("from User");
+        ScrollableResults scrollableResults = query.scroll();
         scrollableResults.last();
-        int i=scrollableResults.getRowNumber()+1;
-        ServletActionContext.getRequest().getSession().setAttribute("page" , i);
-        query.setFirstResult(limit*3);
+        int i = scrollableResults.getRowNumber() + 1;
+        ServletActionContext.getRequest().getSession().setAttribute("page", i);
+        query.setFirstResult(limit * 3);
         query.setMaxResults(3);
         return query.list();
     }
+
     /**
      * 删除用户，，修改alive状态
+     *
      * @param user
      */
     @Override
@@ -42,17 +43,21 @@ public class UserDao extends CommonDao<User> implements IUserDao {
 
     /**
      * 模糊查询
+     *
      * @param selectKey
      * @return
      */
     @Override
     @Transactional
     public List<User> likeSelect(String selectKey) {
-        return sessionFactory.getCurrentSession().createQuery("from User where name like '%"+selectKey+"%' or num like '%"+selectKey+"%' or phone like '%"+selectKey+"%' or deptId like '%"+selectKey+"%'").list();
+        return sessionFactory.getCurrentSession().createQuery("from User where name like '%" + selectKey + "%' or num" +
+                " like '%" + selectKey + "%' or phone like '%" + selectKey + "%' or deptId like '%" + selectKey +
+                "%'").list();
     }
 
     /**
      * 根据num查询
+     *
      * @param num
      * @return
      */

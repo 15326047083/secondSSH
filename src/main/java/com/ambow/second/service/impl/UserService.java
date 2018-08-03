@@ -24,27 +24,40 @@ public class UserService implements IUserService {
     private ICheckDao checkDao;
 
     /**
-     * 查询所有用户
+     * 分页查询所有用户
+     *
      * @return
      */
     @Override
     public List<User> queryAll(int limit) {
         // TODO Auto-generated method stub
+        return userDao.queryAll(limit);
+    }
+
+    /**
+     * 查询全部
+     *
+     * @return
+     */
+    @Override
+    public List<User> queryAll() {
         return userDao.queryAll();
     }
 
     /**
      * 根据Id查询用户
+     *
      * @param user
      * @return
      */
     @Override
-    public User findUserById(User user){
+    public User findUserById(User user) {
         return userDao.get(user.getId());
     }
 
     /**
      * 新增或修改
+     *
      * @param user
      * @return
      */
@@ -56,6 +69,7 @@ public class UserService implements IUserService {
 
     /**
      * 删除用户
+     *
      * @param user
      */
     @Override
@@ -65,17 +79,19 @@ public class UserService implements IUserService {
 
     /**
      * 根据考勤查询所有
+     *
      * @return
      */
 
     @Override
     public List<CheckVo> queryCheckVoAll() {
-        String sql="";
+        String sql = "";
         return null;
     }
 
     /**
      * 根据考勤查询
+     *
      * @param id
      * @return
      */
@@ -87,6 +103,7 @@ public class UserService implements IUserService {
 
     /**
      * 删除用户信息
+     *
      * @param user
      */
     @Override
@@ -96,6 +113,7 @@ public class UserService implements IUserService {
 
     /**
      * 模糊查询
+     *
      * @param selectKey
      * @return
      */
@@ -107,6 +125,7 @@ public class UserService implements IUserService {
 
     /**
      * 根据num查询
+     *
      * @param num
      * @return
      */

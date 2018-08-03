@@ -65,12 +65,6 @@ td.fenye{ padding:10px 0 0 0; text-align:right;}
             </td>
           </tr>
           <tr onMouseOut="this.style.backgroundColor='#ffffff'" onMouseOver="this.style.backgroundColor='#edf5ff'">
-            <td align="right" valign="middle" class="borderright borderbottom bggray">工号：</td>
-            <td align="left" valign="middle" class="borderright borderbottom main-for"><s:property value="userInfo.num"/>
-              <input type="text" name="user.num" value="" class="text-word" required>
-            </td>
-          </tr>
-          <tr onMouseOut="this.style.backgroundColor='#ffffff'" onMouseOver="this.style.backgroundColor='#edf5ff'">
             <td align="right" valign="middle" class="borderright borderbottom bggray">手机号：</td>
             <td align="left" valign="middle" class="borderright borderbottom main-for">
               <input type="text" name="user.phone" value="" class="text-word" required>

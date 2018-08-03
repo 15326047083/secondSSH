@@ -2,6 +2,7 @@ package com.ambow.second.dao.impl;
 
 import com.ambow.second.dao.IUserRolesDao;
 import com.ambow.second.entity.User;
+import com.ambow.second.entity.UserRoles;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Repository
-public class UserRolesDao implements IUserRolesDao {
+public class UserRolesDao extends CommonDao<UserRoles> implements IUserRolesDao {
     @Autowired
     private SessionFactory sessionFactory;
 

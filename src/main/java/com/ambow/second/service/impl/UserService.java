@@ -3,6 +3,8 @@ package com.ambow.second.service.impl;
 import java.util.List;
 
 import com.ambow.second.dao.ICheckDao;
+import com.ambow.second.dao.IUserRolesDao;
+import com.ambow.second.entity.UserRoles;
 import com.ambow.second.vo.CheckVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +24,8 @@ public class UserService implements IUserService {
     //  注入checkDao
     @Autowired
     private ICheckDao checkDao;
+    @Autowired
+    private IUserRolesDao userRolesDao;
 
     /**
      * 分页查询所有用户
@@ -64,6 +68,15 @@ public class UserService implements IUserService {
 
     @Override
     public String saveOrUpdate(User user) {
+        if (user.getNum() == 0) {
+            user.setNum((int) ((Math.random() * 9 + 1) * 100000));
+        }
+        if (user.getId() == null) {
+            UserRoles userRoles = new UserRoles();
+            userRoles.setRoles("user");
+            userRoles.setUserNum(user.getNum() + "");
+            userRolesDao.saveOrUpdate(userRoles);
+        }
         return userDao.saveOrUpdate(user);
     }
 

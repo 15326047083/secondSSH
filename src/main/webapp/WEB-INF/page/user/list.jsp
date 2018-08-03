@@ -102,10 +102,10 @@
     </tr>
     <tr>
         <td align="left" valign="top" class="fenye">
-            <a href="/user/queryAll.action?limit=0" target="mainFrame">首页</a>&nbsp;&nbsp;
-            <a href="/user/queryAll.action?limit=<s:property value="limit"/>-1" target="mainFrame">上一页</a>&nbsp;&nbsp;
-            <a href="/user/queryAll.action?limit=<s:property value="limit"/>+1" target="mainFrame">下一页</a>&nbsp;&nbsp;
-            <a href="/user/queryAll.action?limit=<fmt:formatNumber value="${#session.page/3}" pattern="#" type="number"/>" target="mainFrame">尾页</a>
+            <a href="queryAll.action?limit=0" target="mainFrame">首页</a>&nbsp;&nbsp;
+            <a href="queryAll.action?limit=(<s:property value="limit"/>-1)" target="mainFrame">上一页</a>&nbsp;&nbsp;
+            <a href="queryAll.action?limit=(<s:property value="limit"/>+1)" target="mainFrame">下一页</a>&nbsp;&nbsp;
+            <a href="queryAll.action?limit=<fmt:formatNumber value="${#session.page/3}" pattern="#" type="number"/>" target="mainFrame">尾页</a>
        <%-- <a href="#" target="mainFrame" onFocus="this.blur()">首页</a>&nbsp;&nbsp;
         <a href="#" target="mainFrame" onFocus="this.blur()">上一页</a>&nbsp;&nbsp;
         <a href="#" target="mainFrame" onFocus="this.blur()">下一页</a>&nbsp;&nbsp;

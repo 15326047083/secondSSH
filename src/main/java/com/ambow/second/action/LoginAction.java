@@ -60,6 +60,20 @@ public class LoginAction {
         return SUCCESS;
     }
 
+    /**
+     * 用户注销
+     *
+     * @return
+     */
+    @Action(value = "loginOut", results = {
+            // 登出，重定向至登陆页面
+            @Result(name = "success", location = "toLogin.action", type = "redirect")
+    })
+    public String loginOut() {
+        SecurityUtils.getSubject().logout();
+        return SUCCESS;
+    }
+
     public User getUser() {
         return user;
     }

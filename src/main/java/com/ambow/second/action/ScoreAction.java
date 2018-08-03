@@ -9,6 +9,7 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 
@@ -110,11 +111,11 @@ public class ScoreAction extends ActionSupport {
     @Action(value = "getAlluser", results = {@Result(name = "success", location = "/WEB-INF/page/score/list.jsp")})
     public String getAlluser() {
 
-
+        User user= (User) ServletActionContext.getRequest().getSession().getAttribute("userSession");
 
 
         ActionContext context = ActionContext.getContext();
-        context.put("getAll", scoreService.getScoreByuserId("2"));
+        context.put("getAll", scoreService.getScoreByuserId(user.getId()));
 
 
 
@@ -129,12 +130,12 @@ public class ScoreAction extends ActionSupport {
 
     @Action(value = "getAllteacher", results = {@Result(name = "success", location = "/WEB-INF/page/score/list.jsp")})
     public String getAllteacher() {
-
-        long page = scoreService.countScoreVoByteacher("2");
+        User user= (User) ServletActionContext.getRequest().getSession().getAttribute("userSession");
+        long page = scoreService.countScoreVoByteacher(user.getId());
         tag(page);
 
         ActionContext context = ActionContext.getContext();
-        context.put("getAll", scoreService.getScoreByteacherId("2", index));
+        context.put("getAll", scoreService.getScoreByteacherId(user.getId(), index));
         context.put("bj", "teacher");
         context.put("index", index);
 
@@ -142,13 +143,13 @@ public class ScoreAction extends ActionSupport {
     }
 
     private void tag(long page) {
-        if (page % 5 == 0) {
-            if (page / 5 == 0) {
+        if (page % 10 == 0) {
+            if (page / 10 == 0) {
                 page = 1;
             }
-            ActionContext.getContext().put("allPage", page / 5);
+            ActionContext.getContext().put("allPage", page / 10);
         } else {
-            ActionContext.getContext().put("allPage", page / 5 + 1);
+            ActionContext.getContext().put("allPage", page / 10 + 1);
         }
     }
 
@@ -255,8 +256,9 @@ public class ScoreAction extends ActionSupport {
     @Action(value = "likeScoreteacher", results = {@Result(name = "success", location = "/WEB-INF/page/score/list.jsp")})
     public String likeScoreteacher() {
 
+        User user= (User) ServletActionContext.getRequest().getSession().getAttribute("userSession");
         ActionContext context = ActionContext.getContext();
-        context.put("getAll", scoreService.getScoredByteacherike("2",like));
+        context.put("getAll", scoreService.getScoredByteacherike(user.getId(),like));
 
 
         return SUCCESS;

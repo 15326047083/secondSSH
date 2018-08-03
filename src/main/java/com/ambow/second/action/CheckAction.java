@@ -9,6 +9,7 @@ import com.ambow.second.service.IUserService;
 import com.ambow.second.vo.CheckVo;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import org.apache.shiro.SecurityUtils;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
@@ -65,8 +66,13 @@ public class CheckAction extends ActionSupport {
     public String toCheckList() {
 //        权限
 //        教师查询
-//        list=iCheckService.queryCheskVoAllByTeacherId(teacherId,index);
-        list = iCheckService.queryCheckVoAll(index);
+
+        if (SecurityUtils.getSubject().hasRole("admin")) {
+            list = iCheckService.queryCheckVoAll(index);
+        } else if (SecurityUtils.getSubject().hasRole("teacher")) {
+            User user = (User) ServletActionContext.getRequest().getSession().getAttribute("userSession");
+            list = iCheckService.queryCheskVoAllByTeacherId(user.getId(), index);
+        }
         long page = iCheckService.countVo();
         tag(page);
 
@@ -82,13 +88,13 @@ public class CheckAction extends ActionSupport {
     }
 
     private void tag(long page) {
-        if (page % 5 == 0) {
-            if (page / 5 == 0) {
+        if (page % 10 == 0) {
+            if (page / 10 == 0) {
                 page = 1;
             }
-            ActionContext.getContext().put("allPage", page / 5);
+            ActionContext.getContext().put("allPage", page / 10);
         } else {
-            ActionContext.getContext().put("allPage", page / 5 + 1);
+            ActionContext.getContext().put("allPage", page / 10 + 1);
         }
     }
 
@@ -109,7 +115,7 @@ public class CheckAction extends ActionSupport {
         list = iCheckService.getByCheckVoId(userId);
         ActionContext.getContext().put("list", list);
         ActionContext.getContext().put("role", "user");
-        //    ActionContext.getContext().put("role", "user");
+
         return SUCCESS;
     }
 
@@ -124,10 +130,18 @@ public class CheckAction extends ActionSupport {
 //
 //        教师添加（）
 //        String teacherId="1";
-//        List<Course> courseList=iCourseService.queryTeacherById(teacherId);
+//        List<Course>
 
+        User user = (User) ServletActionContext.getRequest().getSession().getAttribute("userSession");
+        List<Course> courseList = null;
+
+        if (SecurityUtils.getSubject().hasRole("admin")) {
+            courseList = iCourseService.queryCourse();
+        }
+        else if (SecurityUtils.getSubject().hasRole("teacher")) {
+            courseList = iCourseService.queryTeacherById(user.getId());
+        }
         List<User> userList = iUserService.queryAll();
-        List<Course> courseList = iCourseService.queryCourse();
         ActionContext.getContext().put("userList", userList);
         ActionContext.getContext().put("courseList", courseList);
         return SUCCESS;
@@ -159,9 +173,6 @@ public class CheckAction extends ActionSupport {
             iCheckService.setAbsNum(check1);
         }
 
-        // 获取角色 role
-        // bj = role;
-        // return "bj";
         ActionContext.getContext().put("index", 1);
         return SUCCESS;
     }
@@ -215,12 +226,20 @@ public class CheckAction extends ActionSupport {
         //
         // 教师
         // long page=iCheckService.fuzzyCountVoOfTeacher(str,"2");
-        long page = iCheckService.fuzzyCountVo(str);
+        long page = 0;
+        User user = (User) ServletActionContext.getRequest().getSession().getAttribute("userSession");
+
+        if (SecurityUtils.getSubject().hasRole("admin")) {
+
+            page = iCheckService.fuzzyCountVo(str);
+            list = iCheckService.fuzzyQuery(str, index);
+        }
+        else if (SecurityUtils.getSubject().hasRole("teacher")) {
+            page = iCheckService.fuzzyCountVoOfTeacher(str, user.getId());
+            list=iCheckService.fuzzyQueryOfTeacher(str,user.getId(),index);
+        }
         tag(page);
-        list = iCheckService.fuzzyQuery(str, index);
-        //   如果是教师
-        //
-        // list=iCheckService.fuzzyQueryOfTeacher(str,"2",index);
+
         ActionContext.getContext().put("list", list);
         ActionContext.getContext().put("index", 1);
         ActionContext.getContext().put("bj", "fuzzy");

@@ -16,7 +16,7 @@ public class CheckDao extends CommonDao<Check> implements ICheckDao {
     @Autowired
     private SessionFactory sessionFactory;
 
-    final int num=5;        // 一页显示的数目
+    final int num=10;        // 一页显示的数目
     /**
      * 根据UserID查找查看考勤列表
      *

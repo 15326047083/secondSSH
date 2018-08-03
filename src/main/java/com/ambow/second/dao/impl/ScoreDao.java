@@ -20,7 +20,7 @@ public class ScoreDao extends CommonDao<Score> implements IScoreDao {
     private SessionFactory sessionFactory;
 
 
-    final int num = 5;        // 一页显示的数目
+    final int num = 10;        // 一页显示的数目
 
     /**
      * 根据用户 ID查询成绩
@@ -51,7 +51,7 @@ public class ScoreDao extends CommonDao<Score> implements IScoreDao {
         Query query = sessionFactory.getCurrentSession().createQuery("select new com.ambow.second.vo.ScoreVo(c.id as courseId,c.name as courseName,c.teacherId as teacherId,u.name as userName,s.id as scoreId,s.score as score,c.lessons as courseLessons  ) from Score s,User u,Course c  " +
                 "where s.userId=u.id and s.courseId=c.id and c.teacherId='" + teacherid + "'");
         query.setFirstResult((index - 1) * num);
-        query.setMaxResults(num );
+        query.setMaxResults(num);
 
         return query.list();
     }
@@ -67,7 +67,7 @@ public class ScoreDao extends CommonDao<Score> implements IScoreDao {
         Query query = sessionFactory.getCurrentSession().createQuery("select new com.ambow.second.vo.ScoreVo(c.id as courseId,c.name as courseName,c.teacherId as teacherId,u.name as userName,s.id as scoreId,s.score as score,c.lessons as courseLessons  ) from Score s,User u,Course c  " +
                 "where s.userId=u.id and s.courseId=c.id ");
         query.setFirstResult((index - 1) * num);
-        query.setMaxResults(num );
+        query.setMaxResults(num);
 
         return query.list();
     }

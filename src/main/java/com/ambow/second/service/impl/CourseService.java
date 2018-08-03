@@ -24,11 +24,6 @@ public class CourseService implements ICourseService {
 
     @Override
     public void addCourse(Course course) {
-        User teacher = userDao.get(course.getTeacherId());
-        UserRoles userRoles = new UserRoles();
-        userRoles.setUserNum("" + teacher.getNum());
-        userRoles.setRoles("teacher");
-        userRolesDao.saveOrUpdate(userRoles);
         iCourseService.saveOrUpdate(course);
     }
 

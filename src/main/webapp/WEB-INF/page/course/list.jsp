@@ -1,4 +1,4 @@
-<%--
+<%@ page import="com.ambow.second.entity.User" %><%--
   Created by IntelliJ IDEA.
   User: leiyuan
   Date: 2018/8/1
@@ -173,15 +173,10 @@
                     <th align="center" valign="middle" class="borderright">上课时间</th>
                     <th align="center" valign="middle" class="borderright">下课时间</th>
                     <th align="center" valign="middle" class="borderright">课程信息</th>
-                    <th align="center" valign="middle" class="borderright">教师信息</th>
                     <th align="center" valign="middle" class="borderright">总课时</th>
                     <th align="center" valign="middle" class="borderright">课程状态</th>
-
-                    <shiro:lacksRole name="user">
-                        <th align="center" valign="middle">操作</th>
-                    </shiro:lacksRole>
+                    <th align="center" valign="middle">操作</th>
                 </tr>
-
                 <s:iterator value="courseList" var="cl">
                     <tr onMouseOut="this.style.backgroundColor='#ffffff'"
                         onMouseOver="this.style.backgroundColor='#edf5ff'">
@@ -194,23 +189,23 @@
                         <td align="center" valign="middle" class="borderright borderbottom"><s:property
                                 value="#cl.info"/></td>
                         <td align="center" valign="middle" class="borderright borderbottom"><s:property
-                                value="#cl.teacherId"/></td>
-                        <td align="center" valign="middle" class="borderright borderbottom"><s:property
                                 value="#cl.lessons"/></td>
                         <td align="center" valign="middle" class="borderright borderbottom">
                             <s:if test="#cl.alive==0">授课中 </s:if>
                             <s:elseif test="#cl.alive==1">已结课</s:elseif>
                         </td>
-                        <shiro:lacksRole name="user">
-                            <td align="center" valign="middle" class="borderbottom">
+                        <td align="center" valign="middle" class="borderbottom">
+                            <a href="/course/getInfoByCourseIdAndTeacherId.action?courseId=<s:property value="#cl.id"/>&teacherId=<s:property value="#cl.teacherId"/>"
+                               target="mainFrame" onFocus="this.blur()" class="add">查看详情</a><span class="gray">&nbsp;|&nbsp;</span>
+                            <shiro:lacksRole name="user">
                                 <a href="/course/updateCourse.action?courseId=<s:property value="#cl.id"/>"
                                    target="mainFrame" onFocus="this.blur()" class="add">点击结课</a><span class="gray">&nbsp;|&nbsp;</span>
                                 <shiro:hasRole name="admin">
                                     <a href="/course/deleteCourse.action?courseId=<s:property value="#cl.id"/>"
                                        target="mainFrame" onFocus="this.blur()" class="add">删除</a>
                                 </shiro:hasRole>
-                            </td>
-                        </shiro:lacksRole>
+                            </shiro:lacksRole>
+                        </td>
                     </tr>
                 </s:iterator>
             </table>

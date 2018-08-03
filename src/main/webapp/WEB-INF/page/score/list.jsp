@@ -142,151 +142,146 @@
     </style>
 </head>
 <body>
-
+<%@taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <table width="99%" border="0" cellspacing="0" cellpadding="0" id="searchmain">
-<tr>
-    <td width="99%" align="left" valign="top">您的位置：成绩管理</td>
-</tr>
-<tr>
-    <td align="left" valign="top">
-        <table width="100%" border="0" cellspacing="0" cellpadding="0" id="search">
-            <tr>
-                <td width="90%" align="left" valign="middle">
-<s:if test="#bj=='admin'.toString()">
-                    <form method="post" action="<%=request.getContextPath()%>likeScore.action">
-
-
-                        <span>模糊查询：</span>
-                        <input type="text" name="like" value="" class="text-word">
-                        <input name="" type="submit" value="查询" class="text-but">
-                    </form>
-</s:if>
-
-                    <s:if test="#bj=='teacher'.toString()">
-                        <form method="post" action="<%=request.getContextPath()%>likeScoreteacher.action">
-
-
-                            <span>模糊查询：</span>
-                            <input type="text" name="like" value="" class="text-word">
-                            <input name="" type="submit" value="查询" class="text-but">
-                        </form>
-                    </s:if>
-
-
-                </td>
-<s:if test="#bj=='teacher'.toString()">
-                <td width="10%" align="center" valign="middle" style="text-align:right; width:150px;"><a
-                        href="/score/toNewScore.action" target="mainFrame" onFocus="this.blur()" class="add">新增成绩</a>
-                </td>
-</s:if>
-            </tr>
-        </table>
-    </td>
-</tr>
-<tr>
-    <td align="left" valign="top">
-
-        <table width="100%" border="0" cellspacing="0" cellpadding="0" id="main-tab">
-            <tr>
-                <th align="center" valign="middle" class="borderright">课程编号</th>
-                <th align="center" valign="middle" class="borderright">课程名称</th>
-                <th align="center" valign="middle" class="borderright">教师编号</th>
-                <th align="center" valign="middle" class="borderright">干部</th>
-                <th align="center" valign="middle" class="borderright">课时</th>
-                <th align="center" valign="middle" class="borderright">成绩</th>
-                <th align="center" valign="middle">操作</th>
-            </tr>
-            <s:iterator var="score" value="getAll">
-                <tr onMouseOut="this.style.backgroundColor='#ffffff'"
-                    onMouseOver="this.style.backgroundColor='#edf5ff'">
-                    <td align="center" valign="middle" class="borderright borderbottom"><s:property
-                            value="#score.courseId"/></td>
-                    <td align="center" valign="middle" class="borderright borderbottom"><s:property
-                            value="#score.courseName"/></td>
-                    <td align="center" valign="middle" class="borderright borderbottom"><s:property
-                            value="#score.teacherId"/></td>
-                    <td align="center" valign="middle" class="borderright borderbottom"><s:property
-                            value="#score.userName"/></td>
-                    <td align="center" valign="middle" class="borderright borderbottom"><s:property
-                            value="#score.courseLessons"/></td>
-                    <td align="center" valign="middle" class="borderright borderbottom"><s:property
-                            value="#score.score"/></td>
-                    <td align="center" valign="middle" class="borderbottom"><a
-                            href="/score/getById.action?scoreId=<s:property value="#score.scoreId"/>" target="mainFrame"
-                            onFocus="this.blur()" class="add">编辑</a><span class="gray">&nbsp;|&nbsp;</span><a
-                            href="/score/deleteScore.action?scoreId=<s:property value="#score.scoreId"/>"
-                            target="mainFrame" onFocus="this.blur()" class="add">删除</a></td>
-                </tr>
-            </s:iterator>
-
-        </table>
-    </td>
-</tr>
-<tr>
-<td align="left" valign="top" class="fenye"> <s:property value="#index"/>/<s:property value="#allPage"/>页&nbsp;&nbsp;
-
-<s:if test="#bj=='teacher'.toString()">
-    <a href="<%=request.getContextPath()%>getAllteacher.action?index=1" target="mainFrame" onFocus="this.blur()">首页</a>&nbsp;&nbsp;
-
-    <s:if test="#index==1">
-        <a id="prior" style="cursor: default;"
-           href="javascript:return false;" target="mainFrame" onFocus="this.blur()">上一页</a>&nbsp;&nbsp;
-    </s:if>
-    <s:if test="#index>1">
-        <a id="prior"
-           href="<%=request.getContextPath()%>getAllteacher.action?index=<s:property value="#index-1"/>"
-           target="mainFrame" onFocus="this.blur()">上一页</a>&nbsp;&nbsp;
-    </s:if>
-    <s:if test="#allPage>#index">
-        <a id="last" href="<%=request.getContextPath()%>getAllteacher.action?index=<s:property value="#index+1"/>"
-           target="mainFrame" onFocus="this.blur()">下一页</a>&nbsp;&nbsp;
-    </s:if>
-    <s:if test="#allPage<=#index">
-        <a id="last" style="cursor: default;"
-           href="javascript:return false;" target="mainFrame" onFocus="this.blur()">下一页</a>&nbsp;&nbsp;
-    </s:if>
-
-    <a
-    href="<%=request.getContextPath()%>getAllteacher.action?index=<s:property
-        value="#allPage"/>" target="mainFrame" onFocus="this.blur()">尾页</a>
-    </s:if>
-
-    <s:if test="#bj=='admin'.toString()">
-        <a href="<%=request.getContextPath()%>getAlladmin.action?index=1" target="mainFrame" onFocus="this.blur()">首页</a>&nbsp;&nbsp;
-
-        <s:if test="#index==1">
-            <a id="prior" style="cursor: default;"
-               href="javascript:return false;" target="mainFrame" onFocus="this.blur()">上一页</a>&nbsp;&nbsp;
-        </s:if>
-        <s:if test="#index>1">
-            <a id="prior"
-               href="<%=request.getContextPath()%>getAlladmin.action?index=<s:property value="#index-1"/>"
-               target="mainFrame" onFocus="this.blur()">上一页</a>&nbsp;&nbsp;
-        </s:if>
-        <s:if test="#allPage>#index">
-            <a id="last" href="<%=request.getContextPath()%>getAlladmin.action?index=<s:property value="#index+1"/>"
-               target="mainFrame" onFocus="this.blur()">下一页</a>&nbsp;&nbsp;
-        </s:if>
-        <s:if test="#allPage<=#index">
-            <a id="last" style="cursor: default;"
-               href="javascript:return false;" target="mainFrame" onFocus="this.blur()">下一页</a>&nbsp;&nbsp;
-        </s:if>
-
-        <a
-                href="<%=request.getContextPath()%>getAlladmin.action?index=<s:property
-        value="#allPage"/>" target="mainFrame" onFocus="this.blur()">尾页</a>
-    </s:if>
-
-
-
-
-
-
-
-
-</td>
+    <tr>
+        <td width="99%" align="left" valign="top">您的位置：成绩管理</td>
     </tr>
-    </table>
+    <tr>
+        <td align="left" valign="top">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" id="search">
+                <tr>
+                    <td width="90%" align="left" valign="middle">
+                        <shiro:hasRole name="admin">
+                            <form method="post" action="<%=request.getContextPath()%>likeScore.action">
 
-    </body>
-    </html>
+
+                                <span>模糊查询：</span>
+                                <input type="text" name="like" value="" class="text-word">
+                                <input name="" type="submit" value="查询" class="text-but">
+                            </form>
+                        </shiro:hasRole>
+                        <shiro:hasRole name="teacher">
+                            <form method="post" action="<%=request.getContextPath()%>likeScoreteacher.action">
+
+
+                                <span>模糊查询：</span>
+                                <input type="text" name="like" value="" class="text-word">
+                                <input name="" type="submit" value="查询" class="text-but">
+                            </form>
+                        </shiro:hasRole>
+                    </td>
+                    <shiro:hasRole name="teacher">
+                        <td width="10%" align="center" valign="middle" style="text-align:right; width:150px;"><a
+                                href="/score/toNewScore.action" target="mainFrame" onFocus="this.blur()" class="add">新增成绩</a>
+                        </td>
+                    </shiro:hasRole>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td align="left" valign="top">
+
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" id="main-tab">
+                <tr>
+                    <th align="center" valign="middle" class="borderright">课程编号</th>
+                    <th align="center" valign="middle" class="borderright">课程名称</th>
+                    <th align="center" valign="middle" class="borderright">教师编号</th>
+                    <th align="center" valign="middle" class="borderright">干部名称</th>
+                    <th align="center" valign="middle" class="borderright">课时</th>
+                    <th align="center" valign="middle" class="borderright">成绩</th>
+                    <th align="center" valign="middle">操作</th>
+                </tr>
+                <s:iterator var="score" value="getAll">
+                    <tr onMouseOut="this.style.backgroundColor='#ffffff'"
+                        onMouseOver="this.style.backgroundColor='#edf5ff'">
+                        <td align="center" valign="middle" class="borderright borderbottom"><s:property
+                                value="#score.courseId"/></td>
+                        <td align="center" valign="middle" class="borderright borderbottom"><s:property
+                                value="#score.courseName"/></td>
+                        <td align="center" valign="middle" class="borderright borderbottom"><s:property
+                                value="#score.teacherId"/></td>
+                        <td align="center" valign="middle" class="borderright borderbottom"><s:property
+                                value="#score.userName"/></td>
+                        <td align="center" valign="middle" class="borderright borderbottom"><s:property
+                                value="#score.courseLessons"/></td>
+                        <td align="center" valign="middle" class="borderright borderbottom"><s:property
+                                value="#score.score"/></td>
+                        <td align="center" valign="middle" class="borderbottom"><a
+                                href="/score/getById.action?scoreId=<s:property value="#score.scoreId"/>"
+                                target="mainFrame"
+                                onFocus="this.blur()" class="add">编辑</a><span class="gray">&nbsp;|&nbsp;</span><a
+                                href="/score/deleteScore.action?scoreId=<s:property value="#score.scoreId"/>"
+                                target="mainFrame" onFocus="this.blur()" class="add">删除</a></td>
+                    </tr>
+                </s:iterator>
+
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td align="left" valign="top" class="fenye"><s:property value="#index"/>/<s:property value="#allPage"/>页&nbsp;&nbsp;
+
+            <shiro:hasRole name="teacher">
+                <a href="<%=request.getContextPath()%>getAllteacher.action?index=1" target="mainFrame"
+                   onFocus="this.blur()">首页</a>&nbsp;&nbsp;
+
+                <s:if test="#index==1">
+                    <a id="prior" style="cursor: default;"
+                       href="javascript:return false;" target="mainFrame" onFocus="this.blur()">上一页</a>&nbsp;&nbsp;
+                </s:if>
+                <s:if test="#index>1">
+                    <a id="prior"
+                       href="<%=request.getContextPath()%>getAllteacher.action?index=<s:property value="#index-1"/>"
+                       target="mainFrame" onFocus="this.blur()">上一页</a>&nbsp;&nbsp;
+                </s:if>
+                <s:if test="#allPage>#index">
+                    <a id="last"
+                       href="<%=request.getContextPath()%>getAllteacher.action?index=<s:property value="#index+1"/>"
+                       target="mainFrame" onFocus="this.blur()">下一页</a>&nbsp;&nbsp;
+                </s:if>
+                <s:if test="#allPage<=#index">
+                    <a id="last" style="cursor: default;"
+                       href="javascript:return false;" target="mainFrame" onFocus="this.blur()">下一页</a>&nbsp;&nbsp;
+                </s:if>
+
+                <a href="<%=request.getContextPath()%>getAllteacher.action?index=<s:property value="#allPage"/>"
+                   target="mainFrame" onFocus="this.blur()">尾页</a>
+            </shiro:hasRole>
+
+            <shiro:hasRole name="admin">
+                <a href="<%=request.getContextPath()%>getAlladmin.action?index=1" target="mainFrame"
+                   onFocus="this.blur()">首页</a>&nbsp;&nbsp;
+
+                <s:if test="#index==1">
+                    <a id="prior" style="cursor: default;"
+                       href="javascript:return false;" target="mainFrame" onFocus="this.blur()">上一页</a>&nbsp;&nbsp;
+                </s:if>
+                <s:if test="#index>1">
+                    <a id="prior"
+                       href="<%=request.getContextPath()%>getAlladmin.action?index=<s:property value="#index-1"/>"
+                       target="mainFrame" onFocus="this.blur()">上一页</a>&nbsp;&nbsp;
+                </s:if>
+                <s:if test="#allPage>#index">
+                    <a id="last"
+                       href="<%=request.getContextPath()%>getAlladmin.action?index=<s:property value="#index+1"/>"
+                       target="mainFrame" onFocus="this.blur()">下一页</a>&nbsp;&nbsp;
+                </s:if>
+                <s:if test="#allPage<=#index">
+                    <a id="last" style="cursor: default;"
+                       href="javascript:return false;" target="mainFrame" onFocus="this.blur()">下一页</a>&nbsp;&nbsp;
+                </s:if>
+
+                <a
+                        href="<%=request.getContextPath()%>getAlladmin.action?index=<s:property
+        value="#allPage"/>" target="mainFrame" onFocus="this.blur()">尾页</a>
+            </shiro:hasRole>
+
+
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>

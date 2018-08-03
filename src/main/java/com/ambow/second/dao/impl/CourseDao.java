@@ -16,7 +16,7 @@ public class CourseDao extends CommonDao<Course> implements ICourseDao {
     @Autowired
     private SessionFactory sessionFactory;
 
-    final int num=5;        // 一页显示的数目
+    final int num=10;        // 一页显示的数目
 
     @Override
     @Transactional

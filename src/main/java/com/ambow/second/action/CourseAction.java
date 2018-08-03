@@ -18,11 +18,14 @@ import java.util.List;
 public class CourseAction extends ActionSupport {
     @Autowired
     private ICourseService courseService;
+    @Autowired
+    private IUserService userService;
     private Course course;//定义course对象
     private String courseId;//定义courseId 删除对象
+    private String teacherId;
     private int teacherNum;//查询该教师所教授的所有课程
     private int Num;
-    private  int index;  //当前页数
+    private int index;  //当前页数
 
     public int getIndex() {
         return index;
@@ -39,7 +42,6 @@ public class CourseAction extends ActionSupport {
     public void setNum(int num) {
         Num = num;
     }
-
 
 
     public CourseAction() {
@@ -69,13 +71,28 @@ public class CourseAction extends ActionSupport {
     public void setTeacherNum(int teacherNum) {
         this.teacherNum = teacherNum;
     }
+
+    @Action(value = "getInfoByCourseIdAndTeacherId", results = {
+            @Result(name = "success", location = "/WEB-INF/page/course/info.jsp")
+    })
+    public String getInfoByCourseIdAndTeacherId() {
+        Course course = courseService.getById(courseId);
+        User user = new User();
+        user.setId(teacherId);
+        User teacher = userService.findUserById(user);
+        ActionContext.getContext().put("teacher", teacher);
+        ActionContext.getContext().put("course", course);
+        return SUCCESS;
+    }
+
     /**
      * 添加课程信息
      *
      * @return
      */
 
-    @Action(value = "saveCourse", results = {@Result(name = "success", location = "queryCourse.action", type = "redirect")})
+    @Action(value = "saveCourse", results = {@Result(name = "success", location = "queryCourse.action", type =
+            "redirect")})
     public String saveCourse() {
 
         courseService.addCourse(course);
@@ -85,13 +102,14 @@ public class CourseAction extends ActionSupport {
     /**
      * 前往增加页面的过程中
      * 获取User表的值
+     *
      * @return
      */
     @Action(value = "toNew", results = {@Result(name = "success", location = "/WEB-INF/page/course/new.jsp")})
     public String toNew() {
 
-        List<User> userList=courseService.getTeacherList();
-        ActionContext.getContext().put("userList",userList);
+        List<User> userList = courseService.getTeacherList();
+        ActionContext.getContext().put("userList", userList);
 
         return SUCCESS;
     }
@@ -113,7 +131,8 @@ public class CourseAction extends ActionSupport {
      *
      * @return
      */
-    @Action(value = "deleteCourse", results = {@Result(name = "success", location = "queryCourse.action", type = "redirect")}, params = {"courseId", "%{courseId}"})
+    @Action(value = "deleteCourse", results = {@Result(name = "success", location = "queryCourse.action", type =
+            "redirect")}, params = {"courseId", "%{courseId}"})
     public String deleteCourse() {
 
         courseService.deleteCourse(this.courseId);
@@ -123,7 +142,8 @@ public class CourseAction extends ActionSupport {
     /**
      * 修改课程状态
      */
-    @Action(value = "updateCourse", results = {@Result(name = "success", location = "queryCourse.action", type = "redirect")}, params = {"courseId", "%{courseId}"})
+    @Action(value = "updateCourse", results = {@Result(name = "success", location = "queryCourse.action", type =
+            "redirect")}, params = {"courseId", "%{courseId}"})
     public String updateCourse() {
         Course course = courseService.getById(courseId);
         course.setAlive(1);
@@ -134,7 +154,8 @@ public class CourseAction extends ActionSupport {
     /**
      * 根据teacherId查询该老师所教授课程
      */
-    @Action(value = "queryTeacherId", results = {@Result(name = "success", location = "/WEB-INF/page/course/list.jsp"), @Result(name = "error", location = "queryCourse.action", type = "redirect")})
+    @Action(value = "queryTeacherId", results = {@Result(name = "success", location = "/WEB-INF/page/course/list" +
+            ".jsp"), @Result(name = "error", location = "queryCourse.action", type = "redirect")})
     public String queryTeacherId() {
         User teacher = courseService.getUserByNum(teacherNum);
         if (teacher != null) {
@@ -147,32 +168,39 @@ public class CourseAction extends ActionSupport {
     }
 
     /**
-     *分页查询
+     * 分页查询
+     *
      * @return
      */
 
     @Action(value = "queryCourse", results = {@Result(name = "success", location = "/WEB-INF/page/course/list.jsp")})
-    public String queryCourse(){
+    public String queryCourse() {
         ActionContext actionContext = ActionContext.getContext();
-        actionContext.put("courseList",courseService.getAll(index));
-        long page=courseService.countVo();
+        actionContext.put("courseList", courseService.getAll(index));
+        long page = courseService.countVo();
         tag(page);
-        ActionContext.getContext().put("index",index);
+        ActionContext.getContext().put("index", index);
         return SUCCESS;
     }
 
     private void tag(long page) {
-        if (page%5==0){
-            if (page/5==0){
-                page=1;
+        if (page % 10 == 0) {
+            if (page / 10 == 0) {
+                page = 1;
             }
-            ActionContext.getContext().put("allPage",page/5);
-        }
-        else {
-            ActionContext.getContext().put("allPage",page/5+1);
+            ActionContext.getContext().put("allPage", page / 10);
+        } else {
+            ActionContext.getContext().put("allPage", page / 10 + 1);
         }
     }
 
 
+    public String getTeacherId() {
+        return teacherId;
+    }
+
+    public void setTeacherId(String teacherId) {
+        this.teacherId = teacherId;
+    }
 }
 

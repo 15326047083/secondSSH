@@ -2,6 +2,7 @@ package com.ambow.second.action;
 
 import com.ambow.second.entity.User;
 import com.opensymphony.xwork2.ActionContext;
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -22,11 +23,11 @@ public class UserAction extends ActionSupport {
     private String userId;
     //  封装selectKey对象
     private String selectKey;
-    //  封装limit
-    private int limit=0;
 
-    public int getLimit() { return limit; }
-    public void setLimit(int limit) { this.limit = limit; }
+    private int index=1;  //当前页数
+
+    public int getIndex() { return index; }
+    public void setIndex(int index) { this.index = index; }
 
     public User getUser() { return user; }
     public void setUser(User user) { this.user = user; }
@@ -47,7 +48,14 @@ public class UserAction extends ActionSupport {
     @Action(value = "queryAll", results = {@Result(name = "success", location = "/WEB-INF/page/user/list.jsp")})
     public String queryAll(){
         ActionContext actionContext=ActionContext.getContext();
-        actionContext.put("queryAllList",userService.queryAll(limit));
+        actionContext.put("queryAllList",userService.queryAll(index));
+        int page= (int) ServletActionContext.getRequest().getSession().getAttribute("page");
+        if (page%10==0){
+            page=page/10;
+        }else{
+            page=page/10+1;
+        }
+        ActionContext.getContext().put("allPage", page);
         return SUCCESS;
     }
     /**

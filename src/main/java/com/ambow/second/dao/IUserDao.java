@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface IUserDao extends ICommonDao<User> {
     //  查询所有用户
-    List<User> queryAll(int limit);
+    List<User> queryAll(int index);
 
     // 删除用户
     void updateAlive(User user);

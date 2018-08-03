@@ -101,16 +101,37 @@
         </td>
     </tr>
     <tr>
-        <td align="left" valign="top" class="fenye">
-            <a href="queryAll.action?limit=0" target="mainFrame">首页</a>&nbsp;&nbsp;
-            <a href="queryAll.action?limit=(<s:property value="limit"/>-1)" target="mainFrame">上一页</a>&nbsp;&nbsp;
-            <a href="queryAll.action?limit=(<s:property value="limit"/>+1)" target="mainFrame">下一页</a>&nbsp;&nbsp;
-            <a href="queryAll.action?limit=<fmt:formatNumber value="${#session.page/3}" pattern="#" type="number"/>" target="mainFrame">尾页</a>
-       <%-- <a href="#" target="mainFrame" onFocus="this.blur()">首页</a>&nbsp;&nbsp;
-        <a href="#" target="mainFrame" onFocus="this.blur()">上一页</a>&nbsp;&nbsp;
-        <a href="#" target="mainFrame" onFocus="this.blur()">下一页</a>&nbsp;&nbsp;
-        <a href="#" target="mainFrame" onFocus="this.blur()">尾页</a>--%>
-        </td>
+        <td align="left" valign="top" class="fenye"><s:property value="index"/>/<s:property value="#allPage"/>页
+           <%-- <a href="queryAll.action?index=1" target="mainFrame">首页</a>&nbsp;&nbsp;
+            <a href="queryAll.action?index=<s:property value="index-1"/>" target="mainFrame">上一页</a>&nbsp;&nbsp;
+            <a href="queryAll.action?index=<s:property value="index+1"/>" target="mainFrame">下一页</a>&nbsp;&nbsp;
+            <a href="queryAll.action?index=<s:property value="#allPage"/>" pattern="#" type="number" target="mainFrame">尾页</a>a--%>
+
+            <a href="<%=request.getContextPath()%>queryAll.action?index=1" target="mainFrame"
+               onFocus="this.blur()">首页</a>&nbsp;&nbsp;
+
+            <s:if test="#index==1">
+                <a id="prior" style="cursor: default;"
+                   href="javascript:return false;" target="mainFrame" onFocus="this.blur()">上一页</a>&nbsp;&nbsp;
+            </s:if>
+            <s:if test="#index>1">
+                <a id="prior"
+                   href="<%=request.getContextPath()%>queryAll.action?index=<s:property value="#index-1"/>"
+                   target="mainFrame" onFocus="this.blur()">上一页</a>&nbsp;&nbsp;
+            </s:if>
+            <s:if test="#allPage>#index">
+                <a id="last"
+                   href="<%=request.getContextPath()%>queryAll.action?index=<s:property value="#index+1"/>"
+                   target="mainFrame" onFocus="this.blur()">下一页</a>&nbsp;&nbsp;
+            </s:if>
+            <s:if test="#allPage<=#index">
+                <a id="last" style="cursor: default;"
+                   href="javascript:return false;" target="mainFrame" onFocus="this.blur()">下一页</a>&nbsp;&nbsp;
+            </s:if>
+
+            <a
+                    href="<%=request.getContextPath()%>queryAll.action?index=<s:property value="#allPage"/>"
+                    target="mainFrame" onFocus="this.blur()">尾页</a></td>
     </tr>
 </table>
 

@@ -19,14 +19,15 @@ public class UserDao extends CommonDao<User> implements IUserDao {
     @Autowired
     private SessionFactory sessionFactory;
 
-    public List<User> queryAll(int limit) {  //当前页
+    public List<User> queryAll(int index) {  //当前页
         Query query = sessionFactory.getCurrentSession().createQuery("from User");
         ScrollableResults scrollableResults=query.scroll();
         scrollableResults.last();
         int i = scrollableResults.getRowNumber() + 1;
         ServletActionContext.getRequest().getSession().setAttribute("page", i);
-        query.setFirstResult(limit * 3);
-        query.setMaxResults(3);
+        System.out.println(ServletActionContext.getRequest().getSession().getAttribute("page"));
+        query.setFirstResult((index-1) * 10);
+        query.setMaxResults(10);
         return query.list();
     }
 

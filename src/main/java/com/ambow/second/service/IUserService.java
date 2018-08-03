@@ -7,7 +7,7 @@ import com.ambow.second.vo.CheckVo;
 
 public interface IUserService {
     // 分页查询所有的用户
-    List<User> queryAll(int limit);
+    List<User> queryAll(int index);
 
     // 查询所有的用户
     List<User> queryAll();
@@ -35,4 +35,6 @@ public interface IUserService {
 
     //  根据num查询
     User getByNum(int num);
+    //  导入Excel表格插入
+    void saveOrUpdate(List<User> importList);
 }

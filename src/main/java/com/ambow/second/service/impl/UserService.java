@@ -33,9 +33,9 @@ public class UserService implements IUserService {
      * @return
      */
     @Override
-    public List<User> queryAll(int limit) {
+    public List<User> queryAll(int index) {
         // TODO Auto-generated method stub
-        return userDao.queryAll(limit);
+        return userDao.queryAll(index);
     }
 
     /**
@@ -157,6 +157,17 @@ public class UserService implements IUserService {
     @Override
     public User getByNum(int num) {
         return userDao.getByNum(num);
+    }
+    /**
+     * Excel表格导入插入方法
+     * @param importList
+     */
+    @Override
+    public void saveOrUpdate(List<User> importList) {
+        for (User user: importList
+        ) {
+            userDao.saveOrUpdate(user);
+        }
     }
 
 }

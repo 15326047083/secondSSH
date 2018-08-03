@@ -90,7 +90,7 @@ public class CourseAction extends ActionSupport {
     @Action(value = "toNew", results = {@Result(name = "success", location = "/WEB-INF/page/course/new.jsp")})
     public String toNew() {
 
-        List<User> userList=courseService.queryUser();
+        List<User> userList=courseService.getTeacherList();
         ActionContext.getContext().put("userList",userList);
 
         return SUCCESS;

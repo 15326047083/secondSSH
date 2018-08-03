@@ -79,5 +79,11 @@ public class CourseService implements ICourseService {
         return iCourseService.getAll(index);
     }
 
+    @Override
+    public List<User> getTeacherList() {
+        String sql = "select new com.ambow.second.entity.User(u.id as id,u.name as name,u.num as num) from User u," +
+                "UserRoles r where u.num=r.userNum and r.roles='teacher'";
+        return userDao.queryAll(sql);
+    }
 
 }

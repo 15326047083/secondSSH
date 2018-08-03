@@ -44,7 +44,7 @@ public class CheckDao extends CommonDao<Check> implements ICheckDao {
 
         Query query=sessionFactory.getCurrentSession().createQuery(sql);
         query.setFirstResult((index-1)*num);
-        query.setMaxResults(num-1);
+        query.setMaxResults(num);
         return query.list();
 
     }
@@ -92,7 +92,7 @@ public class CheckDao extends CommonDao<Check> implements ICheckDao {
                 "as absNum) from Check c,User u,Course o where c.userId=u.id and c.courseId=o.id and(u.name  like '%"+str+"%' or o.name like '%"+str+"%' or u.num like '%"+str+"%')";
         Query query=sessionFactory.getCurrentSession().createQuery(sql);
         query.setFirstResult((index-1)*num);
-        query.setMaxResults(num-1);
+        query.setMaxResults(num);
         return query.list();
     }
 
@@ -110,7 +110,7 @@ public class CheckDao extends CommonDao<Check> implements ICheckDao {
                 "as absNum) from Check c,User u,Course o where c.userId=u.id and c.courseId=o.id and o.teacherId='"+teacherId+"' and(u.name  like '%"+str+"%' or o.name like '%"+str+"%' or u.num like '%"+str+"%')";
         Query query=sessionFactory.getCurrentSession().createQuery(sql);
         query.setFirstResult((index-1)*num);
-        query.setMaxResults(num-1);
+        query.setMaxResults(num);
         return query.list();
     }
 

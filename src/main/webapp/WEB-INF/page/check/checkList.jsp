@@ -6,7 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@taglib prefix="s" uri="/struts-tags"%>
+<%@taglib prefix="s" uri="/struts-tags" %>
+<%@taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -144,22 +145,35 @@
 <body>
 <table width="99%" border="0" cellspacing="0" cellpadding="0" id="searchmain">
     <tr>
-        <td width="99%" align="left" valign="top">您的位置：考勤管理</td>
+        <td width="99%" align="left" valign="top">
+            <shiro:hasRole name="user">
+                您的位置：我的考勤
+            </shiro:hasRole>
+            <shiro:lacksRole name="user">
+                您的位置：考勤管理
+            </shiro:lacksRole>
+        </td>
     </tr>
     <tr>
         <td align="left" valign="top">
             <table width="100%" border="0" cellspacing="0" cellpadding="0" id="search">
                 <tr>
                     <td width="90%" align="left" valign="middle">
-                        <form method="post" action="<%=request.getContextPath()%>fuzzyQuery.action?index=1">
-                            <span>模糊查询：</span>
-                            <input type="text" name="str" value="" class="text-word">
-                            <input name="" type="submit" value="查询" class="text-but">
-                        </form>
+                        <shiro:lacksRole name="user">
+                            <form method="post" action="<%=request.getContextPath()%>fuzzyQuery.action?index=1">
+                                <span>模糊查询：</span>
+                                <input type="text" name="str" value="" class="text-word">
+                                <input name="" type="submit" value="查询" class="text-but">
+                            </form>
+                        </shiro:lacksRole>
                     </td>
 
-                    <td width="10%" align="center" valign="middle" style="text-align:right; width:150px;"><a
-                            href="<%=request.getContextPath()%>toNewCheck.action" target="mainFrame" onFocus="this.blur()" class="add">新增考勤</a></td>
+                    <td width="10%" align="center" valign="middle" style="text-align:right; width:150px;">
+                        <shiro:lacksRole name="user">
+                            <a href="<%=request.getContextPath()%>toNewCheck.action" target="mainFrame"
+                               onFocus="this.blur()" class="add">新增考勤</a>
+                        </shiro:lacksRole>
+                    </td>
                 </tr>
             </table>
         </td>
@@ -174,76 +188,98 @@
                     <th align="center" valign="middle" class="borderright">课程名</th>
                     <th align="center" valign="middle" class="borderright">缺勤次数</th>
                     <th align="center" valign="middle" class="borderright">详情</th>
-                    <th align="center" valign="middle">操作</th>
+                    <shiro:lacksRole name="user">
+                        <th align="center" valign="middle">操作</th>
+                    </shiro:lacksRole>
                 </tr>
                 <s:iterator value="list" var="a">
                     <tr>
-                    <td align="center" valign="middle" class="borderright borderbottom"><s:property value="#a.num"/></td>
-                    <td align="center" valign="middle" class="borderright borderbottom"><s:property value="#a.userName"/></td>
-                    <td align="center" valign="middle" class="borderright borderbottom"><s:property value="#a.courseName"/></td>
-                    <td align="center" valign="middle" class="borderright borderbottom"><s:property value="#a.absNum"/></td>
-                    <td align="center" valign="middle" class="borderright borderbottom"><s:property value="#a.info"/></td>
-                    <td align="center" valign="middle" class="borderbottom"><a href="<%=request.getContextPath()%>toUpdateCheck.action?id=<s:property value="#a.checkId"/>" target="mainFrame"
-                                                                               onFocus="this.blur()"
-                                                                               class="add">修改</a></td>
+                        <td align="center" valign="middle" class="borderright borderbottom"><s:property
+                                value="#a.num"/></td>
+                        <td align="center" valign="middle" class="borderright borderbottom"><s:property
+                                value="#a.userName"/></td>
+                        <td align="center" valign="middle" class="borderright borderbottom"><s:property
+                                value="#a.courseName"/></td>
+                        <td align="center" valign="middle" class="borderright borderbottom"><s:property
+                                value="#a.absNum"/></td>
+                        <td align="center" valign="middle" class="borderright borderbottom"><s:property
+                                value="#a.info"/></td>
+                        <shiro:lacksRole name="user">
+                            <td align="center" valign="middle" class="borderbottom"><a
+                                    href="<%=request.getContextPath()%>toUpdateCheck.action?id=<s:property value="#a.checkId"/>"
+                                    target="mainFrame"
+                                    onFocus="this.blur()"
+                                    class="add">修改</a></td>
+                        </shiro:lacksRole>
                     </tr>
                 </s:iterator>
                 <%--<c:forEach items="${requestScope.list}" var="a">--%>
-                   <%----%>
+                <%----%>
 
                 <%--</c:forEach>--%>
             </table>
         </td>
     </tr>
-    <s:if test="#role!='user'.toString()"></s:if>
-    <tr>
-        <td align="left" valign="top" class="fenye"> <s:property value="#index"/>/<s:property value="#allPage"/>页&nbsp;&nbsp;
-           <s:if test="#bj!='fuzzy'.toString()">
-            <a href="<%=request.getContextPath()%>toCheckList.action?index=1" target="mainFrame" onFocus="this.blur()">首页</a>&nbsp;&nbsp;
+    <shiro:lacksRole name="user">
+        <tr>
+            <td align="left" valign="top" class="fenye"><s:property value="#index"/>/<s:property value="#allPage"/>页&nbsp;&nbsp;
+                <s:if test="#bj!='fuzzy'.toString()">
+                <a href="<%=request.getContextPath()%>toCheckList.action?index=1" target="mainFrame"
+                   onFocus="this.blur()">首页</a>&nbsp;&nbsp;
 
-           <s:if test="#index==1">
-               <a id="prior" style="cursor: default;"
-                  href="javascript:return false;" target="mainFrame" onFocus="this.blur()">上一页</a>&nbsp;&nbsp;
-           </s:if>
-            <s:if test="#index>1">
-            <a id="prior"
-                href="<%=request.getContextPath()%>toCheckList.action?index=<s:property value="#index-1"/>" target="mainFrame" onFocus="this.blur()">上一页</a>&nbsp;&nbsp;
+                <s:if test="#index==1">
+                    <a id="prior" style="cursor: default;"
+                       href="javascript:return false;" target="mainFrame" onFocus="this.blur()">上一页</a>&nbsp;&nbsp;
+                </s:if>
+                <s:if test="#index>1">
+                    <a id="prior"
+                       href="<%=request.getContextPath()%>toCheckList.action?index=<s:property value="#index-1"/>"
+                       target="mainFrame" onFocus="this.blur()">上一页</a>&nbsp;&nbsp;
+                </s:if>
+                <s:if test="#allPage>#index">
+                    <a id="last"
+                       href="<%=request.getContextPath()%>toCheckList.action?index=<s:property value="#index+1"/>"
+                       target="mainFrame" onFocus="this.blur()">下一页</a>&nbsp;&nbsp;
+                </s:if>
+                <s:if test="#allPage<=#index">
+                    <a id="last" style="cursor: default;"
+                       href="javascript:return false;" target="mainFrame" onFocus="this.blur()">下一页</a>&nbsp;&nbsp;
+                </s:if>
+
+                <a
+                        href="<%=request.getContextPath()%>toCheckList.action?index=<s:property value="#allPage"/>"
+                        target="mainFrame" onFocus="this.blur()">尾页</a></td>
             </s:if>
-           <s:if test="#allPage>#index">
-            <a id="last" href="<%=request.getContextPath()%>toCheckList.action?index=<s:property value="#index+1"/>" target="mainFrame" onFocus="this.blur()">下一页</a>&nbsp;&nbsp;
-           </s:if>
-            <s:if test="#allPage<=#index">
-                <a id="last" style="cursor: default;"
-                   href="javascript:return false;" target="mainFrame" onFocus="this.blur()">下一页</a>&nbsp;&nbsp;
+            <s:if test="#bj=='fuzzy'.toString()">
+                <a href="<%=request.getContextPath()%>fuzzyQuery.action?index=1&str=<s:property value="#str"/>"
+                   target="mainFrame" onFocus="this.blur()">首页</a>&nbsp;&nbsp;
+
+                <s:if test="#index==1">
+                    <a id="prior" style="cursor: default;"
+                       href="javascript:return false;" target="mainFrame" onFocus="this.blur()">上一页</a>&nbsp;&nbsp;
+                </s:if>
+                <s:if test="#index>1">
+                    <a id="prior"
+                       href="<%=request.getContextPath()%>fuzzyQuery.action?index=<s:property value="#index-1"/>&str=<s:property value="#str"/>"
+                       target="mainFrame" onFocus="this.blur()">上一页</a>&nbsp;&nbsp;
+                </s:if>
+                <s:if test="#allPage>#index">
+                    <a id="last"
+                       href="<%=request.getContextPath()%>fuzzyQuery.action?index=<s:property value="#index+1"/>&str=<s:property value="#str"/>"
+                       target="mainFrame" onFocus="this.blur()">下一页</a>&nbsp;&nbsp;
+                </s:if>
+                <s:if test="#allPage<=#index">
+                    <a id="last" style="cursor: default;"
+                       href="javascript:return false;" target="mainFrame" onFocus="this.blur()">下一页</a>&nbsp;&nbsp;
+                </s:if>
+
+                <a
+                        href="<%=request.getContextPath()%>fuzzyQuery.action?index=<s:property value="#allPage"/>&str=<s:property value="#str"/>"
+                        target="mainFrame" onFocus="this.blur()">尾页</a></td>
             </s:if>
 
-            <a
-                href="<%=request.getContextPath()%>toCheckList.action?index=<s:property value="#allPage"/>" target="mainFrame" onFocus="this.blur()">尾页</a></td>
-        </s:if>
-        <s:if test="#bj=='fuzzy'.toString()">
-            <a href="<%=request.getContextPath()%>fuzzyQuery.action?index=1&str=<s:property value="#str"/>" target="mainFrame" onFocus="this.blur()">首页</a>&nbsp;&nbsp;
-
-            <s:if test="#index==1">
-                <a id="prior" style="cursor: default;"
-                   href="javascript:return false;" target="mainFrame" onFocus="this.blur()">上一页</a>&nbsp;&nbsp;
-            </s:if>
-            <s:if test="#index>1">
-                <a id="prior"
-                   href="<%=request.getContextPath()%>fuzzyQuery.action?index=<s:property value="#index-1"/>&str=<s:property value="#str"/>" target="mainFrame" onFocus="this.blur()">上一页</a>&nbsp;&nbsp;
-            </s:if>
-            <s:if test="#allPage>#index">
-                <a id="last" href="<%=request.getContextPath()%>fuzzyQuery.action?index=<s:property value="#index+1"/>&str=<s:property value="#str"/>" target="mainFrame" onFocus="this.blur()">下一页</a>&nbsp;&nbsp;
-            </s:if>
-            <s:if test="#allPage<=#index">
-                <a id="last" style="cursor: default;"
-                   href="javascript:return false;" target="mainFrame" onFocus="this.blur()">下一页</a>&nbsp;&nbsp;
-            </s:if>
-
-            <a
-                    href="<%=request.getContextPath()%>fuzzyQuery.action?index=<s:property value="#allPage"/>&str=<s:property value="#str"/>" target="mainFrame" onFocus="this.blur()">尾页</a></td>
-        </s:if>
-
-    </tr>
+        </tr>
+    </shiro:lacksRole>
 </table>
 
 </body>

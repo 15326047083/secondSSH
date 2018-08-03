@@ -41,7 +41,7 @@ public class LoginAction {
      */
     @Action(value = "login", results = {
             // 认证成功重定向至主页
-            @Result(name = "success", location = "/course/queryCourse.action", type = "redirect"),
+            @Result(name = "success", location = "/head/index.jsp"),
             // 认证失败重定向到登录界面
             @Result(name = "error", location = "toLogin.action", type = "redirect")
     })

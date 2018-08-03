@@ -43,6 +43,12 @@ public class User {
 
     }
 
+    public User(String id, String name, int num) {
+        this.id = id;
+        this.name = name;
+        this.num = num;
+    }
+
     public User(String name, int num, String phone, String email, String sex, String edu, String joinTime, String
             deptId,
                 String duty, String userType, String password, int alive) {

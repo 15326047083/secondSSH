@@ -70,10 +70,21 @@ public class UserService implements IUserService {
     public String saveOrUpdate(User user) {
         if (user.getNum() == 0) {
             user.setNum((int) ((Math.random() * 9 + 1) * 100000));
+            user.setPassword("123456");
         }
         if (user.getId() == null) {
             UserRoles userRoles = new UserRoles();
-            userRoles.setRoles("user");
+            switch (user.getUserType()) {
+                case "管理员":
+                    userRoles.setRoles("admin");
+                    break;
+                case "普通用户":
+                    userRoles.setRoles("user");
+                    break;
+                case "老师":
+                    userRoles.setRoles("teacher");
+                    break;
+            }
             userRoles.setUserNum(user.getNum() + "");
             userRolesDao.saveOrUpdate(userRoles);
         }

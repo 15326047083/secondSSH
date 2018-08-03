@@ -16,7 +16,7 @@ public class CourseDao extends CommonDao<Course> implements ICourseDao {
     @Autowired
     private SessionFactory sessionFactory;
 
-    final int num=7;        // 一页显示的数目
+    final int num=5;        // 一页显示的数目
 
     @Override
     @Transactional
@@ -72,7 +72,7 @@ public class CourseDao extends CommonDao<Course> implements ICourseDao {
         String sql="from Course";
         Query query=sessionFactory.getCurrentSession().createQuery(sql);
         query.setFirstResult((index-1)*num);
-        query.setMaxResults(num-1);
+        query.setMaxResults(num);
         return query.list();
     }
 

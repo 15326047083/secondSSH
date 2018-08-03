@@ -24,7 +24,8 @@ http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
         <property name="unauthorizedUrl" value="/login/toLogin.action"></property>
         <property name="filterChainDefinitions">
             <value>
-                /*=authc
+                /login/login.action=anon
+                /**=authc
             </value>
         </property>
     </bean>

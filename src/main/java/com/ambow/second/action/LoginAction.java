@@ -1,12 +1,15 @@
 package com.ambow.second.action;
 
 import com.ambow.second.entity.User;
+import com.ambow.second.service.IUserService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.Result;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import static com.opensymphony.xwork2.Action.ERROR;
 import static com.opensymphony.xwork2.Action.SUCCESS;
@@ -15,6 +18,8 @@ import static com.opensymphony.xwork2.Action.SUCCESS;
 public class LoginAction {
 
     private User user; // 用户详情（内含用户前台输入工号以及密码）
+    @Autowired
+    private IUserService userService;
 
     /**
      * 跳转方法
@@ -48,6 +53,10 @@ public class LoginAction {
         } catch (Exception e) {
             return ERROR;
         }
+        // 根据工号获取用户信息
+        User user = userService.getByNum(this.user.getNum());
+        // 将用户信息存入session中
+        ServletActionContext.getRequest().getSession().setAttribute("userSession", user);
         return SUCCESS;
     }
 

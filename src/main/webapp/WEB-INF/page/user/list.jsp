@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="s" uri="/struts-tags" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -100,7 +101,16 @@
         </td>
     </tr>
     <tr>
-        <td align="left" valign="top" class="fenye">11 条数据 1/1 页&nbsp;&nbsp;<a href="#" target="mainFrame" onFocus="this.blur()">首页</a>&nbsp;&nbsp;<a href="#" target="mainFrame" onFocus="this.blur()">上一页</a>&nbsp;&nbsp;<a href="#" target="mainFrame" onFocus="this.blur()">下一页</a>&nbsp;&nbsp;<a href="#" target="mainFrame" onFocus="this.blur()">尾页</a></td>
+        <td align="left" valign="top" class="fenye">
+            <a href="/user/queryAll.action?limit=0" target="mainFrame">首页</a>&nbsp;&nbsp;
+            <a href="/user/queryAll.action?limit=<s:property value="limit"/>-1" target="mainFrame">上一页</a>&nbsp;&nbsp;
+            <a href="/user/queryAll.action?limit=<s:property value="limit"/>+1" target="mainFrame">下一页</a>&nbsp;&nbsp;
+            <a href="/user/queryAll.action?limit=<fmt:formatNumber value="${#session.page/3}" pattern="#" type="number"/>" target="mainFrame">尾页</a>
+       <%-- <a href="#" target="mainFrame" onFocus="this.blur()">首页</a>&nbsp;&nbsp;
+        <a href="#" target="mainFrame" onFocus="this.blur()">上一页</a>&nbsp;&nbsp;
+        <a href="#" target="mainFrame" onFocus="this.blur()">下一页</a>&nbsp;&nbsp;
+        <a href="#" target="mainFrame" onFocus="this.blur()">尾页</a>--%>
+        </td>
     </tr>
 </table>
 

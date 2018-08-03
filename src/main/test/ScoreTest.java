@@ -54,7 +54,7 @@ public class ScoreTest {
             @Test
 
             public  void getScore(){
-                System.out.println(scoreService.getScoreByuserId("2",1).toString());
+                System.out.println(scoreService.getScoreByuserId("2").toString());
             }
 
 

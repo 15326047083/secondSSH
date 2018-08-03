@@ -152,15 +152,33 @@
         <table width="100%" border="0" cellspacing="0" cellpadding="0" id="search">
             <tr>
                 <td width="90%" align="left" valign="middle">
+<s:if test="#bj=='admin'.toString()">
                     <form method="post" action="<%=request.getContextPath()%>likeScore.action">
+
+
                         <span>模糊查询：</span>
                         <input type="text" name="like" value="" class="text-word">
                         <input name="" type="submit" value="查询" class="text-but">
                     </form>
+</s:if>
+
+                    <s:if test="#bj=='teacher'.toString()">
+                        <form method="post" action="<%=request.getContextPath()%>likeScoreteacher.action">
+
+
+                            <span>模糊查询：</span>
+                            <input type="text" name="like" value="" class="text-word">
+                            <input name="" type="submit" value="查询" class="text-but">
+                        </form>
+                    </s:if>
+
+
                 </td>
+<s:if test="#bj=='teacher'.toString()">
                 <td width="10%" align="center" valign="middle" style="text-align:right; width:150px;"><a
                         href="/score/toNewScore.action" target="mainFrame" onFocus="this.blur()" class="add">新增成绩</a>
                 </td>
+</s:if>
             </tr>
         </table>
     </td>
@@ -260,31 +278,7 @@
     </s:if>
 
 
-    <s:if test="#bj=='user'.toString()">
-        <a href="<%=request.getContextPath()%>getAlluser.action?index=1" target="mainFrame" onFocus="this.blur()">首页</a>&nbsp;&nbsp;
 
-        <s:if test="#index==1">
-            <a id="prior" style="cursor: default;"
-               href="javascript:return false;" target="mainFrame" onFocus="this.blur()">上一页</a>&nbsp;&nbsp;
-        </s:if>
-        <s:if test="#index>1">
-            <a id="prior"
-               href="<%=request.getContextPath()%>getAlluser.action?index=<s:property value="#index-1"/>"
-               target="mainFrame" onFocus="this.blur()">上一页</a>&nbsp;&nbsp;
-        </s:if>
-        <s:if test="#allPage>#index">
-            <a id="last" href="<%=request.getContextPath()%>getAlluser.action?index=<s:property value="#index+1"/>"
-               target="mainFrame" onFocus="this.blur()">下一页</a>&nbsp;&nbsp;
-        </s:if>
-        <s:if test="#allPage<=#index">
-            <a id="last" style="cursor: default;"
-               href="javascript:return false;" target="mainFrame" onFocus="this.blur()">下一页</a>&nbsp;&nbsp;
-        </s:if>
-
-        <a
-                href="<%=request.getContextPath()%>getAlluser.action?index=<s:property
-        value="#allPage"/>" target="mainFrame" onFocus="this.blur()">尾页</a>
-    </s:if>
 
 
 

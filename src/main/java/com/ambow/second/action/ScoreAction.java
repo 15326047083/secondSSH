@@ -110,18 +110,13 @@ public class ScoreAction extends ActionSupport {
     @Action(value = "getAlluser", results = {@Result(name = "success", location = "/WEB-INF/page/score/list.jsp")})
     public String getAlluser() {
 
-        long page = scoreService.countScoreVo();
-        if (page % 5 == 0) {
-            ActionContext.getContext().put("allPage", page / 5);
-        } else {
-            ActionContext.getContext().put("allPage", page / 5 + 1);
-        }
+
 
 
         ActionContext context = ActionContext.getContext();
-        context.put("getAll", scoreService.getScoreByuserId("2", index));
-        context.put("bj", "user");
-        context.put("index", index);
+        context.put("getAll", scoreService.getScoreByuserId("2"));
+
+
 
         return SUCCESS;
     }
@@ -135,7 +130,7 @@ public class ScoreAction extends ActionSupport {
     @Action(value = "getAllteacher", results = {@Result(name = "success", location = "/WEB-INF/page/score/list.jsp")})
     public String getAllteacher() {
 
-        long page = scoreService.countScoreVo();
+        long page = scoreService.countScoreVoByteacher("2");
         tag(page);
 
         ActionContext context = ActionContext.getContext();
@@ -240,7 +235,7 @@ public class ScoreAction extends ActionSupport {
     }
 
     /**
-     * 模糊查询
+     * 管理员模糊查询
      */
 
     @Action(value = "likeScore", results = {@Result(name = "success", location = "/WEB-INF/page/score/list.jsp")})
@@ -248,6 +243,20 @@ public class ScoreAction extends ActionSupport {
 
         ActionContext context = ActionContext.getContext();
         context.put("getAll", scoreService.getScoredBylike(like));
+
+
+        return SUCCESS;
+    }
+
+    /**
+     * 教师模糊查询
+     */
+
+    @Action(value = "likeScoreteacher", results = {@Result(name = "success", location = "/WEB-INF/page/score/list.jsp")})
+    public String likeScoreteacher() {
+
+        ActionContext context = ActionContext.getContext();
+        context.put("getAll", scoreService.getScoredByteacherike("2",like));
 
 
         return SUCCESS;

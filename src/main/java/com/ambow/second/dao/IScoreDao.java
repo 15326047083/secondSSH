@@ -10,7 +10,7 @@ import java.util.List;
 public interface IScoreDao extends ICommonDao<Score> {
 
 
-    List<ScoreVo> getScoreByuserId(String userId, int index);
+    List<ScoreVo> getScoreByuserId(String userId);
 
     List<ScoreVo> getScoreByteacherId(String teacherid, int index);
 
@@ -24,7 +24,11 @@ public interface IScoreDao extends ICommonDao<Score> {
 
     List<ScoreVo> getScoredBylike(String like);
 
+    List<ScoreVo> getScoredByteacherike(String tescherId,String like);
+
     long countScoreVo();
+
+    long countScoreVoByteacher(String teacherId);
 
 
 }

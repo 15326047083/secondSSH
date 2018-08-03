@@ -26,7 +26,11 @@ public class ScoreService implements IScoreService {
     @Override
     public String saveorUpdateScore(Score score) {
 
-        if(scoreDao.savebefor(score.getUserId(),score.getCourseId())==null) {
+        Score scoreold=  scoreDao.savebefor(score.getUserId(),score.getCourseId());
+        if(scoreold!=null) {
+            score.setId(scoreold.getId());
+            scoreDao.saveOrUpdate(score);
+        }else{
             scoreDao.saveOrUpdate(score);
         }
         return "";
@@ -61,13 +65,13 @@ public class ScoreService implements IScoreService {
      */
 
     @Override
-    public List<ScoreVo> getScoreByuserId(String id,int index) {
+    public List<ScoreVo> getScoreByuserId(String id) {
 
-        return scoreDao.getScoreByuserId(id,index);
+        return scoreDao.getScoreByuserId(id);
     }
 
     /**
-     * 根据教书Id查询成绩
+     * 根据教师Id查询成绩
      * @param teacherid
      * @param index
      * @return
@@ -115,7 +119,7 @@ public  List<User> getAllUser(){
     }
 
     /**
-     * 模糊查询
+     * 管理员模糊查询
      * @param like
      * @return
      */
@@ -125,13 +129,30 @@ public  List<User> getAllUser(){
     return scoreDao.getScoredBylike(like);
     }
 
+
     /**
-     * 统计查询个数
+     * 教师模糊查询
+     */
+    @Override
+    public List<ScoreVo> getScoredByteacherike(String  teacherId,String like) {
+        return scoreDao.getScoredByteacherike(teacherId,like);    }
+
+    /**
+     * 统计管理员查询个数
      * @return
      */
     @Override
     public long countScoreVo() {
         return scoreDao.countScoreVo();
+    }
+
+    /**
+     * 统计教师查询个数
+     * @return
+     */
+    @Override
+    public long countScoreVoByteacher(String teacherId) {
+        return scoreDao.countScoreVoByteacher(teacherId);
     }
 
 }

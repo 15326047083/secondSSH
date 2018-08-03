@@ -31,12 +31,11 @@ public class ScoreDao extends CommonDao<Score> implements IScoreDao {
 
     @Override
     @Transactional
-    public List<ScoreVo> getScoreByuserId(String userId, int index) {
+    public List<ScoreVo> getScoreByuserId(String userId) {
 
         Query query = sessionFactory.getCurrentSession().createQuery("select new com.ambow.second.vo.ScoreVo(c.id as courseId,c.name as courseName,c.teacherId as teacherId,u.name as userName,s.id as scoreId,s.score as score,c.lessons as courseLessons  ) from Score s,User u,Course c  " +
                 "where s.userId=u.id and s.courseId=c.id and u.id='" + userId + "'");
-        query.setFirstResult((index - 1) * num);
-        query.setMaxResults(num - 1);
+
 
         return query.list();
     }
@@ -52,7 +51,7 @@ public class ScoreDao extends CommonDao<Score> implements IScoreDao {
         Query query = sessionFactory.getCurrentSession().createQuery("select new com.ambow.second.vo.ScoreVo(c.id as courseId,c.name as courseName,c.teacherId as teacherId,u.name as userName,s.id as scoreId,s.score as score,c.lessons as courseLessons  ) from Score s,User u,Course c  " +
                 "where s.userId=u.id and s.courseId=c.id and c.teacherId='" + teacherid + "'");
         query.setFirstResult((index - 1) * num);
-        query.setMaxResults(num - 1);
+        query.setMaxResults(num );
 
         return query.list();
     }
@@ -68,7 +67,7 @@ public class ScoreDao extends CommonDao<Score> implements IScoreDao {
         Query query = sessionFactory.getCurrentSession().createQuery("select new com.ambow.second.vo.ScoreVo(c.id as courseId,c.name as courseName,c.teacherId as teacherId,u.name as userName,s.id as scoreId,s.score as score,c.lessons as courseLessons  ) from Score s,User u,Course c  " +
                 "where s.userId=u.id and s.courseId=c.id ");
         query.setFirstResult((index - 1) * num);
-        query.setMaxResults(num - 1);
+        query.setMaxResults(num );
 
         return query.list();
     }
@@ -102,19 +101,31 @@ public class ScoreDao extends CommonDao<Score> implements IScoreDao {
     }
 
     /**
-     * 模糊查询
+     * 管理员模糊查询
      */
 
     @Override
     @Transactional
     public List<ScoreVo> getScoredBylike(String like) {
 
-        return sessionFactory.getCurrentSession().createQuery("select new com.ambow.second.vo.ScoreVo(c.id as courseId,c.name as courseName,u.id as teacherId,u.name as teacherName,s.id as scoreId,s.score as score,c.lessons as courseLessons  ) from Score s,User u,Course c  " +
+
+        return sessionFactory.getCurrentSession().createQuery("select new com.ambow.second.vo.ScoreVo(c.id as courseId,c.name as courseName,c.teacherId as teacherId,u.name as userName,s.id as scoreId,s.score as score,c.lessons as courseLessons  ) from Score s,User u,Course c  " +
                 "where s.userId=u.id and s.courseId=c.id and (u.num like'%" + like + "%' or u.name like '%" + like + "%' or c.name like'%" + like + "%')").list();
     }
+    /**
+     * 教师模糊查询
+     */
+    @Override
+    @Transactional
+    public List<ScoreVo> getScoredByteacherike(String tescherId,String like) {
+
+        return sessionFactory.getCurrentSession().createQuery("select new com.ambow.second.vo.ScoreVo(c.id as courseId,c.name as courseName,c.teacherId as teacherId,u.name as userName,s.id as scoreId,s.score as score,c.lessons as courseLessons  ) from Score s,User u,Course c  " +
+                "where s.userId=u.id and s.courseId=c.id and c.teacherId='"+ tescherId+"'and (u.num like'%" + like + "%' or u.name like '%" + like + "%' or c.name like'%" + like + "%')").list();
+    }
+
 
     /**
-     * 统计成绩的个数
+     * 统计管理员查看成绩的个数
      *
      * @return
      */
@@ -126,5 +137,15 @@ public class ScoreDao extends CommonDao<Score> implements IScoreDao {
 
     }
 
+    /**
+     * 统计老师查看成绩的个数
+     */
+    @Override
+    @Transactional
+    public long countScoreVoByteacher(String teacherId) {
+        String sql = "select count(*) from Score s,User u,Course c  where s.userId=u.id and s.courseId=c.id and c.teacherId='"+teacherId+"' ";
+        return (long) sessionFactory.getCurrentSession().createQuery(sql).uniqueResult();
+
+    }
 
 }

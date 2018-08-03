@@ -14,7 +14,7 @@ public interface IScoreService {
 
     List<Score> getAll();
 
-    List<ScoreVo> getScoreByuserId(String id,int index);
+    List<ScoreVo> getScoreByuserId(String id);
 
     List<ScoreVo> getScoreByteacherId(String teacherid,int index);
 
@@ -28,5 +28,8 @@ public interface IScoreService {
 
     List<ScoreVo> getScoredBylike(String like);
 
+    List<ScoreVo> getScoredByteacherike(String  teacherId,String like);
+
     long countScoreVo();
+    long countScoreVoByteacher(String teacherId);
 }

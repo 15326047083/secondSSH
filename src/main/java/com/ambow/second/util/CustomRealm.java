@@ -78,8 +78,9 @@ public class CustomRealm extends AuthorizingRealm {
 
     private String getPasswordByUserName(int userNum) {
         // TODO Auto-generated method stub
-        System.out.println(userNum);
-        System.out.println(userService.getByNum(userNum).toString());
+        if (userService.getByNum(userNum)==null){
+            return null;
+        }
         return userService.getByNum(userNum).getPassword();
     }
 }

@@ -21,14 +21,7 @@ public class UserDao extends CommonDao<User> implements IUserDao {
     @Autowired
     @Transactional
     public List<User> queryAll() {
-        Query query=sessionFactory.getCurrentSession().createQuery("from User");
-        ScrollableResults scrollableResults=query.scroll();
-        scrollableResults.last();
-        int i=scrollableResults.getRowNumber()+1;
-        System.out.println("总记录数：" + i);
-        query.setFirstResult(0);
-        query.setMaxResults(3);
-        return query.list();
+        return null;
     }
     @Override
     @Transactional

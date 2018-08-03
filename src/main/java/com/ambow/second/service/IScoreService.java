@@ -18,6 +18,8 @@ public interface IScoreService {
 
     List<ScoreVo> getScoreByteacherId(String teacherid,int index);
 
+    List<ScoreVo> getScoreByadminId(int index);
+
     Score get(String id);
 
     List<User> getAllUser();

@@ -10,9 +10,13 @@ import java.util.List;
 public interface IScoreDao extends ICommonDao<Score> {
 
 
-    List<ScoreVo> getScoreByuserId(String userId , int index);
+    List<ScoreVo> getScoreByuserId(String userId, int index);
 
-    List<ScoreVo> getScoreByteacherId(String teacherid , int index);
+    List<ScoreVo> getScoreByteacherId(String teacherid, int index);
+
+    List<ScoreVo> getScoreByadminId(int index);
+
+    Score savebefor( String userId,String courseId);
 
     List<User> getAllUser();
 

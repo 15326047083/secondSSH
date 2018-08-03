@@ -32,7 +32,7 @@ public class ScoreAction extends ActionSupport {
 
     private String like;//模糊查询的内容(jsp->action)
 
-    private  int index;  //当前页数
+    private int index;  //当前页数
 
 
     public int getIndex() {
@@ -110,18 +110,18 @@ public class ScoreAction extends ActionSupport {
     @Action(value = "getAlluser", results = {@Result(name = "success", location = "/WEB-INF/page/score/list.jsp")})
     public String getAlluser() {
 
-        long page=scoreService.countScoreVo();
-        if (page%5==0){
-            ActionContext.getContext().put("allPage",page/5);
-        }
-        else {
-            ActionContext.getContext().put("allPage",page/5+1);
+        long page = scoreService.countScoreVo();
+        if (page % 5 == 0) {
+            ActionContext.getContext().put("allPage", page / 5);
+        } else {
+            ActionContext.getContext().put("allPage", page / 5 + 1);
         }
 
 
         ActionContext context = ActionContext.getContext();
-        context.put("getAll", scoreService.getScoreByuserId("2",index));
-        context.put("index",index);
+        context.put("getAll", scoreService.getScoreByuserId("2", index));
+        context.put("bj", "user");
+        context.put("index", index);
 
         return SUCCESS;
     }
@@ -135,22 +135,47 @@ public class ScoreAction extends ActionSupport {
     @Action(value = "getAllteacher", results = {@Result(name = "success", location = "/WEB-INF/page/score/list.jsp")})
     public String getAllteacher() {
 
-        long page=scoreService.countScoreVo();
-        if (page%5==0){
-            ActionContext.getContext().put("allPage",page/5);
-        }
-        else {
-            ActionContext.getContext().put("allPage",page/5+1);
-        }
-
+        long page = scoreService.countScoreVo();
+        tag(page);
 
         ActionContext context = ActionContext.getContext();
-        context.put("getAll", scoreService.getScoreByteacherId("2",index));
-
-        context.put("index",index);
+        context.put("getAll", scoreService.getScoreByteacherId("2", index));
+        context.put("bj", "teacher");
+        context.put("index", index);
 
         return SUCCESS;
     }
+
+    private void tag(long page) {
+        if (page % 5 == 0) {
+            if (page / 5 == 0) {
+                page = 1;
+            }
+            ActionContext.getContext().put("allPage", page / 5);
+        } else {
+            ActionContext.getContext().put("allPage", page / 5 + 1);
+        }
+    }
+
+    /**
+     * 管理员查看所有成绩
+     */
+
+    @Action(value = "getAlladmin", results = {@Result(name = "success", location = "/WEB-INF/page/score/list.jsp")})
+    public String getAlladmin() {
+
+        long page = scoreService.countScoreVo();
+        tag(page);
+
+
+        ActionContext context = ActionContext.getContext();
+        context.put("getAll", scoreService.getScoreByadminId(index));
+        context.put("bj", "admin");
+        context.put("index", index);
+
+        return SUCCESS;
+    }
+
 
     /**
      * 单查

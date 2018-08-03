@@ -26,7 +26,10 @@ public class ScoreService implements IScoreService {
     @Override
     public String saveorUpdateScore(Score score) {
 
-        return  scoreDao.saveOrUpdate(score);
+        if(scoreDao.savebefor(score.getUserId(),score.getCourseId())==null) {
+            scoreDao.saveOrUpdate(score);
+        }
+        return "";
     }
 
 
@@ -63,9 +66,26 @@ public class ScoreService implements IScoreService {
         return scoreDao.getScoreByuserId(id,index);
     }
 
+    /**
+     * 根据教书Id查询成绩
+     * @param teacherid
+     * @param index
+     * @return
+     */
+
     @Override
     public List<ScoreVo> getScoreByteacherId(String teacherid,int index) {
         return scoreDao.getScoreByteacherId(teacherid,index);
+    }
+
+
+    /**
+     * 管理员查询全部成绩
+     */
+
+    @Override
+    public List<ScoreVo> getScoreByadminId(int index) {
+        return scoreDao.getScoreByadminId(index);
     }
 
 
@@ -80,8 +100,9 @@ public class ScoreService implements IScoreService {
         return scoreDao.get(id);
     }
 
+
     /**
-     * 查询全部用户
+     * 查询全部用户和全部课程
      */
 
 public  List<User> getAllUser(){

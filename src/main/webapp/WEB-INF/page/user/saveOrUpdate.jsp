@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>主要内容区main</title>
+<title>用户信息编辑</title>
 <link href="/css/css/css.css" type="text/css" rel="stylesheet" />
 <link href="/css/css/main.css" type="text/css" rel="stylesheet" />
 <link rel="shortcut icon" href="/css/images/main/favicon.ico" />
@@ -90,8 +90,8 @@ td.fenye{ padding:10px 0 0 0; text-align:right;}
           <tr onMouseOut="this.style.backgroundColor='#ffffff'" onMouseOver="this.style.backgroundColor='#edf5ff'">
             <td align="right" valign="middle" class="borderright borderbottom bggray">性别：</td>
             <td align="left" valign="middle" class="borderright borderbottom main-for">
-              <input type="radio" name="user.sex" required/><label>男</label>
-              <input type="radio" name="user.sex" required/><label>女</label>
+              <input type="radio" name="user.sex" checked="checked" value= "男"/><label>男</label>
+              <input type="radio" name="user.sex" value= "女"/><label>女</label>
             </td>
           </tr>
           <tr onMouseOut="this.style.backgroundColor='#ffffff'" onMouseOver="this.style.backgroundColor='#edf5ff'">

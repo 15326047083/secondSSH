@@ -195,6 +195,7 @@
             </table>
         </td>
     </tr>
+    <s:if test="#role!='user'.toString()"></s:if>
     <tr>
         <td align="left" valign="top" class="fenye"> <s:property value="#index"/>/<s:property value="#allPage"/>页&nbsp;&nbsp;
            <s:if test="#bj!='fuzzy'.toString()">

@@ -38,7 +38,7 @@ public class LoginAction {
             // 认证成功重定向至主页
             @Result(name = "success", location = "/course/queryCourse.action", type = "redirect"),
             // 认证失败重定向到登录界面
-            @Result(name = "error", location = "/user/queryAll.action", type = "redirect")
+            @Result(name = "error", location = "toLogin.action", type = "redirect")
     })
     public String login() {
         Subject subject = SecurityUtils.getSubject();

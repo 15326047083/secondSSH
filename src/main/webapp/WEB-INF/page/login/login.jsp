@@ -13,7 +13,7 @@
     <link href="/css/css/alogin.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
-<form id="form1" runat="server" action="login.action" method="post">
+<form id="form1" runat="server" action="/login/login.action" method="post">
     <div class="Main">
         <ul>
             <li class="top"></li>

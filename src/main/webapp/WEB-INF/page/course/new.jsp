@@ -203,12 +203,12 @@
     </tr>
     <tr>
         <td align="left" valign="top" id="addinfo">
-            <a href="add.html" target="mainFrame" onFocus="this.blur()" class="add">课程信息</a>
+
         </td>
     </tr>
     <tr>
         <td align="left" valign="top">
-            <form method="post" action="/course/saveCourse.action">
+            <form method="post" action="/course/saveCourse.action?index=1">
                 <table width="100%" border="0" cellspacing="0" cellpadding="0" id="main-tab">
                     <tr onMouseOut="this.style.backgroundColor='#ffffff'"
                         onMouseOver="this.style.backgroundColor='#edf5ff'">
@@ -251,14 +251,14 @@
 
                     <tr onMouseOut="this.style.backgroundColor='#ffffff'"
                         onMouseOver="this.style.backgroundColor='#edf5ff'">
-                        <td align="right" valign="middle" class="borderright borderbottom bggray">授课教师工号：</td>
+                        <td align="right" valign="middle" class="borderright borderbottom bggray">授课教师姓名：</td>
                         <td align="left" valign="middle" class="borderright borderbottom main-for">
                             <select name="course.teacherId" id="level">
 
 
                                 <s:iterator var="user" value="userList">
                                     <option value="<s:property value="#user.id"/>"><s:property
-                                            value="#user.num"/></option>
+                                            value="#user.name"/></option>
                                 </s:iterator>
                             </select>
 

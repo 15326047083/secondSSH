@@ -74,13 +74,21 @@ public class CheckAction extends ActionSupport {
             list = iCheckService.queryCheskVoAllByTeacherId(user.getId(), index);
         }
         long page = iCheckService.countVo();
-        tag(page);
+
 
         //
 //        如果是教师；
 //        String teacherId = "1";
 //        从session 中获得userId 即为 teacherID
 //        list = iCheckService.queryCheskVoAllByTeacherId(teacherId);
+        if (index==0){
+            index=Integer.parseInt(String.valueOf(page))/10+1;
+            if (index==0){
+                index=1;
+            }
+
+        }
+        tag(page);
         ActionContext.getContext().put("list", list);
         ActionContext.getContext().put("index", index);
 

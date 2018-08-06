@@ -95,6 +95,7 @@ public class CourseAction extends ActionSupport {
             "redirect")})
     public String saveCourse() {
 
+        ActionContext.getContext().put("index", index);
         courseService.addCourse(course);
         return SUCCESS;
     }
@@ -134,7 +135,7 @@ public class CourseAction extends ActionSupport {
     @Action(value = "deleteCourse", results = {@Result(name = "success", location = "queryCourse.action", type =
             "redirect")}, params = {"courseId", "%{courseId}"})
     public String deleteCourse() {
-
+        ActionContext.getContext().put("index", 1);
         courseService.deleteCourse(this.courseId);
         return SUCCESS;
     }
@@ -147,6 +148,7 @@ public class CourseAction extends ActionSupport {
     public String updateCourse() {
         Course course = courseService.getById(courseId);
         course.setAlive(1);
+        ActionContext.getContext().put("index", 1);
         courseService.updateCourse(course);
         return SUCCESS;
     }
@@ -161,8 +163,11 @@ public class CourseAction extends ActionSupport {
         if (teacher != null) {
             List<Course> courseList = courseService.queryTeacherById(teacher.getId());
             ActionContext.getContext().put("courseList", courseList);
+
+            ActionContext.getContext().put("index", 1);
             return SUCCESS;
         } else {
+            ActionContext.getContext().put("index", 1);
             return ERROR;
         }
     }
@@ -176,9 +181,20 @@ public class CourseAction extends ActionSupport {
     @Action(value = "queryCourse", results = {@Result(name = "success", location = "/WEB-INF/page/course/list.jsp")})
     public String queryCourse() {
         ActionContext actionContext = ActionContext.getContext();
-        actionContext.put("courseList", courseService.getAll(index));
+
         long page = courseService.countVo();
+
+        if (index==0){
+
+            index=Integer.parseInt(String.valueOf(page))/10+1;
+
+            if (index==0){
+                index=1;
+            }
+
+        }
         tag(page);
+        actionContext.put("courseList", courseService.getAll(index));
         ActionContext.getContext().put("index", index);
         return SUCCESS;
     }

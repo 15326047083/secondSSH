@@ -187,11 +187,12 @@
                 <tr>
                     <th align="center" valign="middle" class="borderright">课程编号</th>
                     <th align="center" valign="middle" class="borderright">课程名称</th>
-                    <th align="center" valign="middle" class="borderright">教师编号</th>
                     <th align="center" valign="middle" class="borderright">干部名称</th>
                     <th align="center" valign="middle" class="borderright">课时</th>
                     <th align="center" valign="middle" class="borderright">成绩</th>
-                    <th align="center" valign="middle">操作</th>
+                    <shiro:lacksRole name="user">
+                        <th align="center" valign="middle">操作</th>
+                    </shiro:lacksRole>
                 </tr>
                 <s:iterator var="score" value="getAll">
                     <tr onMouseOut="this.style.backgroundColor='#ffffff'"
@@ -201,19 +202,20 @@
                         <td align="center" valign="middle" class="borderright borderbottom"><s:property
                                 value="#score.courseName"/></td>
                         <td align="center" valign="middle" class="borderright borderbottom"><s:property
-                                value="#score.teacherId"/></td>
-                        <td align="center" valign="middle" class="borderright borderbottom"><s:property
                                 value="#score.userName"/></td>
                         <td align="center" valign="middle" class="borderright borderbottom"><s:property
                                 value="#score.courseLessons"/></td>
                         <td align="center" valign="middle" class="borderright borderbottom"><s:property
                                 value="#score.score"/></td>
-                        <td align="center" valign="middle" class="borderbottom"><a
-                                href="/score/getById.action?scoreId=<s:property value="#score.scoreId"/>"
-                                target="mainFrame"
-                                onFocus="this.blur()" class="add">编辑</a><span class="gray">&nbsp;|&nbsp;</span><a
-                                href="/score/deleteScore.action?scoreId=<s:property value="#score.scoreId"/>"
-                                target="mainFrame" onFocus="this.blur()" class="add">删除</a></td>
+                        <shiro:lacksRole name="user">
+                            <td align="center" valign="middle" class="borderbottom">
+                                <a href="/score/getById.action?scoreId=<s:property value="#score.scoreId"/>"
+                                   target="mainFrame" onFocus="this.blur()" class="add">编辑</a>
+                                <span class="gray">&nbsp;|&nbsp;</span>
+                                <a href="/score/deleteScore.action?scoreId=<s:property value="#score.scoreId"/>"
+                                   target="mainFrame" onFocus="this.blur()" class="add">删除</a>
+                            </td>
+                        </shiro:lacksRole>
                     </tr>
                 </s:iterator>
 

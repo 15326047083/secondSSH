@@ -94,7 +94,7 @@
         <shiro:hasRole name="user">
             <a href="main.jsp" target="mainFrame" onFocus="this.blur()">后台首页</a>
             <a href="/course/queryCourse.action?index=1" target="mainFrame" onFocus="this.blur()">我的课程</a>
-            <a href="main_info.html" target="mainFrame" onFocus="this.blur()">我的成绩</a>
+            <a href="/score/getAlluser.action" target="mainFrame" onFocus="this.blur()">我的成绩</a>
             <a href="/check/toListByUserId.action" target="mainFrame" onFocus="this.blur()">我的考勤</a>
         </shiro:hasRole>
         <a href="/user/toUpdate.action?userId=<%=user.getId()%>" target="mainFrame" onFocus="this.blur()">我的信息</a>

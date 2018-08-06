@@ -63,7 +63,7 @@ public class GuoweiTest {
         ImportExcel importExcel=new ImportExcel();
         List<User> importList=importExcel.ImportExcel("D:/software/export/2018-08-03.xls");
         System.out.println(importList.size());
-        userService.saveOrUpdate(importList);
+      //  userService.saveOrUpdate(importList);
 
     }
 }

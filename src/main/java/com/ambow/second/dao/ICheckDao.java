@@ -58,5 +58,11 @@ public interface ICheckDao extends ICommonDao<Check> {
      * @return
      */
     long fuzzyCountVo(String str);
-    long fuzzyCountVoOfTeacher(String str,String teacherId);
+
+    /**
+     * 教师统计条目
+     * @return
+     */
+    long countVoOfTeacher(String teacherId);
+    long fuzzyCountVoOfTeacher(String str, String teacherId);
 }

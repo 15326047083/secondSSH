@@ -186,10 +186,15 @@ public class CourseAction extends ActionSupport {
 
         if (index==0){
 
-            index=Integer.parseInt(String.valueOf(page))/10+1;
+            index=Integer.parseInt(String.valueOf(page));
 
-            if (index==0){
-                index=1;
+            if (index%10==0){
+                if (index/10==0){
+                    index=1;
+                }
+            index=index/10;
+            }else{
+                index=index/10+1;
             }
 
         }
@@ -203,6 +208,7 @@ public class CourseAction extends ActionSupport {
         if (page % 10 == 0) {
             if (page / 10 == 0) {
                 page = 1;
+                ActionContext.getContext().put("allPage", page);
             }
             ActionContext.getContext().put("allPage", page / 10);
         } else {

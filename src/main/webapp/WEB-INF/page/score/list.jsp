@@ -185,7 +185,7 @@
 
             <table width="100%" border="0" cellspacing="0" cellpadding="0" id="main-tab">
                 <tr>
-                    <th align="center" valign="middle" class="borderright">课程编号</th>
+
                     <th align="center" valign="middle" class="borderright">课程名称</th>
                     <th align="center" valign="middle" class="borderright">干部名称</th>
                     <th align="center" valign="middle" class="borderright">课时</th>
@@ -197,8 +197,7 @@
                 <s:iterator var="score" value="getAll">
                     <tr onMouseOut="this.style.backgroundColor='#ffffff'"
                         onMouseOver="this.style.backgroundColor='#edf5ff'">
-                        <td align="center" valign="middle" class="borderright borderbottom"><s:property
-                                value="#score.courseId"/></td>
+
                         <td align="center" valign="middle" class="borderright borderbottom"><s:property
                                 value="#score.courseName"/></td>
                         <td align="center" valign="middle" class="borderright borderbottom"><s:property

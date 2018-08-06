@@ -125,6 +125,8 @@ public class CheckService implements ICheckService {
         return checkDao.countVo();
     }
 
+
+
     /**
      * 统计条目(模糊)
      *
@@ -141,7 +143,17 @@ public class CheckService implements ICheckService {
      */
     @Override
     public long fuzzyCountVoOfTeacher(String str,String teacherId) {
-        return checkDao.fuzzyCountVo(str);
+        return checkDao.fuzzyCountVoOfTeacher(str,teacherId);
+    }
+
+    /**
+     * 教师统计条目
+     *
+     * @return
+     */
+    @Override
+    public long countVoOfTeacher(String teacherId) {
+        return checkDao.countVoOfTeacher(teacherId);
     }
 
 

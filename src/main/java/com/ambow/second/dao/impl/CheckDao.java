@@ -133,12 +133,27 @@ public class CheckDao extends CommonDao<Check> implements ICheckDao {
      * @return
      */
     @Override
+    @Transactional
     public long fuzzyCountVo(String str) {
         String sql="select count(*) from Check c,User u,Course o where c.userId=u.id and c.courseId=o.id and(u.name like '%"+str+"%' or o.name like '%"+str+"%' or u.num like '%"+str+"%')";
         return (long) sessionFactory.getCurrentSession().createQuery(sql).uniqueResult();
     }
 
+    /**
+     * 教师统计条目
+     *
+     * @param teacherId
+     * @return
+     */
     @Override
+    @Transactional
+    public long countVoOfTeacher(String teacherId) {
+        String sql="select count(*) from Check c,User u,Course o where c.userId=u.id and c.courseId=o.id where c.teacherId='"+teacherId+"'";
+        return (long) sessionFactory.getCurrentSession().createQuery(sql).uniqueResult();
+    }
+
+    @Override
+    @Transactional
     public long fuzzyCountVoOfTeacher(String str, String teacherId) {
         String sql="select count(*) from Check c,User u,Course o where c.userId=u.id and c.courseId=o.id and o.teacherId='"+teacherId+"' and(u.name like '%"+str+"%' or o.name like '%"+str+"%' or u.num like '%"+str+"%')";
         return (long) sessionFactory.getCurrentSession().createQuery(sql).uniqueResult();

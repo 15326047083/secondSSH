@@ -66,21 +66,17 @@ public class CheckAction extends ActionSupport {
     public String toCheckList() {
 //        权限
 //        教师查询
-
+        long page=0;
         if (SecurityUtils.getSubject().hasRole("admin")) {
             list = iCheckService.queryCheckVoAll(index);
-        } else if (SecurityUtils.getSubject().hasRole("teacher")) {
+            page=iCheckService.countVo();
+        }
+        else if (SecurityUtils.getSubject().hasRole("teacher")) {
             User user = (User) ServletActionContext.getRequest().getSession().getAttribute("userSession");
             list = iCheckService.queryCheskVoAllByTeacherId(user.getId(), index);
+            page=iCheckService.countVoOfTeacher(user.getId());
         }
-        long page = iCheckService.countVo();
 
-
-        //
-//        如果是教师；
-//        String teacherId = "1";
-//        从session 中获得userId 即为 teacherID
-//        list = iCheckService.queryCheskVoAllByTeacherId(teacherId);
         if (index==0){
             index=Integer.parseInt(String.valueOf(page))/10+1;
             if (index==0){
@@ -88,6 +84,7 @@ public class CheckAction extends ActionSupport {
             }
 
         }
+
         tag(page);
         ActionContext.getContext().put("list", list);
         ActionContext.getContext().put("index", index);
@@ -99,6 +96,7 @@ public class CheckAction extends ActionSupport {
         if (page % 10 == 0) {
             if (page / 10 == 0) {
                 page = 1;
+                ActionContext.getContext().put("allPage", page);
             }
             ActionContext.getContext().put("allPage", page / 10);
         } else {
@@ -224,36 +222,37 @@ public class CheckAction extends ActionSupport {
      * @return
      */
     @Action(value = "fuzzyQuery", results = {@Result(name = "success", location = "/WEB-INF/page/check/checkList" +
-            ".jsp", type = "dispatcher"), @Result(name = "listAll", location = "toCheckList.action", type =
+            ".jsp"), @Result(name = "listAll", location = "toCheckList.action", type =
             "redirect")})
     public String fuzzyQuery() {
 
-        if (str == null) {
+        if ("".equals(str)) {
+            ActionContext.getContext().put("index",1);
             return "listAll";
         }
-        //
-        // 教师
-        // long page=iCheckService.fuzzyCountVoOfTeacher(str,"2");
-        long page = 0;
-        User user = (User) ServletActionContext.getRequest().getSession().getAttribute("userSession");
+       else {
 
-        if (SecurityUtils.getSubject().hasRole("admin")) {
+            long page = 0;
+            User user = (User) ServletActionContext.getRequest().getSession().getAttribute("userSession");
 
-            page = iCheckService.fuzzyCountVo(str);
-            list = iCheckService.fuzzyQuery(str, index);
+            if (SecurityUtils.getSubject().hasRole("admin")) {
+
+                page = iCheckService.fuzzyCountVo(str);
+                list = iCheckService.fuzzyQuery(str, index);
+            } else if (SecurityUtils.getSubject().hasRole("teacher")) {
+                page = iCheckService.fuzzyCountVoOfTeacher(str, user.getId());
+                list = iCheckService.fuzzyQueryOfTeacher(str, user.getId(), index);
+            }
+            System.out.println(page);
+            tag(page);
+
+            ActionContext.getContext().put("list", list);
+            ActionContext.getContext().put("index", index);
+            ActionContext.getContext().put("bj", "fuzzy");
+            ActionContext.getContext().put("str", str);
+
+            return SUCCESS;
         }
-        else if (SecurityUtils.getSubject().hasRole("teacher")) {
-            page = iCheckService.fuzzyCountVoOfTeacher(str, user.getId());
-            list=iCheckService.fuzzyQueryOfTeacher(str,user.getId(),index);
-        }
-        tag(page);
-
-        ActionContext.getContext().put("list", list);
-        ActionContext.getContext().put("index", 1);
-        ActionContext.getContext().put("bj", "fuzzy");
-        ActionContext.getContext().put("str", str);
-
-        return SUCCESS;
     }
 
     public String getUserId() {

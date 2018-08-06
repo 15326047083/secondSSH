@@ -146,6 +146,7 @@ public class ScoreAction extends ActionSupport {
         if (page % 10 == 0) {
             if (page / 10 == 0) {
                 page = 1;
+                ActionContext.getContext().put("allPage", page);
             }
             ActionContext.getContext().put("allPage", page / 10);
         } else {

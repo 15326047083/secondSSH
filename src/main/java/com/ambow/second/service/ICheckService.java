@@ -14,6 +14,7 @@ public interface ICheckService {
 
     /**
      * 根据UserID查找查看考勤
+     *
      * @param id UserId
      * @return 考情
      */
@@ -21,19 +22,22 @@ public interface ICheckService {
 
     /**
      * 查找全部考勤列表
+     *
      * @return 考勤列表
      */
     List<CheckVo> queryCheckVoAll(int index);
 
     /**
      * 查找全部考勤列表
+     *
      * @param id 教师Id
      * @return
      */
-    List<CheckVo> queryCheskVoAllByTeacherId(String id,int index);
+    List<CheckVo> queryCheskVoAllByTeacherId(String id, int index);
 
     /**
      * 判断是否可以新建
+     *
      * @param check
      * @return
      */
@@ -41,6 +45,7 @@ public interface ICheckService {
 
     /**
      * 根据ID查找vo类
+     *
      * @param id
      * @return
      */
@@ -48,6 +53,7 @@ public interface ICheckService {
 
     /**
      * 根据ID查找 check表全部信息
+     *
      * @param Id
      * @return
      */
@@ -55,28 +61,39 @@ public interface ICheckService {
 
     /**
      * 模糊查询(管理员)
+     *
      * @param str
      * @return
      */
-    List<CheckVo> fuzzyQuery(String str,int index);
+    List<CheckVo> fuzzyQuery(String str, int index);
 
     /**
      * 模糊查询(教师）
+     *
      * @param str
      * @return
      */
-    List<CheckVo> fuzzyQueryOfTeacher(String str,String teacherId,int index);
+    List<CheckVo> fuzzyQueryOfTeacher(String str, String teacherId, int index);
 
     /**
      * 统计条目
+     *
      * @return
      */
     long countVo();
+
     /**
      * 统计条目(模糊)
+     *
      * @return
      */
     long fuzzyCountVo(String str);
 
-    long fuzzyCountVoOfTeacher(String str,String teacherId);
+    long fuzzyCountVoOfTeacher(String str, String teacherId);
+
+    /**
+     * 教师统计条目
+     * @return
+     */
+    long countVoOfTeacher(String teacherId);
 }

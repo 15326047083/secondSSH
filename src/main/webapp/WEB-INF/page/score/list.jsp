@@ -222,9 +222,9 @@
         </td>
     </tr>
     <tr>
-        <td align="left" valign="top" class="fenye"><s:property value="#index"/>/<s:property value="#allPage"/>页&nbsp;&nbsp;
 
             <shiro:hasRole name="teacher">
+        <td align="left" valign="top" class="fenye"><s:property value="#index"/>/<s:property value="#allPage"/>页&nbsp;&nbsp;
                 <a href="<%=request.getContextPath()%>getAllteacher.action?index=1" target="mainFrame"
                    onFocus="this.blur()">首页</a>&nbsp;&nbsp;
 
@@ -252,6 +252,7 @@
             </shiro:hasRole>
 
             <shiro:hasRole name="admin">
+        <td align="left" valign="top" class="fenye"><s:property value="#index"/>/<s:property value="#allPage"/>页&nbsp;&nbsp;
                 <a href="<%=request.getContextPath()%>getAlladmin.action?index=1" target="mainFrame"
                    onFocus="this.blur()">首页</a>&nbsp;&nbsp;
 

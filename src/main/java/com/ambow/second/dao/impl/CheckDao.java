@@ -16,7 +16,8 @@ public class CheckDao extends CommonDao<Check> implements ICheckDao {
     @Autowired
     private SessionFactory sessionFactory;
 
-    final int num=10;        // 一页显示的数目
+    final int num = 10;        // 一页显示的数目
+
     /**
      * 根据UserID查找查看考勤列表
      *
@@ -26,8 +27,11 @@ public class CheckDao extends CommonDao<Check> implements ICheckDao {
     @Override
     @Transactional
     public List<CheckVo> getByCheckVoId(String id) {
-       
-        String sql="select new com.ambow.second.vo.CheckVo(c.id as checkId,u.id as userId,u.name as userName,u.num as num,u.deptId as deptName,c.time as time,o.id as courseId,o.name as courseName,c.info as info,c.num as absNum) from Check c,User u,Course o where c.userId=u.id and c.courseId=o.id and u.id='"+id+"'";
+
+        String sql = "select new com.ambow.second.vo.CheckVo(c.id as checkId,u.id as userId,u.name as userName,u.num " +
+                "as num,u.deptId as deptName,c.time as time,o.id as courseId,o.name as courseName,c.info as info,c" +
+                ".num as absNum) from Check c,User u,Course o where c.userId=u.id and c.courseId=o.id and u.id='" +
+                id + "'";
 
         return (List<CheckVo>) sessionFactory.getCurrentSession().createQuery(sql).list();
     }
@@ -39,11 +43,13 @@ public class CheckDao extends CommonDao<Check> implements ICheckDao {
      */
     @Override
     @Transactional
-    public List<CheckVo> queryCheckVoAll(String addsql,int index) {
-        String sql="select new com.ambow.second.vo.CheckVo(c.id as checkId,u.id as userId,u.name as userName,u.num as num,u.deptId as deptName,c.time as time,o.id as courseId,o.name as courseName,c.info as info,c.num as absNum) from Check c,User u,Course o where c.userId=u.id and c.courseId=o.id"+addsql;
+    public List<CheckVo> queryCheckVoAll(String addsql, int index) {
+        String sql = "select new com.ambow.second.vo.CheckVo(c.id as checkId,u.id as userId,u.name as userName,u.num " +
+                "as num,u.deptId as deptName,c.time as time,o.id as courseId,o.name as courseName,c.info as info,c" +
+                ".num as absNum) from Check c,User u,Course o where c.userId=u.id and c.courseId=o.id" + addsql;
 
-        Query query=sessionFactory.getCurrentSession().createQuery(sql);
-        query.setFirstResult((index-1)*num);
+        Query query = sessionFactory.getCurrentSession().createQuery(sql);
+        query.setFirstResult((index - 1) * num);
         query.setMaxResults(num);
         return query.list();
 
@@ -58,7 +64,7 @@ public class CheckDao extends CommonDao<Check> implements ICheckDao {
     @Override
     @Transactional
     public Check getByUserIdAndCourseId(Check check) {
-        String sql="from Check where userId='"+check.getUserId()+"' and courseId='"+check.getCourseId()+"'";
+        String sql = "from Check where userId='" + check.getUserId() + "' and courseId='" + check.getCourseId() + "'";
         return (Check) sessionFactory.getCurrentSession().createQuery(sql).uniqueResult();
     }
 
@@ -71,7 +77,10 @@ public class CheckDao extends CommonDao<Check> implements ICheckDao {
     @Override
     @Transactional
     public CheckVo getById(String id) {
-        String sql="select new com.ambow.second.vo.CheckVo(c.id as checkId,u.id as userId,u.name as userName,u.num as num,u.deptId as deptName,c.time as time,o.id as courseId,o.name as courseName,c.info as info,c.num as absNum) from Check c,User u,Course o where c.userId=u.id and c.courseId=o.id and c.id='"+id+"'";
+        String sql = "select new com.ambow.second.vo.CheckVo(c.id as checkId,u.id as userId,u.name as userName,u.num " +
+                "as num,u.deptId as deptName,c.time as time,o.id as courseId,o.name as courseName,c.info as info,c" +
+                ".num as absNum) from Check c,User u,Course o where c.userId=u.id and c.courseId=o.id and c.id='" +
+                id + "'";
 
         return (CheckVo) sessionFactory.getCurrentSession().createQuery(sql).uniqueResult();
 
@@ -85,13 +94,15 @@ public class CheckDao extends CommonDao<Check> implements ICheckDao {
      */
     @Override
     @Transactional
-    public List<CheckVo> fuzzyQuery(String str,int index) {
+    public List<CheckVo> fuzzyQuery(String str, int index) {
 
-        String sql="select new com.ambow.second.vo.CheckVo(c.id as checkId,u.id as userId,u.name as userName,u.num as" +
+        String sql = "select new com.ambow.second.vo.CheckVo(c.id as checkId,u.id as userId,u.name as userName,u.num " +
+                "as" +
                 " num,u.deptId as deptName,c.time as time,o.id as courseId,o.name as courseName,c.info as info,c.num " +
-                "as absNum) from Check c,User u,Course o where c.userId=u.id and c.courseId=o.id and(u.name  like '%"+str+"%' or o.name like '%"+str+"%' or u.num like '%"+str+"%')";
-        Query query=sessionFactory.getCurrentSession().createQuery(sql);
-        query.setFirstResult((index-1)*num);
+                "as absNum) from Check c,User u,Course o where c.userId=u.id and c.courseId=o.id and(u.name  like '%"
+                + str + "%' or o.name like '%" + str + "%' or u.num like '%" + str + "%')";
+        Query query = sessionFactory.getCurrentSession().createQuery(sql);
+        query.setFirstResult((index - 1) * num);
         query.setMaxResults(num);
         return query.list();
     }
@@ -104,12 +115,15 @@ public class CheckDao extends CommonDao<Check> implements ICheckDao {
      */
     @Override
     @Transactional
-    public List<CheckVo> fuzzyQueryOfTeacher(String str,String teacherId,int index) {
-        String sql="select new com.ambow.second.vo.CheckVo(c.id as checkId,u.id as userId,u.name as userName,u.num as" +
+    public List<CheckVo> fuzzyQueryOfTeacher(String str, String teacherId, int index) {
+        String sql = "select new com.ambow.second.vo.CheckVo(c.id as checkId,u.id as userId,u.name as userName,u.num " +
+                "as" +
                 " num,u.deptId as deptName,c.time as time,o.id as courseId,o.name as courseName,c.info as info,c.num " +
-                "as absNum) from Check c,User u,Course o where c.userId=u.id and c.courseId=o.id and o.teacherId='"+teacherId+"' and(u.name  like '%"+str+"%' or o.name like '%"+str+"%' or u.num like '%"+str+"%')";
-        Query query=sessionFactory.getCurrentSession().createQuery(sql);
-        query.setFirstResult((index-1)*num);
+                "as absNum) from Check c,User u,Course o where c.userId=u.id and c.courseId=o.id and o.teacherId='" +
+                teacherId + "' and(u.name  like '%" + str + "%' or o.name like '%" + str + "%' or u.num like '%" +
+                str + "%')";
+        Query query = sessionFactory.getCurrentSession().createQuery(sql);
+        query.setFirstResult((index - 1) * num);
         query.setMaxResults(num);
         return query.list();
     }
@@ -122,7 +136,7 @@ public class CheckDao extends CommonDao<Check> implements ICheckDao {
     @Override
     @Transactional
     public long countVo() {
-        String sql="select count(*) from Check c,User u,Course o where c.userId=u.id and c.courseId=o.id";
+        String sql = "select count(*) from Check c,User u,Course o where c.userId=u.id and c.courseId=o.id";
         return (long) sessionFactory.getCurrentSession().createQuery(sql).uniqueResult();
 
     }
@@ -135,7 +149,8 @@ public class CheckDao extends CommonDao<Check> implements ICheckDao {
     @Override
     @Transactional
     public long fuzzyCountVo(String str) {
-        String sql="select count(*) from Check c,User u,Course o where c.userId=u.id and c.courseId=o.id and(u.name like '%"+str+"%' or o.name like '%"+str+"%' or u.num like '%"+str+"%')";
+        String sql = "select count(*) from Check c,User u,Course o where c.userId=u.id and c.courseId=o.id and(u.name" +
+                " like '%" + str + "%' or o.name like '%" + str + "%' or u.num like '%" + str + "%')";
         return (long) sessionFactory.getCurrentSession().createQuery(sql).uniqueResult();
     }
 
@@ -148,14 +163,17 @@ public class CheckDao extends CommonDao<Check> implements ICheckDao {
     @Override
     @Transactional
     public long countVoOfTeacher(String teacherId) {
-        String sql="select count(*) from Check c,User u,Course o where c.userId=u.id and c.courseId=o.id where c.teacherId='"+teacherId+"'";
+        String sql = "select count(*) from Check c,User u,Course o where c.userId=u.id and c.courseId=o.id and o" +
+                ".teacherId='" + teacherId + "'";
         return (long) sessionFactory.getCurrentSession().createQuery(sql).uniqueResult();
     }
 
     @Override
     @Transactional
     public long fuzzyCountVoOfTeacher(String str, String teacherId) {
-        String sql="select count(*) from Check c,User u,Course o where c.userId=u.id and c.courseId=o.id and o.teacherId='"+teacherId+"' and(u.name like '%"+str+"%' or o.name like '%"+str+"%' or u.num like '%"+str+"%')";
+        String sql = "select count(*) from Check c,User u,Course o where c.userId=u.id and c.courseId=o.id and o" +
+                ".teacherId='" + teacherId + "' and(u.name like '%" + str + "%' or o.name like '%" + str + "%' or u" +
+                ".num like '%" + str + "%')";
         return (long) sessionFactory.getCurrentSession().createQuery(sql).uniqueResult();
     }
 

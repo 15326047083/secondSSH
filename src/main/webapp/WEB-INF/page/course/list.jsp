@@ -212,7 +212,7 @@
         </td>
     </tr>
     <tr>
-        <shiro:hasRole name="admin">
+        <shiro:lacksRole name="teacher">
             <td align="left" valign="top" class="fenye"><s:property value="#index"/>/<s:property value="#allPage"/>页&nbsp;&nbsp;
                 <a href="<%=request.getContextPath()%>queryCourse.action?index=1" target="mainFrame"
                    onFocus="this.blur()">首页</a>&nbsp;&nbsp;
@@ -239,7 +239,7 @@
                 <a
                         href="<%=request.getContextPath()%>queryCourse.action?index=<s:property value="#allPage"/>"
                         target="mainFrame" onFocus="this.blur()">尾页</a></td>
-        </shiro:hasRole>
+        </shiro:lacksRole>
     </tr>
 
 </table>

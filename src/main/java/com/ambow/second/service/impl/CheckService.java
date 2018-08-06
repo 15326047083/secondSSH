@@ -55,7 +55,7 @@ public class CheckService implements ICheckService {
      */
     @Override
     public List<CheckVo> queryCheskVoAllByTeacherId(String id,int index) {
-        String sql=" and o.teacherId="+id;
+        String sql=" and o.teacherId='"+id+"'";
         return checkDao.queryCheckVoAll(sql,index);
     }
 

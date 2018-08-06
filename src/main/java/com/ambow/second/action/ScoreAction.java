@@ -4,6 +4,7 @@ package com.ambow.second.action;
 import com.ambow.second.entity.Course;
 import com.ambow.second.entity.Score;
 import com.ambow.second.entity.User;
+import com.ambow.second.service.ICourseService;
 import com.ambow.second.service.IScoreService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -23,6 +24,8 @@ import java.util.List;
 public class ScoreAction extends ActionSupport {
     @Autowired
     private IScoreService scoreService;//scoreService
+    @Autowired
+    ICourseService iCourseService;
     private Score score;//score对象(jsp->action)
     private String scores;//修改后或新添加的成绩(jsp->action)
     private String scoreId;//成绩Id(jsp->action)
@@ -132,6 +135,13 @@ public class ScoreAction extends ActionSupport {
     public String getAllteacher() {
         User user= (User) ServletActionContext.getRequest().getSession().getAttribute("userSession");
         long page = scoreService.countScoreVoByteacher(user.getId());
+        if (index==0){
+            index=Integer.parseInt(String.valueOf(page))/10+1;
+            if (index==0){
+                index=1;
+            }
+
+        }
         tag(page);
 
         ActionContext context = ActionContext.getContext();
@@ -220,8 +230,9 @@ public class ScoreAction extends ActionSupport {
      */
     @Action(value = "toNewScore", results = {@Result(name = "success", location = "/WEB-INF/page/score/new.jsp")})
     public String toNewScore() {
+        User user = (User) ServletActionContext.getRequest().getSession().getAttribute("userSession");
         List<User> userList = scoreService.getAllUser();
-        List<Course> courseList = scoreService.getAllCourse();
+        List<Course> courseList = iCourseService.queryTeacherById(user.getId());
         ActionContext.getContext().put("userList", userList);
         ActionContext.getContext().put("courseList", courseList);
         return SUCCESS;

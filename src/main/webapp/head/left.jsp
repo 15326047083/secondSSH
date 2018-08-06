@@ -60,7 +60,7 @@
         <div class="collapsed">
             <span>党员管理</span>
             <a href="main.jsp" target="mainFrame" onFocus="this.blur()">后台首页</a>
-            <a href="/user/queryAll.action" target="mainFrame" onFocus="this.blur()">用户管理</a>
+            <a href="/user/queryAll.action?index=1" target="mainFrame" onFocus="this.blur()">用户管理</a>
             <a href="/score/getAlladmin.action?index=1" target="mainFrame" onFocus="this.blur()">成绩管理</a>
             <a href="/check/toCheckList.action?index=1" target="mainFrame" onFocus="this.blur()">考勤管理</a>
         </div>

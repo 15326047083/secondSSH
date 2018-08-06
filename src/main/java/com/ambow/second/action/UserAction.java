@@ -25,20 +25,19 @@ public class UserAction extends ActionSupport {
     private String userId;
     //  封装selectKey对象
     private String selectKey;
+    //  数据库数据的总数
     private int page=0;
-
+    //  当前页数
+    private int index=1;
 
 
 
     public void setPage(int page) {
         this.page = page;
     }
-
     public int getPage() {
         return page;
     }
-
-    private int index=1;  //当前页数
 
     public int getIndex() { return index; }
     public void setIndex(int index) { this.index = index; }
@@ -129,10 +128,19 @@ public class UserAction extends ActionSupport {
      *  模糊查询
      * @return
      */
-    @Action (value = "likeSelect" ,results = {@Result(name = "success", location = "/WEB-INF/page/user/list.jsp")})
+    @Action (value = "likeSelect" ,results = {@Result(name = "success", location = "/WEB-INF/page/user/likeSelect.jsp")})
     public String likeSelect(){
         ActionContext actionContext=ActionContext.getContext();
-        actionContext.put("queryAllList",userService.likeSelect(selectKey));
+        actionContext.put("likeSelectList",userService.likeSelect(selectKey,index));
+        actionContext.put("selectKey",selectKey);
+        actionContext.put("index",index);
+        page= (int) ServletActionContext.getRequest().getSession().getAttribute("page");
+        if (page%10==0){
+            page=page/10;
+        }else{
+            page=page/10+1;
+        }
+        ActionContext.getContext().put("allPage", page);
         return SUCCESS;
     }
 }

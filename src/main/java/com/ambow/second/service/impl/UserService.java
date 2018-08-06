@@ -143,8 +143,8 @@ public class UserService implements IUserService {
      */
 
     @Override
-    public List<User> likeSelect(String selectKey) {
-        return userDao.likeSelect(selectKey);
+    public List<User> likeSelect(String selectKey,int index) {
+        return userDao.likeSelect(selectKey,index);
     }
 
     /**

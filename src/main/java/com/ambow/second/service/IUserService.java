@@ -31,7 +31,7 @@ public interface IUserService {
     void updateAlive(User user);
 
     // 模糊查询
-    List<User> likeSelect(String selectKey);
+    List<User> likeSelect(String selectKey ,int index);
 
     //  根据num查询
     User getByNum(int num);

@@ -49,10 +49,16 @@ public class UserDao extends CommonDao<User> implements IUserDao {
      */
     @Override
     @Transactional
-    public List<User> likeSelect(String selectKey) {
-        return sessionFactory.getCurrentSession().createQuery("from User where name like '%" + selectKey + "%' or num" +
-                " like '%" + selectKey + "%' or phone like '%" + selectKey + "%' or deptId like '%" + selectKey +
-                "%'").list();
+    public List<User> likeSelect(String selectKey,int index) {
+        Query query = sessionFactory.getCurrentSession().createQuery("from User where name like '%" + selectKey + "%' or num" +
+                " like '%" + selectKey + "%' or phone like '%" + selectKey + "%'");
+        ScrollableResults scrollableResults=query.scroll();
+        scrollableResults.last();
+        int i = scrollableResults.getRowNumber() + 1;
+        ServletActionContext.getRequest().getSession().setAttribute("page", i);
+        query.setFirstResult((index-1) * 10);
+        query.setMaxResults(10);
+        return query.list();
     }
 
     /**

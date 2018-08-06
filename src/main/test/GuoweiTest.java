@@ -53,17 +53,9 @@ public class GuoweiTest {
 
     @Test
     public void exportExcel(){
-        List<User> userList=userService.queryAll();
-        ExportExcel exportExcel =new ExportExcel();
-        int num= exportExcel.ExportExcel(userList);
     }
 
     @Test
     public void importExcel(){
-        ImportExcel importExcel=new ImportExcel();
-        List<User> importList=importExcel.ImportExcel("D:/software/export/2018-08-03.xls");
-        System.out.println(importList.size());
-      //  userService.saveOrUpdate(importList);
-
     }
 }

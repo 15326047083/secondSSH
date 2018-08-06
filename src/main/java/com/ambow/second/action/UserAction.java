@@ -1,6 +1,7 @@
 package com.ambow.second.action;
 
 import com.ambow.second.entity.User;
+import com.ambow.second.util.ExportExcel;
 import com.opensymphony.xwork2.ActionContext;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.*;
@@ -11,6 +12,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 import javax.management.Query;
 import java.util.Date;
+import java.util.List;
 
 @Namespace("/user")
 public class UserAction extends ActionSupport {
@@ -23,6 +25,18 @@ public class UserAction extends ActionSupport {
     private String userId;
     //  封装selectKey对象
     private String selectKey;
+    private int page=0;
+
+
+
+
+    public void setPage(int page) {
+        this.page = page;
+    }
+
+    public int getPage() {
+        return page;
+    }
 
     private int index=1;  //当前页数
 
@@ -49,7 +63,8 @@ public class UserAction extends ActionSupport {
     public String queryAll(){
         ActionContext actionContext=ActionContext.getContext();
         actionContext.put("queryAllList",userService.queryAll(index));
-        int page= (int) ServletActionContext.getRequest().getSession().getAttribute("page");
+        actionContext.put("index",index);
+        page= (int) ServletActionContext.getRequest().getSession().getAttribute("page");
         if (page%10==0){
             page=page/10;
         }else{

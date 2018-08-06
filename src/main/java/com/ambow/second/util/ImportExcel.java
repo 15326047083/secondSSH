@@ -3,6 +3,7 @@ package com.ambow.second.util;
 import com.ambow.second.entity.User;
 import jxl.Workbook;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -12,12 +13,12 @@ import java.util.regex.Pattern;
 
 public class ImportExcel {
 
-    public List<User> ImportExcel(String path) {
+    public List<User> ImportExcel(File file) {
         // TODO Auto-generated method stub
         List<User> list = new ArrayList<User>();
         try {
             // 创建输入流，读取Excel
-            InputStream is = new FileInputStream(path);
+            InputStream is = new FileInputStream(file);
             Workbook wb = Workbook.getWorkbook(is);
             // 页签数量
             int sheet_size = wb.getNumberOfSheets();
@@ -32,6 +33,12 @@ public class ImportExcel {
                                 u.setAlive(Integer.parseInt(wb.getSheet(i).getCell(k, j).getContents()));
                             } else {
                                 u.setAlive(0);
+                            }
+                        } if (wb.getSheet(i).getCell(k, 0).getContents().equals("num")) {
+                            if (isNumeric(wb.getSheet(i).getCell(k, j).getContents())) {
+                                u.setNum(Integer.parseInt(wb.getSheet(i).getCell(k, j).getContents()));
+                            } else {
+                                u.setNum(0);
                             }
                         } else if (wb.getSheet(i).getCell(k, 0).getContents().equals("deptId")) {
                             u.setDeptId(wb.getSheet(i).getCell(k, j).getContents());
@@ -53,6 +60,8 @@ public class ImportExcel {
                             u.setUserType(wb.getSheet(i).getCell(k, j).getContents());
                         } else if (wb.getSheet(i).getCell(k, 0).getContents().equals("name")) {
                             u.setName(wb.getSheet(i).getCell(k, j).getContents());
+                        } else if (wb.getSheet(i).getCell(k, 0).getContents().equals("id")) {
+                                u.setId(wb.getSheet(i).getCell(k, j).getContents());
                         }
                     }
                     list.add(u);

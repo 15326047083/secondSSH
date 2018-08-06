@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="s" uri="/struts-tags"%>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -20,6 +21,7 @@
                 <tr>
                     <td align="left" valign="bottom" id="header-name"><h1>Ambow</h1></td>
                     <td align="right" valign="top" id="header-right">
+
                         <a href="/login/loginOut.action" target="topFrame" onFocus="this.blur()"
                            class="admin-out">注销</a>
                         <span>

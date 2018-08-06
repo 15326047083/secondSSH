@@ -25,7 +25,6 @@ public class UserDao extends CommonDao<User> implements IUserDao {
         scrollableResults.last();
         int i = scrollableResults.getRowNumber() + 1;
         ServletActionContext.getRequest().getSession().setAttribute("page", i);
-        System.out.println(ServletActionContext.getRequest().getSession().getAttribute("page"));
         query.setFirstResult((index-1) * 10);
         query.setMaxResults(10);
         return query.list();

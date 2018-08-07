@@ -217,8 +217,10 @@
                                 value="#selectList.duty"/></td>
                         <td align="center" valign="middle" class="borderright borderbottom"><s:property
                                 value="#selectList.userType"/></td>
-                        <td align="center" valign="middle" class="borderright borderbottom"><s:property
-                                value="#selectList.alive"/></td>
+                        <td align="center" valign="middle" class="borderright borderbottom">
+                            <s:if test="#selectList.alive==0">在校</s:if>
+                            <s:if test="#selectList.alive==1">离校</s:if>
+                        </td>
                         <td align="center" valign="middle" class="borderbottom">
                             <a href="/user/toUpdate.action?userId=<s:property value="#selectList.id"/>"
                                target="mainFrame" onFocus="this.blur()" class="add">编辑</a>

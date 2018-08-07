@@ -217,8 +217,10 @@
                                 value="#queryUser.duty"/></td>
                         <td align="center" valign="middle" class="borderright borderbottom"><s:property
                                 value="#queryUser.userType"/></td>
-                        <td align="center" valign="middle" class="borderright borderbottom"><s:property
-                                value="#queryUser.alive"/></td>
+                        <td align="center" valign="middle" class="borderright borderbottom">
+                            <s:if test="#queryUser.alive==0">在校</s:if>
+                            <s:if test="#queryUser.alive==1">离校</s:if>
+                        </td>
                         <td align="center" valign="middle" class="borderbottom">
                             <a href="/user/toUpdate.action?userId=<s:property value="#queryUser.id"/>"
                                target="mainFrame" onFocus="this.blur()" class="add">编辑</a>

@@ -16,7 +16,7 @@ public interface IScoreDao extends ICommonDao<Score> {
 
     List<ScoreVo> getScoreByadminId(int index);
 
-    Score savebefor( String userId,String courseId);
+    String saveBefor( String userId,String courseId);
 
     List<User> getAllUser();
 

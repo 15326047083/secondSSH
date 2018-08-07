@@ -20,25 +20,24 @@ public class ScoreService implements IScoreService {
 
     /**
      * 保存/修改成绩
+     *
      * @param score
      * @return
      */
     @Override
     public String saveorUpdateScore(Score score) {
-
-        Score scoreold=  scoreDao.savebefor(score.getUserId(),score.getCourseId());
-        if(scoreold!=null) {
-            score.setId(scoreold.getId());
-            scoreDao.saveOrUpdate(score);
-        }else{
-            scoreDao.saveOrUpdate(score);
+        if (scoreDao.saveBefor(score.getUserId(), score.getCourseId()) == null) {
+        } else {
+            score.setId(scoreDao.saveBefor(score.getUserId(), score.getCourseId()));
         }
+        scoreDao.saveOrUpdate(score);
         return "";
     }
 
 
     /**
      * 删除成绩
+     *
      * @param id
      */
 
@@ -49,6 +48,7 @@ public class ScoreService implements IScoreService {
 
     /**
      * 查询全部成绩
+     *
      * @return
      */
 
@@ -60,6 +60,7 @@ public class ScoreService implements IScoreService {
 
     /**
      * 根据用户ID查询成绩
+     *
      * @param id
      * @return
      */
@@ -72,14 +73,15 @@ public class ScoreService implements IScoreService {
 
     /**
      * 根据教师Id查询成绩
+     *
      * @param teacherid
      * @param index
      * @return
      */
 
     @Override
-    public List<ScoreVo> getScoreByteacherId(String teacherid,int index) {
-        return scoreDao.getScoreByteacherId(teacherid,index);
+    public List<ScoreVo> getScoreByteacherId(String teacherid, int index) {
+        return scoreDao.getScoreByteacherId(teacherid, index);
     }
 
 
@@ -95,6 +97,7 @@ public class ScoreService implements IScoreService {
 
     /**
      * 根据成绩ID查询成绩
+     *
      * @param id
      * @return
      */
@@ -109,9 +112,9 @@ public class ScoreService implements IScoreService {
      * 查询全部用户和全部课程
      */
 
-public  List<User> getAllUser(){
-    return  scoreDao.getAllUser();
-}
+    public List<User> getAllUser() {
+        return scoreDao.getAllUser();
+    }
 
     @Override
     public List<Course> getAllCourse() {
@@ -120,13 +123,14 @@ public  List<User> getAllUser(){
 
     /**
      * 管理员模糊查询
+     *
      * @param like
      * @return
      */
     @Override
     public List<ScoreVo> getScoredBylike(String like) {
 
-    return scoreDao.getScoredBylike(like);
+        return scoreDao.getScoredBylike(like);
     }
 
 
@@ -134,11 +138,13 @@ public  List<User> getAllUser(){
      * 教师模糊查询
      */
     @Override
-    public List<ScoreVo> getScoredByteacherike(String  teacherId,String like) {
-        return scoreDao.getScoredByteacherike(teacherId,like);    }
+    public List<ScoreVo> getScoredByteacherike(String teacherId, String like) {
+        return scoreDao.getScoredByteacherike(teacherId, like);
+    }
 
     /**
      * 统计管理员查询个数
+     *
      * @return
      */
     @Override
@@ -148,6 +154,7 @@ public  List<User> getAllUser(){
 
     /**
      * 统计教师查询个数
+     *
      * @return
      */
     @Override

@@ -96,8 +96,8 @@ public class ScoreDao extends CommonDao<Score> implements IScoreDao {
 
     @Override
     @Transactional
-    public Score savebefor(String userId,String courseId) {
-        return (Score) sessionFactory.getCurrentSession().createQuery("from Score where userId='"+ userId +"' and  courseId='"+ courseId +"' ").uniqueResult();
+    public String saveBefor(String userId,String courseId) {
+        return (String) sessionFactory.getCurrentSession().createQuery("select id from Score where userId='"+ userId +"' and  courseId='"+ courseId +"' ").uniqueResult();
     }
 
     /**

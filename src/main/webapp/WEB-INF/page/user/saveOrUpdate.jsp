@@ -235,7 +235,7 @@
                         <td align="left" valign="middle" class="borderright borderbottom main-for"><s:property
                                 value="userInfo.num"/>
                             <input type="password" name="user.password" value="<s:property value="#userInfo.password"/>"
-                                   class="text-word" readonly>
+                                   class="text-word" required>
                         </td>
                     </tr>
                     <tr onMouseOut="this.style.backgroundColor='#ffffff'"
@@ -250,7 +250,7 @@
                         onMouseOver="this.style.backgroundColor='#edf5ff'">
                         <td align="right" valign="middle" class="borderright borderbottom bggray">邮箱：</td>
                         <td align="left" valign="middle" class="borderright borderbottom main-for">
-                            <input type="text" name="user.email" value="<s:property value="#userInfo.email"/>"
+                            <input type="email" name="user.email" value="<s:property value="#userInfo.email"/>"
                                    class="text-word" required>
                         </td>
                     </tr>

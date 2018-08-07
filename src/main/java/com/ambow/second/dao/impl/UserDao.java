@@ -50,8 +50,7 @@ public class UserDao extends CommonDao<User> implements IUserDao {
     @Override
     @Transactional
     public List<User> likeSelect(String selectKey,int index) {
-        Query query = sessionFactory.getCurrentSession().createQuery("from User where num<>123456 and name like '%" + selectKey + "%' or num" +
-                " like '%" + selectKey + "%' or phone like '%" + selectKey + "%'");
+        Query query = sessionFactory.getCurrentSession().createQuery("from User where num<>123456 and (name like '%" + selectKey + "%' or num like '%" + selectKey + "%' or phone like '%" + selectKey + "%')");
         ScrollableResults scrollableResults=query.scroll();
         scrollableResults.last();
         int i = scrollableResults.getRowNumber() + 1;
